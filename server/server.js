@@ -14,9 +14,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/api/projects", projectRoutes);
-app.use("/api/users", userRoutes);
-app.use("/api/tickets", ticketRoutes);
+app.use("/api/project", projectRoutes);
+app.use("/api/user", userRoutes);
+app.use("/api/ticket", ticketRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

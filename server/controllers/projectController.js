@@ -6,6 +6,11 @@ const getProjects = asyncHandler(async (req, res) => {
    res.status(200).json(projects);
 });
 
+const getProject = asyncHandler(async (req, res) => {
+   const project = await Project.findById(req.params.id);
+   res.status(200).json(project);
+});
+
 const createProject = asyncHandler(async (req, res) => {
    if (!req.body.title || !req.body.description) {
       res.status(400);
@@ -40,4 +45,4 @@ const deleteProject = asyncHandler(async (req, res) => {
    res.status(200).json({ id: req.params.id });
 });
 
-export { getProjects, createProject, updateProject, deleteProject };
+export { getProjects, getProject, createProject, updateProject, deleteProject };
