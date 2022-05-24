@@ -8,6 +8,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Ticket from "./pages/Ticket";
 import Project from "./pages/Project";
+import Navigation from "./components/Navigation";
 import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -15,13 +16,7 @@ root.render(
    <React.StrictMode>
       <Provider store={store}>
          <Router>
-            <header>
-               <nav>
-                  <Link to="/">
-                     <h1>Bug Tracker</h1>
-                  </Link>
-               </nav>
-            </header>
+            <Navigation />
             <Routes>
                <Route exact path="/" element={<Dashboard />} />
                <Route path="/login" element={<Login />} />

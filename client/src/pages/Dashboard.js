@@ -1,17 +1,25 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getProjects } from "../features/projects/projectSlice";
 
 function Dashboard() {
    const dispatch = useDispatch();
+   const navigate = useNavigate();
 
+   const { user } = useSelector((state) => state.auth);
    const { projects, isLoading, isError, message } = useSelector(
       (state) => state.projects
    );
 
    useEffect(() => {
-      dispatch(getProjects());
+      if (!user) {
+         navigate("/login");
+      }
+
+      return () => {
+         dispatch(getProjects());
+      };
    }, [isError, message, dispatch]);
 
    return (
