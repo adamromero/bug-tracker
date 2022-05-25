@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getProject } from "../features/projects/projectSlice";
@@ -7,6 +7,15 @@ import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
 const Project = () => {
+   const initialTicketDetails = {
+      title: "",
+      description: "",
+      estimate: 0,
+      teamMembers: [],
+      status: "",
+      priority: "",
+   };
+   const [ticketDetails, setTicketDetails] = useState(initialTicketDetails);
    const dispatch = useDispatch();
    const navigate = useNavigate();
    const { id } = useParams();
@@ -21,7 +30,14 @@ const Project = () => {
 
    const handleNewTicket = (e) => {
       e.preventDefault();
-      console.log("new ticket");
+      console.log(ticketDetails);
+   };
+
+   const handleOnChange = (e) => {
+      setTicketDetails({
+         ...ticketDetails,
+         [e.target.name]: e.target.value,
+      });
    };
 
    return (
@@ -37,30 +53,59 @@ const Project = () => {
                   <form onSubmit={handleNewTicket}>
                      <label htmlFor="">Title</label>
                      <br />
-                     <input type="text" placeholder="Title" />
+                     <input
+                        type="text"
+                        name="title"
+                        placeholder="Title"
+                        onChange={handleOnChange}
+                     />
                      <br />
                      <label htmlFor="">Description</label>
                      <br />
-                     <textarea placeholder="Description" />
+                     <textarea
+                        placeholder="Description"
+                        name="description"
+                        onChange={handleOnChange}
+                     />
                      <br />
                      <label htmlFor="">Time Estimate</label>
                      <br />
-                     <input type="number" placeholder="Time estimate" />
+                     <input
+                        type="number"
+                        name="estimate"
+                        placeholder="Time estimate"
+                        onChange={handleOnChange}
+                     />
                      <br />
                      <label htmlFor="">Assign team member</label>
                      <br />
-                     <select name="" id="">
+                     <select
+                        name="teamMembers"
+                        id=""
+                        onChange={handleOnChange}
+                        multiple
+                     >
                         <option value="">Select a team member</option>
-                        <option value="">Adam Romero</option>
-                        <option value="">John Doe</option>
+                        <option value="Adam Romero">Adam Romero</option>
+                        <option value="John Doe">John Doe</option>
+                     </select>
+                     <br />
+                     <label htmlFor="">Status</label>
+                     <br />
+                     <select name="status" id="" onChange={handleOnChange}>
+                        <option value="">Select a status</option>
+                        <option value="On Hold">On Hold</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed</option>
                      </select>
                      <br />
                      <label htmlFor="">Priority</label>
                      <br />
-                     <select name="" id="">
-                        <option value="">Low</option>
-                        <option value="">Medium</option>
-                        <option value="">High</option>
+                     <select name="priority" id="" onChange={handleOnChange}>
+                        <option value="">Select a priority</option>
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
                      </select>
                      <br />
                      <button type="submit">Submit</button>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { getProjects } from "../features/projects/projectSlice";
+import { getProjects, createProject } from "../features/projects/projectSlice";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
@@ -32,7 +32,7 @@ function Dashboard() {
 
    const handleNewProject = (e) => {
       e.preventDefault();
-      console.log(projectDetails);
+      dispatch(createProject(projectDetails));
    };
 
    const handleOnChange = (e) => {

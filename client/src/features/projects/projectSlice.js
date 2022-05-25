@@ -17,6 +17,27 @@ export const getProject = createAsyncThunk("project/getProject", async (id) => {
    return await projectService.getProject(id);
 });
 
+export const createProject = createAsyncThunk(
+   "project/createProject",
+   async (project) => {
+      return await projectService.createProject(project);
+   }
+);
+
+export const updateProject = createAsyncThunk(
+   "project/updateProject",
+   async (project) => {
+      return await projectService.updateProject(project);
+   }
+);
+
+export const deleteProject = createAsyncThunk(
+   "project/deleteProject",
+   async (id) => {
+      return await projectService.deleteProject(id);
+   }
+);
+
 export const projectSlice = createSlice({
    name: "project",
    initialState,
