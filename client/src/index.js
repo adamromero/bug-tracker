@@ -6,7 +6,9 @@ import { Provider } from "react-redux";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
+import Tickets from "./pages/Tickets";
 import Ticket from "./pages/Ticket";
+import Administration from "./pages/Administration";
 import Project from "./pages/Project";
 import Navigation from "./components/Navigation";
 import "./index.css";
@@ -21,8 +23,10 @@ root.render(
                <Route exact path="/" element={<Dashboard />} />
                <Route path="/login" element={<Login />} />
                <Route path="/register" element={<Register />} />
-               <Route path="/ticket" element={<Ticket />} />
+               <Route path="/tickets" element={<Tickets />} />
+               <Route path="/ticket/:id" element={<Ticket />} />
                <Route path="/project/:id" element={<Project />} />
+               <Route path="/administration" element={<Administration />} />
             </Routes>
          </Router>
       </Provider>
