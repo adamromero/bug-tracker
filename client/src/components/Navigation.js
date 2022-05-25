@@ -24,6 +24,9 @@ const Navigation = () => {
             <h2>Welcome {user.name}</h2>
             <ul>
                <li>
+                  <Link to="/">Dashboard</Link>
+               </li>
+               <li>
                   <Link to="/tickets">Tickets</Link>
                </li>
                <li>
