@@ -1,5 +1,7 @@
 import asyncHandler from "express-async-handler";
 import Project from "../models/projectModel.js";
+import User from "../models/userModel.js";
+import Ticket from "../models/ticketModel.js";
 
 const getProjects = asyncHandler(async (req, res) => {
    const projects = await Project.find();
@@ -12,13 +14,15 @@ const getProject = asyncHandler(async (req, res) => {
 });
 
 const createProject = asyncHandler(async (req, res) => {
-   if (!req.body.title || !req.body.description) {
-      res.status(400);
-      throw new Error("Please provide a title and description");
-   }
+   console.log("req.body: ", req.body.teamMembers);
 
-   const project = await Project.create(req.body);
-   res.status(200).json(project);
+   // if (!req.body.title || !req.body.description) {
+   //    res.status(400);
+   //    throw new Error("Please provide a title and description");
+   // }
+
+   // const project = await Project.create(req.body);
+   // res.status(200).json(project);
 });
 
 const updateProject = asyncHandler(async (req, res) => {

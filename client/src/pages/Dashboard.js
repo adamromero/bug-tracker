@@ -42,6 +42,8 @@ function Dashboard() {
       });
    };
 
+   console.log(user);
+
    return (
       <div>
          <main>
