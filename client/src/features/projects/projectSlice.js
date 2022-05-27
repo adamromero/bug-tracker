@@ -3,6 +3,7 @@ import projectService from "./projectService";
 
 const initialState = {
    projects: [],
+   project: {},
    isLoading: false,
    isError: false,
    isSuccess: false,
@@ -63,7 +64,7 @@ export const projectSlice = createSlice({
          .addCase(getProject.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isSuccess = true;
-            state.projects = action.payload;
+            state.project = action.payload;
          })
          .addCase(getProject.rejected, (state, action) => {
             state.isLoading = false;

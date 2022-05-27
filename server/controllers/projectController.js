@@ -1,28 +1,30 @@
 import asyncHandler from "express-async-handler";
 import Project from "../models/projectModel.js";
-import User from "../models/userModel.js";
-import Ticket from "../models/ticketModel.js";
 
 const getProjects = asyncHandler(async (req, res) => {
-   const projects = await Project.find();
+   const projects = await Project.find()
+      .populate("teamMembers")
+      .populate("tickets");
    res.status(200).json(projects);
 });
 
 const getProject = asyncHandler(async (req, res) => {
-   const project = await Project.findById(req.params.id);
+   const project = await Project.findById(req.params.id)
+      .populate("teamMembers")
+      .populate("tickets");
    res.status(200).json(project);
 });
 
 const createProject = asyncHandler(async (req, res) => {
    console.log("req.body: ", req.body);
 
-   // if (!req.body.title || !req.body.description) {
-   //    res.status(400);
-   //    throw new Error("Please provide a title and description");
-   // }
+   if (!req.body.title || !req.body.description) {
+      res.status(400);
+      throw new Error("Please provide a title and description");
+   }
 
-   // const project = await Project.create(req.body);
-   // res.status(200).json(project);
+   const project = await Project.create(req.body);
+   res.status(200).json(project);
 });
 
 const updateProject = asyncHandler(async (req, res) => {

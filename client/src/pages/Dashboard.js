@@ -39,10 +39,10 @@ function Dashboard() {
    };
 
    const handleOnChange = (e) => {
-      setProjectDetails({
-         ...projectDetails,
+      setProjectDetails((prevState) => ({
+         ...prevState,
          [e.target.name]: e.target.value,
-      });
+      }));
    };
 
    return (
@@ -85,7 +85,7 @@ function Dashboard() {
                         >
                            <option value="">Select a team member</option>
                            {allUsers.map((user) => (
-                              <option key={user._id} value={user.name}>
+                              <option key={user._id} value={user._id}>
                                  {user.name}
                               </option>
                            ))}

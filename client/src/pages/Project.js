@@ -20,7 +20,7 @@ const Project = () => {
    const navigate = useNavigate();
    const { id } = useParams();
 
-   const { projects, isLoading, isError, message } = useSelector(
+   const { project, isLoading, isError, message } = useSelector(
       (state) => state.projects
    );
 
@@ -113,13 +113,30 @@ const Project = () => {
                </div>
             )}
          </Popup>
-         <h3>{projects.title}</h3>
-         <p>{projects.description}</p>
-         <h3>Tickets</h3>
-         {projects.tickets && projects.tickets.length > 0 ? (
+         <h3>{project.title}</h3>
+         <p>{project.description}</p>
+
+         {project.teamMembers && project.teamMembers.length > 0 ? (
             <div>
-               {projects.tickets.map((ticket) => (
-                  <div key={ticket}>{ticket}</div>
+               <h4>Team Members</h4>
+               {project.teamMembers.map((member) => (
+                  <p key={member._id}>{member.name}</p>
+               ))}
+            </div>
+         ) : (
+            <p>No team members assigned</p>
+         )}
+
+         <h3>Tickets</h3>
+         {project.tickets && project.tickets.length > 0 ? (
+            <div>
+               {project.tickets.map((ticket) => (
+                  <div key={ticket._id}>
+                     <h4>{ticket.title}</h4>
+                     <p>{ticket.description}</p>
+                     <p>{ticket.priority}</p>
+                     <p>{ticket.status}</p>
+                  </div>
                ))}
             </div>
          ) : (
