@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { getProjects, createProject } from "../features/projects/projectSlice";
+import { getUsers } from "../features/users/allUsersSlice";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
@@ -19,6 +20,7 @@ function Dashboard() {
    const { projects, isLoading, isError, message } = useSelector(
       (state) => state.projects
    );
+   const { allUsers } = useSelector((state) => state.users);
 
    useEffect(() => {
       if (!user) {
@@ -27,6 +29,7 @@ function Dashboard() {
 
       return () => {
          dispatch(getProjects());
+         dispatch(getUsers());
       };
    }, [isError, message, dispatch]);
 
@@ -41,8 +44,6 @@ function Dashboard() {
          [e.target.name]: e.target.value,
       });
    };
-
-   console.log(user);
 
    return (
       <div>
@@ -83,8 +84,11 @@ function Dashboard() {
                            multiple
                         >
                            <option value="">Select a team member</option>
-                           <option value="Adam Romero">Adam Romero</option>
-                           <option value="John Doe">John Doe</option>
+                           {allUsers.map((user) => (
+                              <option key={user._id} value={user.name}>
+                                 {user.name}
+                              </option>
+                           ))}
                         </select>
                         <br />
                         <button type="submit">Submit</button>

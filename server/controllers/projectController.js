@@ -14,7 +14,7 @@ const getProject = asyncHandler(async (req, res) => {
 });
 
 const createProject = asyncHandler(async (req, res) => {
-   console.log("req.body: ", req.body.teamMembers);
+   console.log("req.body: ", req.body);
 
    // if (!req.body.title || !req.body.description) {
    //    res.status(400);

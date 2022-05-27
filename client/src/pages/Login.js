@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useSelector, useReducer, useDispatch } from "react-redux";
 import { login } from "../features/auth/authSlice";
 
@@ -54,6 +54,7 @@ const Login = () => {
             <br />
             <button type="submit">Login</button>
          </form>
+         <Link to="/register">Register</Link>
       </div>
    );
 };

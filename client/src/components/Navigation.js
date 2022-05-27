@@ -21,7 +21,7 @@ const Navigation = () => {
                <h1>Bug Tracker</h1>
             </Link>
 
-            <h2>Welcome {user.name}</h2>
+            <h2>{user.name}</h2>
             <ul>
                <li>
                   <Link to="/">Dashboard</Link>

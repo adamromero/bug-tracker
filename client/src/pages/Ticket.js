@@ -1,7 +1,13 @@
 import React from "react";
 
 const Ticket = () => {
-   return <div>Ticket</div>;
+   return (
+      <div>
+         <h2>Ticket</h2>
+
+         <p>description</p>
+      </div>
+   );
 };
 
 export default Ticket;

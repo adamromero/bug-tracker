@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { register } from "../features/auth/authSlice";
 
@@ -81,6 +81,7 @@ const Register = () => {
             <br />
             <button type="submit">Submit</button>
          </form>
+         <Link to="/login">Login</Link>
       </div>
    );
 };
