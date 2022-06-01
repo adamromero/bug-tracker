@@ -11,19 +11,23 @@ const ticketSchema = new mongoose.Schema({
    },
    status: {
       type: String,
-      required: true,
+      //required: true,
    },
    priority: {
       type: String,
-      required: true,
+      //required: true,
    },
    dueDate: {
       type: Date,
-      required: true,
+      //required: true,
    },
    createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+   },
+   project: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Project",
    },
    assignedTo: [
       {

@@ -7,12 +7,21 @@ const getTickets = asyncHandler(async (req, res) => {
 });
 
 const createTicket = asyncHandler(async (req, res) => {
+   console.log(req.body);
    if (!req.body.title || !req.body.description) {
       res.status(400);
       throw new Error("Please provide a title and description");
    }
 
-   const ticket = await Ticket.create(req.body);
+   const newTicket = {
+      ...req.body,
+      title: req.body.title,
+      description: req.body.description,
+      //assignedTo: req.body.teamMembers,
+      //createdBy: req.user._id,
+   };
+
+   const ticket = await Ticket.create(newTicket);
    res.status(200).json(ticket);
 });
 

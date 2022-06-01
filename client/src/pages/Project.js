@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getProject } from "../features/projects/projectSlice";
+import { createTicket } from "../features/tickets/ticketSlice";
 import Ticket from "./Ticket";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
@@ -12,6 +13,7 @@ const Project = () => {
       description: "",
       estimate: 0,
       teamMembers: [],
+      project: "",
       status: "",
       priority: "",
    };
@@ -24,20 +26,25 @@ const Project = () => {
       (state) => state.projects
    );
 
+   const { tickets } = useSelector((state) => state.tickets);
+
+   console.log(project);
+
    useEffect(() => {
       dispatch(getProject(id));
    }, [dispatch]);
 
    const handleNewTicket = (e) => {
       e.preventDefault();
-      console.log(ticketDetails);
+      dispatch(createTicket(ticketDetails));
    };
 
    const handleOnChange = (e) => {
-      setTicketDetails({
-         ...ticketDetails,
+      setTicketDetails((prevState) => ({
+         ...prevState,
+         project: id,
          [e.target.name]: e.target.value,
-      });
+      }));
    };
 
    return (
@@ -86,8 +93,12 @@ const Project = () => {
                         multiple
                      >
                         <option value="">Select a team member</option>
-                        <option value="Adam Romero">Adam Romero</option>
-                        <option value="John Doe">John Doe</option>
+                        {project.teamMembers &&
+                           project.teamMembers.map((member) => (
+                              <option key={member._id} value={member._id}>
+                                 {member.name}
+                              </option>
+                           ))}
                      </select>
                      <br />
                      <label htmlFor="">Status</label>
