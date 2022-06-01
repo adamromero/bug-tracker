@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getProject } from "../features/projects/projectSlice";
 import { createTicket } from "../features/tickets/ticketSlice";
@@ -142,12 +142,12 @@ const Project = () => {
          {project.tickets && project.tickets.length > 0 ? (
             <div>
                {project.tickets.map((ticket) => (
-                  <div key={ticket._id}>
+                  <Link to={`/ticket/${ticket._id}`} key={ticket._id}>
                      <h4>{ticket.title}</h4>
                      <p>{ticket.description}</p>
                      <p>{ticket.priority}</p>
                      <p>{ticket.status}</p>
-                  </div>
+                  </Link>
                ))}
             </div>
          ) : (
