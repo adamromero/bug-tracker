@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getProject } from "../features/projects/projectSlice";
-import { createTicket } from "../features/tickets/ticketSlice";
-import Ticket from "./Ticket";
+import {
+   createTicket,
+   getProjectTickets,
+} from "../features/tickets/ticketSlice";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
@@ -28,14 +30,16 @@ const Project = () => {
 
    const { tickets } = useSelector((state) => state.tickets);
 
-   console.log(project);
+   //console.log("tickets: ", tickets);
 
    useEffect(() => {
       dispatch(getProject(id));
+      dispatch(getProjectTickets(id));
    }, [dispatch]);
 
    const handleNewTicket = (e) => {
       e.preventDefault();
+      console.log(ticketDetails);
       dispatch(createTicket(ticketDetails));
    };
 
@@ -139,9 +143,9 @@ const Project = () => {
          )}
 
          <h3>Tickets</h3>
-         {project.tickets && project.tickets.length > 0 ? (
+         {tickets && tickets.length > 0 ? (
             <div>
-               {project.tickets.map((ticket) => (
+               {tickets.map((ticket) => (
                   <Link to={`/ticket/${ticket._id}`} key={ticket._id}>
                      <h4>{ticket.title}</h4>
                      <p>{ticket.description}</p>

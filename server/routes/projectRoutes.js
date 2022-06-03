@@ -5,10 +5,16 @@ import {
    getProject,
    createProject,
    updateProject,
+   updateProjectTicket,
    deleteProject,
 } from "../controllers/projectController.js";
 
 router.route("/").get(getProjects).post(createProject);
-router.route("/:id").get(getProject).put(updateProject).delete(deleteProject);
+router
+   .route("/:id")
+   .get(getProject)
+   .put(updateProject)
+   .put(updateProjectTicket)
+   .delete(deleteProject);
 
 export default router;

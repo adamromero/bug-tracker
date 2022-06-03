@@ -16,8 +16,6 @@ const getProject = asyncHandler(async (req, res) => {
 });
 
 const createProject = asyncHandler(async (req, res) => {
-   console.log("req.body: ", req.body);
-
    if (!req.body.title || !req.body.description) {
       res.status(400);
       throw new Error("Please provide a title and description");
@@ -41,6 +39,21 @@ const updateProject = asyncHandler(async (req, res) => {
    res.status(200).json(project);
 });
 
+const updateProjectTicket = asyncHandler(async (req, res) => {
+   const project = await Project.findById(req.params.id);
+   if (!project) {
+      res.status(404);
+      throw new Error("Project not found");
+   }
+
+   console.log("req.body: ", req.body);
+   console.log("project: ", project);
+
+   //project.tickets.push(req.body.ticketId);
+   //await project.save();
+   //res.status(200).json(project);
+});
+
 const deleteProject = asyncHandler(async (req, res) => {
    const project = await Project.findById(req.params.id);
    if (!project) {
@@ -51,4 +64,11 @@ const deleteProject = asyncHandler(async (req, res) => {
    res.status(200).json({ id: req.params.id });
 });
 
-export { getProjects, getProject, createProject, updateProject, deleteProject };
+export {
+   getProjects,
+   getProject,
+   createProject,
+   updateProject,
+   updateProjectTicket,
+   deleteProject,
+};

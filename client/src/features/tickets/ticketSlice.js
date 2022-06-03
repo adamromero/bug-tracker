@@ -18,6 +18,13 @@ export const getTicket = createAsyncThunk("ticket/getTicket", async (id) => {
    return await ticketService.getTicket(id);
 });
 
+export const getProjectTickets = createAsyncThunk(
+   "ticket/getProjectTickets",
+   async (id) => {
+      return await ticketService.getProjectTickets(id);
+   }
+);
+
 export const createTicket = createAsyncThunk(
    "ticket/createTicket",
    async (ticket) => {
@@ -54,6 +61,19 @@ export const ticketSlice = createSlice({
             state.tickets = action.payload;
          })
          .addCase(getTickets.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
+         })
+         .addCase(getProjectTickets.pending, (state) => {
+            state.isLoading = true;
+         })
+         .addCase(getProjectTickets.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.tickets = action.payload;
+         })
+         .addCase(getProjectTickets.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload;

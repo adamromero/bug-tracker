@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import Ticket from "../models/ticketModel.js";
+import Project from "../models/projectModel.js";
 
 const getTickets = asyncHandler(async (req, res) => {
    const tickets = await Ticket.find()
@@ -16,8 +17,21 @@ const getTicket = asyncHandler(async (req, res) => {
    res.status(200).json(ticket);
 });
 
+const getProjectTickets = asyncHandler(async (req, res) => {
+   const tickets = await Ticket.find({ project: req.params.projectId })
+      .populate("assignedTo")
+      .populate("createdBy");
+
+   res.status(200).json(tickets);
+});
+
 const createTicket = asyncHandler(async (req, res) => {
-   console.log(req.body);
+   const project = await Project.findById(req.body.project);
+   if (!project) {
+      res.status(404);
+      throw new Error("Project not found");
+   }
+
    if (!req.body.title || !req.body.description) {
       res.status(400);
       throw new Error("Please provide a title and description");
@@ -32,6 +46,8 @@ const createTicket = asyncHandler(async (req, res) => {
    };
 
    const ticket = await Ticket.create(newTicket);
+   project.tickets.push(ticket);
+   await project.save();
    res.status(200).json(ticket);
 });
 
@@ -59,4 +75,11 @@ const deleteTicket = asyncHandler(async (req, res) => {
    res.status(200).json({ id: req.params.id });
 });
 
-export { getTickets, getTicket, createTicket, updateTicket, deleteTicket };
+export {
+   getTickets,
+   getTicket,
+   getProjectTickets,
+   createTicket,
+   updateTicket,
+   deleteTicket,
+};
