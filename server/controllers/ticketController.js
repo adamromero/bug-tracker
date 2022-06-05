@@ -10,7 +10,7 @@ const getTickets = asyncHandler(async (req, res) => {
 });
 
 const getTicket = asyncHandler(async (req, res) => {
-   const ticket = await Ticket.findById(req.params.id)
+   const ticket = await Ticket.findById(req.params.ticketId)
       .populate("assignedTo")
       .populate("createdBy")
       .populate("project");
@@ -18,9 +18,11 @@ const getTicket = asyncHandler(async (req, res) => {
 });
 
 const getProjectTickets = asyncHandler(async (req, res) => {
+   console.log(req.body);
    const tickets = await Ticket.find({ project: req.params.projectId })
       .populate("assignedTo")
-      .populate("createdBy");
+      .populate("createdBy")
+      .populate("project");
 
    res.status(200).json(tickets);
 });

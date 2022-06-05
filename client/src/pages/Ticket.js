@@ -1,28 +1,30 @@
 import React, { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getTicket } from "../features/tickets/ticketSlice";
+import { getProjectTickets } from "../features/tickets/ticketSlice";
 
 const Ticket = () => {
    const { id } = useParams();
    const dispatch = useDispatch();
+   const location = useLocation();
+   const data = location.state;
 
-   const { ticket, isLoading, isError, message } = useSelector(
-      (state) => state.tickets
-   );
+   // const { tickets, isLoading, isError, message } = useSelector(
+   //    (state) => state.tickets
+   // );
 
-   console.log(ticket);
-
+   //const ticket = tickets.filter((ticket) => ticket.project._id === id);
+   console.log(data);
    useEffect(() => {
-      dispatch(getTicket(id));
+      //dispatch(getProjectTickets(id));
    }, [dispatch]);
 
    return (
       <div>
          <h2>Ticket</h2>
-         <p>{ticket.description}</p>
-         <p>{ticket.priority}</p>
-         <p>{ticket.status}</p>
+         <p>{data.description}</p>
+         <p>{data.priority}</p>
+         <p>{data.status}</p>
       </div>
    );
 };

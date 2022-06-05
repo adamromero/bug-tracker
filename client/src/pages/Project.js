@@ -21,7 +21,6 @@ const Project = () => {
    };
    const [ticketDetails, setTicketDetails] = useState(initialTicketDetails);
    const dispatch = useDispatch();
-   const navigate = useNavigate();
    const { id } = useParams();
 
    const { project, isLoading, isError, message } = useSelector(
@@ -30,8 +29,6 @@ const Project = () => {
 
    const { tickets } = useSelector((state) => state.tickets);
 
-   //console.log("tickets: ", tickets);
-
    useEffect(() => {
       dispatch(getProject(id));
       dispatch(getProjectTickets(id));
@@ -39,7 +36,6 @@ const Project = () => {
 
    const handleNewTicket = (e) => {
       e.preventDefault();
-      console.log(ticketDetails);
       dispatch(createTicket(ticketDetails));
    };
 
@@ -146,7 +142,7 @@ const Project = () => {
          {tickets && tickets.length > 0 ? (
             <div>
                {tickets.map((ticket) => (
-                  <Link to={`/ticket/${ticket._id}`} key={ticket._id}>
+                  <Link to={`/ticket/${id}`} key={ticket._id} state={ticket}>
                      <h4>{ticket.title}</h4>
                      <p>{ticket.description}</p>
                      <p>{ticket.priority}</p>
