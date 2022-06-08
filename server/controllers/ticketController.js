@@ -18,7 +18,6 @@ const getTicket = asyncHandler(async (req, res) => {
 });
 
 const getProjectTickets = asyncHandler(async (req, res) => {
-   console.log(req.body);
    const tickets = await Ticket.find({ project: req.params.projectId })
       .populate("assignedTo")
       .populate("createdBy")
