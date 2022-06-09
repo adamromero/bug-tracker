@@ -1,41 +1,49 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getProjectTickets } from "../features/tickets/ticketSlice";
+import { getComments, createComment } from "../features/comments/commentSlice";
 
 const Ticket = () => {
-   const [comments, setComments] = useState([]);
+   const initialCommentDetails = {
+      text: "",
+      //createdBy: "",
+      ticket: "",
+      //createdAt: "",
+   };
+
+   const [comments, setComments] = useState(initialCommentDetails);
    const [input, setInput] = useState("");
    const { id } = useParams();
    const dispatch = useDispatch();
    const location = useLocation();
    const data = location.state;
 
-   // const { tickets, isLoading, isError, message } = useSelector(
-   //    (state) => state.tickets
-   // );
+   //  const { comments, isLoading, isError, message } = useSelector(
+   //     (state) => state.comments
+   //  );
 
-   //const ticket = tickets.filter((ticket) => ticket.project._id === id);
-   //console.log(data);
    useEffect(() => {
-      //dispatch(getProjectTickets(id));
+      dispatch(getComments());
    }, [dispatch]);
-
-   const handleOnChange = (e) => {
-      setInput(e.target.value);
-   };
 
    const handleOnSubmit = (e) => {
       e.preventDefault();
-      setComments((prevState) => [...prevState, input]);
+      setComments((prevState) => ({
+         ...prevState,
+         text: input,
+         [e.target.name]: e.target.value,
+      }));
       setInput("");
+      console.log(e.target.value);
+      dispatch(createComment(comments));
    };
 
    return (
       <div>
-         <h2>Ticket</h2>
+         <h1>Ticket</h1>
          {data ? (
             <div>
+               <p>{data.title}</p>
                <h2>Description</h2>
                <p>{data.description}</p>
                <h2>Priority</h2>
@@ -52,8 +60,8 @@ const Ticket = () => {
             <div>No data</div>
          )}
 
-         {comments &&
-            comments.map((comment, index) => <p key={index}>{comment}</p>)}
+         {/* {comments &&
+            comments.map((comment, index) => <p key={index}>{comment.text}</p>)} */}
 
          <form onSubmit={handleOnSubmit}>
             <textarea
@@ -61,7 +69,9 @@ const Ticket = () => {
                id=""
                cols="50"
                rows="10"
-               onChange={handleOnChange}
+               onChange={(e) => {
+                  setInput(e.target.value);
+               }}
                value={input}
             ></textarea>
             <button type="submit">Submit</button>

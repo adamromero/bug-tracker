@@ -20,7 +20,6 @@ const Project = () => {
       priority: "",
    };
    const [ticketDetails, setTicketDetails] = useState(initialTicketDetails);
-   const [team, setTeam] = useState([]);
    const dispatch = useDispatch();
    const { id } = useParams();
 
@@ -37,7 +36,6 @@ const Project = () => {
 
    const handleNewTicket = (e) => {
       e.preventDefault();
-      console.log(ticketDetails);
       dispatch(createTicket(ticketDetails));
    };
 
