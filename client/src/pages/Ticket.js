@@ -36,9 +36,17 @@ const Ticket = () => {
          <h2>Ticket</h2>
          {data ? (
             <div>
+               <h2>Description</h2>
                <p>{data.description}</p>
+               <h2>Priority</h2>
                <p>{data.priority}</p>
+               <h2>Status</h2>
                <p>{data.status}</p>
+               <h2>Assigned to</h2>
+
+               {data.assignedTo.map((member) => (
+                  <p key={member._id}>{member.name}</p>
+               ))}
             </div>
          ) : (
             <div>No data</div>

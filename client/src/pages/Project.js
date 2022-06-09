@@ -20,6 +20,7 @@ const Project = () => {
       priority: "",
    };
    const [ticketDetails, setTicketDetails] = useState(initialTicketDetails);
+   const [team, setTeam] = useState([]);
    const dispatch = useDispatch();
    const { id } = useParams();
 
@@ -36,14 +37,28 @@ const Project = () => {
 
    const handleNewTicket = (e) => {
       e.preventDefault();
+      console.log(ticketDetails);
       dispatch(createTicket(ticketDetails));
    };
 
    const handleOnChange = (e) => {
+      let selectedOptionsArray;
+
+      const selectedOptions = e.target.selectedOptions;
+      if (selectedOptions && e.target.name === "teamMembers") {
+         selectedOptionsArray = Array.from(
+            selectedOptions,
+            (item) => item.value
+         );
+      }
+
       setTicketDetails((prevState) => ({
          ...prevState,
          project: id,
          [e.target.name]: e.target.value,
+         teamMembers: selectedOptionsArray
+            ? selectedOptionsArray
+            : prevState.teamMembers,
       }));
    };
 

@@ -16,9 +16,9 @@ const getProject = asyncHandler(async (req, res) => {
 });
 
 const createProject = asyncHandler(async (req, res) => {
-   if (!req.body.title || !req.body.description) {
+   if (!req.body.title || !req.body.description || !req.body.teamMembers) {
       res.status(400);
-      throw new Error("Please provide a title and description");
+      throw new Error("Please provide a title, description, and team members");
    }
 
    const project = await Project.create(req.body);

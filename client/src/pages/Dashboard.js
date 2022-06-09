@@ -35,13 +35,24 @@ function Dashboard() {
 
    const handleNewProject = (e) => {
       e.preventDefault();
+      console.log(projectDetails);
       dispatch(createProject(projectDetails));
    };
 
    const handleOnChange = (e) => {
+      const selectedOptions = e.target.selectedOptions;
+      let selectedOptionsArray;
+      if (selectedOptions) {
+         selectedOptionsArray = Array.from(
+            selectedOptions,
+            (item) => item.value
+         );
+      }
+
       setProjectDetails((prevState) => ({
          ...prevState,
          [e.target.name]: e.target.value,
+         teamMembers: selectedOptionsArray,
       }));
    };
 
