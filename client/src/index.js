@@ -22,15 +22,20 @@ root.render(
          <Router>
             <div className="container">
                <Navigation />
-               <Routes>
-                  <Route exact path="/" element={<Dashboard />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/register" element={<Register />} />
-                  <Route path="/tickets" element={<Tickets />} />
-                  <Route path="/ticket/:id" element={<Ticket />} />
-                  <Route path="/project/:id" element={<Project />} />
-                  <Route path="/administration" element={<Administration />} />
-               </Routes>
+               <main>
+                  <Routes>
+                     <Route exact path="/" element={<Dashboard />} />
+                     <Route path="/login" element={<Login />} />
+                     <Route path="/register" element={<Register />} />
+                     <Route path="/tickets" element={<Tickets />} />
+                     <Route path="/ticket/:id" element={<Ticket />} />
+                     <Route path="/project/:id" element={<Project />} />
+                     <Route
+                        path="/administration"
+                        element={<Administration />}
+                     />
+                  </Routes>
+               </main>
             </div>
          </Router>
       </Provider>

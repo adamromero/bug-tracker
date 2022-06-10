@@ -3,6 +3,8 @@ import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getComments, createComment } from "../features/comments/commentSlice";
 
+import PrimaryButton from "../styles/Button";
+
 const Ticket = () => {
    const initialCommentDetails = {
       text: "",
@@ -74,7 +76,8 @@ const Ticket = () => {
                }}
                value={input}
             ></textarea>
-            <button type="submit">Submit</button>
+            <br />
+            <PrimaryButton type="submit">Submit</PrimaryButton>
          </form>
       </div>
    );

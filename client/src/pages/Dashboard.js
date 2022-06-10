@@ -6,6 +6,10 @@ import { getUsers } from "../features/users/allUsersSlice";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
+import TrackerList from "../styles/TrackerList";
+import TrackerListItem from "../styles/TrackerListItem";
+import PrimaryButton from "../styles/Button";
+
 function Dashboard() {
    const initialProjectDetails = {
       title: "",
@@ -58,68 +62,72 @@ function Dashboard() {
 
    return (
       <>
-         <main>
-            <h2>Dashboard</h2>
-            <h3>Projects</h3>
-            <Popup trigger={<button>New Project</button>} modal nested>
-               {(close) => (
-                  <div className="modal">
-                     <button className="close" onClick={close}>
-                        &times;
-                     </button>
-                     <div className="header"> New Project </div>
-                     <form onSubmit={handleNewProject}>
-                        <label htmlFor="">Title</label>
-                        <br />
-                        <input
-                           type="text"
-                           placeholder="Title"
-                           name="title"
-                           onChange={handleOnChange}
-                        />
-                        <br />
-                        <label htmlFor="">Description</label>
-                        <br />
-                        <textarea
-                           name="description"
-                           placeholder="Description"
-                           onChange={handleOnChange}
-                        />
-                        <br />
-                        <label htmlFor="">Assign team member</label>
-                        <br />
-                        <select
-                           name="teamMembers"
-                           id=""
-                           onChange={handleOnChange}
-                           multiple
-                        >
-                           <option value="">Select a team member</option>
-                           {allUsers.map((user) => (
-                              <option key={user._id} value={user._id}>
-                                 {user.name}
-                              </option>
-                           ))}
-                        </select>
-                        <br />
-                        <button type="submit">Submit</button>
-                     </form>
-                  </div>
-               )}
-            </Popup>
-            {projects.length > 0 ? (
-               <div>
-                  {projects.map((project) => (
+         <h2>Dashboard</h2>
+         <h3>Projects</h3>
+         <Popup
+            trigger={<PrimaryButton>New Project</PrimaryButton>}
+            modal
+            nested
+         >
+            {(close) => (
+               <div className="modal">
+                  <button className="close" onClick={close}>
+                     &times;
+                  </button>
+                  <div className="header"> New Project </div>
+                  <form onSubmit={handleNewProject}>
+                     <label htmlFor="">Title</label>
+                     <br />
+                     <input
+                        type="text"
+                        placeholder="Title"
+                        name="title"
+                        onChange={handleOnChange}
+                     />
+                     <br />
+                     <label htmlFor="">Description</label>
+                     <br />
+                     <textarea
+                        name="description"
+                        placeholder="Description"
+                        onChange={handleOnChange}
+                     />
+                     <br />
+                     <label htmlFor="">Assign team member</label>
+                     <br />
+                     <select
+                        name="teamMembers"
+                        id=""
+                        onChange={handleOnChange}
+                        multiple
+                     >
+                        <option value="">Select a team member</option>
+                        {allUsers.map((user) => (
+                           <option key={user._id} value={user._id}>
+                              {user.name}
+                           </option>
+                        ))}
+                     </select>
+                     <br />
+                     <button type="submit">Submit</button>
+                  </form>
+               </div>
+            )}
+         </Popup>
+         {projects.length > 0 ? (
+            <TrackerList>
+               {projects.map((project) => (
+                  <TrackerListItem key={project._id}>
                      <Link to={`/project/${project._id}`} key={project._id}>
                         <h4>{project.title}</h4>
                         <p>{project.description}</p>
                      </Link>
-                  ))}
-               </div>
-            ) : (
-               <div>No projects</div>
-            )}
-         </main>
+                  </TrackerListItem>
+               ))}
+            </TrackerList>
+         ) : (
+            <div>No projects</div>
+         )}
       </>
    );
 }

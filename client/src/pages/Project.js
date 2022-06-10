@@ -9,6 +9,10 @@ import {
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
+import TrackerList from "../styles/TrackerList";
+import TrackerListItem from "../styles/TrackerListItem";
+import PrimaryButton from "../styles/Button";
+
 const Project = () => {
    const initialTicketDetails = {
       title: "",
@@ -62,81 +66,87 @@ const Project = () => {
 
    return (
       <div>
-         <h2>Project</h2>
-         <Popup trigger={<button>New Ticket</button>} modal nested>
-            {(close) => (
-               <div className="modal">
-                  <button className="close" onClick={close}>
-                     &times;
-                  </button>
-                  <div className="header"> New Ticket </div>
-                  <form onSubmit={handleNewTicket}>
-                     <label htmlFor="">Title</label>
-                     <br />
-                     <input
-                        type="text"
-                        name="title"
-                        placeholder="Title"
-                        onChange={handleOnChange}
-                     />
-                     <br />
-                     <label htmlFor="">Description</label>
-                     <br />
-                     <textarea
-                        placeholder="Description"
-                        name="description"
-                        onChange={handleOnChange}
-                     />
-                     <br />
-                     <label htmlFor="">Time Estimate</label>
-                     <br />
-                     <input
-                        type="number"
-                        name="estimate"
-                        placeholder="Time estimate"
-                        onChange={handleOnChange}
-                     />
-                     <br />
-                     <label htmlFor="">Assign team member</label>
-                     <br />
-                     <select
-                        name="teamMembers"
-                        id=""
-                        onChange={handleOnChange}
-                        multiple
-                     >
-                        <option value="">Select a team member</option>
-                        {project.teamMembers &&
-                           project.teamMembers.map((member) => (
-                              <option key={member._id} value={member._id}>
-                                 {member.name}
-                              </option>
-                           ))}
-                     </select>
-                     <br />
-                     <label htmlFor="">Status</label>
-                     <br />
-                     <select name="status" id="" onChange={handleOnChange}>
-                        <option value="">Select a status</option>
-                        <option value="On Hold">On Hold</option>
-                        <option value="In Progress">In Progress</option>
-                        <option value="Completed">Completed</option>
-                     </select>
-                     <br />
-                     <label htmlFor="">Priority</label>
-                     <br />
-                     <select name="priority" id="" onChange={handleOnChange}>
-                        <option value="">Select a priority</option>
-                        <option value="Low">Low</option>
-                        <option value="Medium">Medium</option>
-                        <option value="High">High</option>
-                     </select>
-                     <br />
-                     <button type="submit">Submit</button>
-                  </form>
-               </div>
-            )}
-         </Popup>
+         <div>
+            <h2>Project</h2>
+            <Popup
+               trigger={<PrimaryButton>New Ticket</PrimaryButton>}
+               modal
+               nested
+            >
+               {(close) => (
+                  <div className="modal">
+                     <button className="close" onClick={close}>
+                        &times;
+                     </button>
+                     <div className="header"> New Ticket </div>
+                     <form onSubmit={handleNewTicket}>
+                        <label htmlFor="">Title</label>
+                        <br />
+                        <input
+                           type="text"
+                           name="title"
+                           placeholder="Title"
+                           onChange={handleOnChange}
+                        />
+                        <br />
+                        <label htmlFor="">Description</label>
+                        <br />
+                        <textarea
+                           placeholder="Description"
+                           name="description"
+                           onChange={handleOnChange}
+                        />
+                        <br />
+                        <label htmlFor="">Time Estimate</label>
+                        <br />
+                        <input
+                           type="number"
+                           name="estimate"
+                           placeholder="Time estimate"
+                           onChange={handleOnChange}
+                        />
+                        <br />
+                        <label htmlFor="">Assign team member</label>
+                        <br />
+                        <select
+                           name="teamMembers"
+                           id=""
+                           onChange={handleOnChange}
+                           multiple
+                        >
+                           <option value="">Select a team member</option>
+                           {project.teamMembers &&
+                              project.teamMembers.map((member) => (
+                                 <option key={member._id} value={member._id}>
+                                    {member.name}
+                                 </option>
+                              ))}
+                        </select>
+                        <br />
+                        <label htmlFor="">Status</label>
+                        <br />
+                        <select name="status" id="" onChange={handleOnChange}>
+                           <option value="">Select a status</option>
+                           <option value="On Hold">On Hold</option>
+                           <option value="In Progress">In Progress</option>
+                           <option value="Completed">Completed</option>
+                        </select>
+                        <br />
+                        <label htmlFor="">Priority</label>
+                        <br />
+                        <select name="priority" id="" onChange={handleOnChange}>
+                           <option value="">Select a priority</option>
+                           <option value="Low">Low</option>
+                           <option value="Medium">Medium</option>
+                           <option value="High">High</option>
+                        </select>
+                        <br />
+                        <button type="submit">Submit</button>
+                     </form>
+                  </div>
+               )}
+            </Popup>
+         </div>
          <h3>{project.title}</h3>
          <p>{project.description}</p>
 
@@ -153,16 +163,18 @@ const Project = () => {
 
          <h3>Tickets</h3>
          {tickets && tickets.length > 0 ? (
-            <div>
+            <TrackerList>
                {tickets.map((ticket) => (
-                  <Link to={`/ticket/${id}`} key={ticket._id} state={ticket}>
-                     <h4>{ticket.title}</h4>
-                     <p>{ticket.description}</p>
-                     <p>{ticket.priority}</p>
-                     <p>{ticket.status}</p>
-                  </Link>
+                  <TrackerListItem key={ticket._id}>
+                     <Link to={`/ticket/${id}`} key={ticket._id} state={ticket}>
+                        <h4>{ticket.title}</h4>
+                        <p>{ticket.description}</p>
+                        <p>{ticket.priority}</p>
+                        <p>{ticket.status}</p>
+                     </Link>
+                  </TrackerListItem>
                ))}
-            </div>
+            </TrackerList>
          ) : (
             <div>No tickets</div>
          )}
