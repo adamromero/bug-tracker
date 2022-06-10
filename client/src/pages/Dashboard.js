@@ -123,6 +123,9 @@ function Dashboard() {
                   <Link to={`/project/${project._id}`} key={project._id}>
                      <h4>{project.title}</h4>
                      <p>{project.description}</p>
+                     {project.teamMembers.map((user) => (
+                        <span key={user._id}>{user.name}</span>
+                     ))}
                   </Link>
                </TrackerListItem>
             ))}

@@ -48,12 +48,27 @@ const Ticket = () => {
                <h2>{data.title}</h2>
                <h4>Description</h4>
                <p>{data.description}</p>
-               <h4>Priority</h4>
-               <p>{data.priority}</p>
-               <h4>Status</h4>
-               <p>{data.status}</p>
-               <h4>Estimate</h4>
-               <p>{data.estimate}</p>
+               <div
+                  style={{
+                     display: "flex",
+                     justifyContent: "space-between",
+                     maxWidth: "450px",
+                  }}
+               >
+                  <div>
+                     <h4>Priority</h4>
+                     <p>{data.priority}</p>
+                  </div>
+                  <div>
+                     <h4>Status</h4>
+                     <p>{data.status}</p>
+                  </div>
+                  <div>
+                     <h4>Estimate</h4>
+                     <p>{data.estimate}</p>
+                  </div>
+               </div>
+
                <h4>Assigned to</h4>
 
                {data.assignedTo.map((member) => (

@@ -13,7 +13,7 @@ export const green = {
 };
 
 export const gray = {
-   100: "#087E8B",
+   100: "#ededed",
    200: "#5f25a4",
    300: "#030086",
 };
