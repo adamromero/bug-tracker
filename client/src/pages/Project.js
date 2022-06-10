@@ -9,6 +9,7 @@ import {
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
+import Spinner from "../styles/Spinner";
 import TrackerList from "../styles/TrackerList";
 import TrackerListItem from "../styles/TrackerListItem";
 import PrimaryButton from "../styles/Button";
@@ -63,6 +64,10 @@ const Project = () => {
             : prevState.teamMembers,
       }));
    };
+
+   if (isLoading) {
+      return <Spinner />;
+   }
 
    return (
       <div>

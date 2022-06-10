@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { blue } from "./utils/colors";
+import { green } from "./utils/colors";
 
 const PrimaryButton = styled.button`
-   background-color: ${blue[500]};
-   border: none;
-   color: white;
-   padding: 12px 24px;
+   background-color: white;
+   border: 1px solid ${green[300]};
+   color: ${green[300]};
+   padding: 6px 12px;
    font-size: 1rem;
    cursor: pointer;
 `;

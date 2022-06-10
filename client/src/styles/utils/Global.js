@@ -18,12 +18,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+a {
+    text-decoration: none;
+}
+
 .container {
     display: flex;
-    gap: 20px;
 }
 
 main {
   flex: 1;
+  padding: 0 24px;
 }
 `;

@@ -6,6 +6,7 @@ import { getUsers } from "../features/users/allUsersSlice";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
+import Spinner from "../styles/Spinner";
 import TrackerList from "../styles/TrackerList";
 import TrackerListItem from "../styles/TrackerListItem";
 import PrimaryButton from "../styles/Button";
@@ -59,6 +60,10 @@ function Dashboard() {
          teamMembers: selectedOptionsArray,
       }));
    };
+
+   if (isLoading) {
+      return <Spinner />;
+   }
 
    return (
       <>
@@ -114,20 +119,16 @@ function Dashboard() {
                </div>
             )}
          </Popup>
-         {projects.length > 0 ? (
-            <TrackerList>
-               {projects.map((project) => (
-                  <TrackerListItem key={project._id}>
-                     <Link to={`/project/${project._id}`} key={project._id}>
-                        <h4>{project.title}</h4>
-                        <p>{project.description}</p>
-                     </Link>
-                  </TrackerListItem>
-               ))}
-            </TrackerList>
-         ) : (
-            <div>No projects</div>
-         )}
+         <TrackerList>
+            {projects.map((project) => (
+               <TrackerListItem key={project._id}>
+                  <Link to={`/project/${project._id}`} key={project._id}>
+                     <h4>{project.title}</h4>
+                     <p>{project.description}</p>
+                  </Link>
+               </TrackerListItem>
+            ))}
+         </TrackerList>
       </>
    );
 }

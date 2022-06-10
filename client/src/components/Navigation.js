@@ -3,6 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
 
+import NavigationStyle from "../styles/NavigationStyle";
+import PrimaryButton from "../styles/Button";
+
 const Navigation = () => {
    const dispatch = useDispatch();
    const navigate = useNavigate();
@@ -16,7 +19,7 @@ const Navigation = () => {
 
    if (user) {
       return (
-         <nav>
+         <NavigationStyle>
             <Link to="/">
                <h1>Bug Tracker</h1>
             </Link>
@@ -33,8 +36,8 @@ const Navigation = () => {
                   <Link to="/administration">Administration</Link>
                </li>
             </ul>
-            <button onClick={handleLogout}>Logout</button>
-         </nav>
+            <PrimaryButton onClick={handleLogout}>Logout</PrimaryButton>
+         </NavigationStyle>
       );
    } else {
       return null;
