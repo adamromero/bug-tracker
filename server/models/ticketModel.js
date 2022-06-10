@@ -11,15 +11,19 @@ const ticketSchema = new mongoose.Schema({
    },
    status: {
       type: String,
-      //required: true,
+      required: true,
    },
    priority: {
       type: String,
-      //required: true,
+      required: true,
    },
    dueDate: {
       type: Date,
       //required: true,
+   },
+   estimate: {
+      type: Number,
+      required: true,
    },
    createdBy: {
       type: mongoose.Schema.Types.ObjectId,

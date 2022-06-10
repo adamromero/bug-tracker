@@ -45,14 +45,16 @@ const Ticket = () => {
          <h1>Ticket</h1>
          {data ? (
             <div>
-               <p>{data.title}</p>
-               <h2>Description</h2>
+               <h2>{data.title}</h2>
+               <h4>Description</h4>
                <p>{data.description}</p>
-               <h2>Priority</h2>
+               <h4>Priority</h4>
                <p>{data.priority}</p>
-               <h2>Status</h2>
+               <h4>Status</h4>
                <p>{data.status}</p>
-               <h2>Assigned to</h2>
+               <h4>Estimate</h4>
+               <p>{data.estimate}</p>
+               <h4>Assigned to</h4>
 
                {data.assignedTo.map((member) => (
                   <p key={member._id}>{member.name}</p>

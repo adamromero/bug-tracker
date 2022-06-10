@@ -68,57 +68,59 @@ function Dashboard() {
    return (
       <>
          <h2>Dashboard</h2>
-         <h3>Projects</h3>
-         <Popup
-            trigger={<PrimaryButton>New Project</PrimaryButton>}
-            modal
-            nested
-         >
-            {(close) => (
-               <div className="modal">
-                  <button className="close" onClick={close}>
-                     &times;
-                  </button>
-                  <div className="header"> New Project </div>
-                  <form onSubmit={handleNewProject}>
-                     <label htmlFor="">Title</label>
-                     <br />
-                     <input
-                        type="text"
-                        placeholder="Title"
-                        name="title"
-                        onChange={handleOnChange}
-                     />
-                     <br />
-                     <label htmlFor="">Description</label>
-                     <br />
-                     <textarea
-                        name="description"
-                        placeholder="Description"
-                        onChange={handleOnChange}
-                     />
-                     <br />
-                     <label htmlFor="">Assign team member</label>
-                     <br />
-                     <select
-                        name="teamMembers"
-                        id=""
-                        onChange={handleOnChange}
-                        multiple
-                     >
-                        <option value="">Select a team member</option>
-                        {allUsers.map((user) => (
-                           <option key={user._id} value={user._id}>
-                              {user.name}
-                           </option>
-                        ))}
-                     </select>
-                     <br />
-                     <button type="submit">Submit</button>
-                  </form>
-               </div>
-            )}
-         </Popup>
+         <div>
+            <h3>Projects</h3>
+            <Popup
+               trigger={<PrimaryButton>New Project</PrimaryButton>}
+               modal
+               nested
+            >
+               {(close) => (
+                  <div className="modal">
+                     <button className="close" onClick={close}>
+                        &times;
+                     </button>
+                     <div className="header"> New Project </div>
+                     <form onSubmit={handleNewProject}>
+                        <label htmlFor="">Title</label>
+                        <br />
+                        <input
+                           type="text"
+                           placeholder="Title"
+                           name="title"
+                           onChange={handleOnChange}
+                        />
+                        <br />
+                        <label htmlFor="">Description</label>
+                        <br />
+                        <textarea
+                           name="description"
+                           placeholder="Description"
+                           onChange={handleOnChange}
+                        />
+                        <br />
+                        <label htmlFor="">Assign team member</label>
+                        <br />
+                        <select
+                           name="teamMembers"
+                           id=""
+                           onChange={handleOnChange}
+                           multiple
+                        >
+                           <option value="">Select a team member</option>
+                           {allUsers.map((user) => (
+                              <option key={user._id} value={user._id}>
+                                 {user.name}
+                              </option>
+                           ))}
+                        </select>
+                        <br />
+                        <button type="submit">Submit</button>
+                     </form>
+                  </div>
+               )}
+            </Popup>
+         </div>
          <TrackerList>
             {projects.map((project) => (
                <TrackerListItem key={project._id}>
