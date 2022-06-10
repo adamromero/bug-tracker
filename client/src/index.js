@@ -11,23 +11,27 @@ import Ticket from "./pages/Ticket";
 import Administration from "./pages/Administration";
 import Project from "./pages/Project";
 import Navigation from "./components/Navigation";
-import "./index.css";
+import { GlobalStyle } from "./styles/utils";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
    <React.StrictMode>
+      <GlobalStyle />
+
       <Provider store={store}>
          <Router>
-            <Navigation />
-            <Routes>
-               <Route exact path="/" element={<Dashboard />} />
-               <Route path="/login" element={<Login />} />
-               <Route path="/register" element={<Register />} />
-               <Route path="/tickets" element={<Tickets />} />
-               <Route path="/ticket/:id" element={<Ticket />} />
-               <Route path="/project/:id" element={<Project />} />
-               <Route path="/administration" element={<Administration />} />
-            </Routes>
+            <div className="container">
+               <Navigation />
+               <Routes>
+                  <Route exact path="/" element={<Dashboard />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                  <Route path="/tickets" element={<Tickets />} />
+                  <Route path="/ticket/:id" element={<Ticket />} />
+                  <Route path="/project/:id" element={<Project />} />
+                  <Route path="/administration" element={<Administration />} />
+               </Routes>
+            </div>
          </Router>
       </Provider>
    </React.StrictMode>

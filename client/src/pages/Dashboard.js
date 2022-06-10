@@ -57,7 +57,7 @@ function Dashboard() {
    };
 
    return (
-      <div>
+      <>
          <main>
             <h2>Dashboard</h2>
             <h3>Projects</h3>
@@ -120,7 +120,7 @@ function Dashboard() {
                <div>No projects</div>
             )}
          </main>
-      </div>
+      </>
    );
 }
 
