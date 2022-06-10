@@ -13,6 +13,7 @@ import Spinner from "../styles/Spinner";
 import TrackerList from "../styles/TrackerList";
 import TrackerListItem from "../styles/TrackerListItem";
 import PrimaryButton from "../styles/Button";
+import ModalStyle from "../styles/ModalStyle";
 
 const Project = () => {
    const initialTicketDetails = {
@@ -79,40 +80,33 @@ const Project = () => {
                nested
             >
                {(close) => (
-                  <div className="modal">
+                  <ModalStyle className="modal">
                      <button className="close" onClick={close}>
                         &times;
                      </button>
                      <div className="header"> New Ticket </div>
                      <form onSubmit={handleNewTicket}>
                         <label htmlFor="">Title</label>
-                        <br />
                         <input
                            type="text"
                            name="title"
                            placeholder="Title"
                            onChange={handleOnChange}
                         />
-                        <br />
                         <label htmlFor="">Description</label>
-                        <br />
                         <textarea
                            placeholder="Description"
                            name="description"
                            onChange={handleOnChange}
                         />
-                        <br />
                         <label htmlFor="">Time Estimate</label>
-                        <br />
                         <input
                            type="number"
                            name="estimate"
                            placeholder="Time estimate"
                            onChange={handleOnChange}
                         />
-                        <br />
                         <label htmlFor="">Assign team member</label>
-                        <br />
                         <select
                            name="teamMembers"
                            id=""
@@ -127,28 +121,23 @@ const Project = () => {
                                  </option>
                               ))}
                         </select>
-                        <br />
                         <label htmlFor="">Status</label>
-                        <br />
                         <select name="status" id="" onChange={handleOnChange}>
                            <option value="">Select a status</option>
                            <option value="On Hold">On Hold</option>
                            <option value="In Progress">In Progress</option>
                            <option value="Completed">Completed</option>
                         </select>
-                        <br />
                         <label htmlFor="">Priority</label>
-                        <br />
                         <select name="priority" id="" onChange={handleOnChange}>
                            <option value="">Select a priority</option>
                            <option value="Low">Low</option>
                            <option value="Medium">Medium</option>
                            <option value="High">High</option>
                         </select>
-                        <br />
-                        <button type="submit">Submit</button>
+                        <PrimaryButton type="submit">Submit</PrimaryButton>
                      </form>
-                  </div>
+                  </ModalStyle>
                )}
             </Popup>
          </div>

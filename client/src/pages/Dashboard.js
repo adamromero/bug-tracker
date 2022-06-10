@@ -10,6 +10,7 @@ import Spinner from "../styles/Spinner";
 import TrackerList from "../styles/TrackerList";
 import TrackerListItem from "../styles/TrackerListItem";
 import PrimaryButton from "../styles/Button";
+import ModalStyle from "../styles/ModalStyle";
 
 function Dashboard() {
    const initialProjectDetails = {
@@ -76,31 +77,27 @@ function Dashboard() {
                nested
             >
                {(close) => (
-                  <div className="modal">
+                  <ModalStyle className="modal">
                      <button className="close" onClick={close}>
                         &times;
                      </button>
                      <div className="header"> New Project </div>
                      <form onSubmit={handleNewProject}>
                         <label htmlFor="">Title</label>
-                        <br />
                         <input
                            type="text"
                            placeholder="Title"
                            name="title"
                            onChange={handleOnChange}
                         />
-                        <br />
                         <label htmlFor="">Description</label>
-                        <br />
                         <textarea
                            name="description"
                            placeholder="Description"
                            onChange={handleOnChange}
+                           rows="4"
                         />
-                        <br />
                         <label htmlFor="">Assign team member</label>
-                        <br />
                         <select
                            name="teamMembers"
                            id=""
@@ -114,10 +111,9 @@ function Dashboard() {
                               </option>
                            ))}
                         </select>
-                        <br />
-                        <button type="submit">Submit</button>
+                        <PrimaryButton type="submit">Submit</PrimaryButton>
                      </form>
-                  </div>
+                  </ModalStyle>
                )}
             </Popup>
          </div>

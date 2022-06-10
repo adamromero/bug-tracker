@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import { primaryFont } from "./typography";
+import { green } from "./colors";
 import { normalize } from "polished";
 
 export const GlobalStyle = createGlobalStyle`
@@ -20,10 +21,20 @@ body {
 
 a {
     text-decoration: none;
+    color: ${green[300]};
 }
 
 .container {
     display: flex;
+}
+
+.popup-content {
+  width: 100%;
+  max-width: 475px;
+  margin: 0 auto;
+  padding: 0;
+  border: 0;
+  background: none;
 }
 
 main {
