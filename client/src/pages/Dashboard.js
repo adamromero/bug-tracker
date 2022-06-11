@@ -12,6 +12,9 @@ import TrackerListItem from "../styles/TrackerListItem";
 import PrimaryButton from "../styles/Button";
 import ModalStyle from "../styles/ModalStyle";
 
+import ProjectModal from "../components/ProjectModal";
+import DeleteModal from "../components/DeleteModal";
+
 function Dashboard() {
    const initialProjectDetails = {
       title: "",
@@ -41,8 +44,17 @@ function Dashboard() {
 
    const handleNewProject = (e) => {
       e.preventDefault();
-      console.log(projectDetails);
       dispatch(createProject(projectDetails));
+   };
+
+   const handleEditProject = (e) => {
+      e.preventDefault();
+      console.log(projectDetails);
+      //dispatch(updateProject(projectDetails));
+   };
+
+   const handleDeleteProject = (e) => {
+      console.log("delete project");
    };
 
    const handleOnChange = (e) => {
@@ -71,51 +83,11 @@ function Dashboard() {
          <h2>Dashboard</h2>
          <div>
             <h3>Projects</h3>
-            <Popup
-               trigger={<PrimaryButton>New Project</PrimaryButton>}
-               modal
-               nested
-            >
-               {(close) => (
-                  <ModalStyle className="modal">
-                     <button className="close" onClick={close}>
-                        &times;
-                     </button>
-                     <div className="header"> New Project </div>
-                     <form onSubmit={handleNewProject}>
-                        <label htmlFor="">Title</label>
-                        <input
-                           type="text"
-                           placeholder="Title"
-                           name="title"
-                           onChange={handleOnChange}
-                        />
-                        <label htmlFor="">Description</label>
-                        <textarea
-                           name="description"
-                           placeholder="Description"
-                           onChange={handleOnChange}
-                           rows="4"
-                        />
-                        <label htmlFor="">Assign team member</label>
-                        <select
-                           name="teamMembers"
-                           id=""
-                           onChange={handleOnChange}
-                           multiple
-                        >
-                           <option value="">Select a team member</option>
-                           {allUsers.map((user) => (
-                              <option key={user._id} value={user._id}>
-                                 {user.name}
-                              </option>
-                           ))}
-                        </select>
-                        <PrimaryButton type="submit">Submit</PrimaryButton>
-                     </form>
-                  </ModalStyle>
-               )}
-            </Popup>
+            <ProjectModal
+               type="New"
+               submitHandler={handleNewProject}
+               changeHandler={handleOnChange}
+            />
          </div>
          <TrackerList>
             {projects.map((project) => (
@@ -127,6 +99,12 @@ function Dashboard() {
                         <span key={user._id}>{user.name}</span>
                      ))}
                   </Link>
+                  <ProjectModal
+                     type="Edit"
+                     onClick={handleEditProject}
+                     changeHandler={handleOnChange}
+                  />
+                  <DeleteModal onClick={handleDeleteProject} />
                </TrackerListItem>
             ))}
          </TrackerList>

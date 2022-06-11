@@ -2,12 +2,17 @@ import styled from "styled-components";
 import { green } from "./utils/colors";
 
 const PrimaryButton = styled.button`
-   background-color: white;
-   border: 1px solid ${green[300]};
-   color: ${green[300]};
+   background-color: ${green[300]};
+   border: 0;
+   color: white;
    padding: 6px 12px;
    font-size: 1rem;
    cursor: pointer;
+   transition: 0.2s ease-in-out all;
+
+   &:hover {
+      background-color: ${green[200]};
+      color: white;
 `;
 
 export default PrimaryButton;
