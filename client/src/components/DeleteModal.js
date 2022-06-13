@@ -1,10 +1,15 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { deleteProject } from "../features/projects/projectSlice";
 import Modal from "./Modal";
 import PrimaryButton from "../styles/Button";
 
-const DeleteModal = () => {
+const DeleteModal = ({ id }) => {
+   const dispatch = useDispatch();
+
    const handleDeleteProject = (e) => {
       console.log("delete project");
+      dispatch(deleteProject(id));
    };
 
    return (

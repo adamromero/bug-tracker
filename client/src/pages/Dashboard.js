@@ -51,7 +51,7 @@ function Dashboard() {
                      ))}
                   </Link>
                   <ProjectModal type="Edit" project={project} />
-                  <DeleteModal />
+                  <DeleteModal id={project._id} />
                </TrackerListItem>
             ))}
          </TrackerList>

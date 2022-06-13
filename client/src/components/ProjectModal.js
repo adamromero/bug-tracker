@@ -4,8 +4,11 @@ import {
    createProject,
    updateProject,
 } from "../features/projects/projectSlice";
+import { getUsers } from "../features/users/allUsersSlice";
+
 import Modal from "./Modal";
 import PrimaryButton from "../styles/Button";
+import { useEffect } from "react";
 
 const ProjectModal = ({ type, project }) => {
    const initialProjectDetails = {
@@ -45,6 +48,10 @@ const ProjectModal = ({ type, project }) => {
          teamMembers: selectedOptionsArray,
       }));
    };
+
+   useEffect(() => {
+      dispatch(getUsers());
+   }, [dispatch]);
 
    return (
       <Modal button={type}>
