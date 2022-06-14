@@ -10,12 +10,15 @@ import {
 } from "../controllers/ticketController.js";
 
 //router.route("/").get(getTickets).post(createTicket);
-router.route("/:projectId").get(getProjectTickets).post(createTicket);
+router
+   .route("/:projectId")
+   .get(getProjectTickets)
+   .post(createTicket)
+   .delete(deleteTicket);
 router
    .route("/:projectId/:ticketId")
    .get(getTickets)
    .get(getTicket)
-   .put(updateTicket)
-   .delete(deleteTicket);
+   .put(updateTicket);
 
 export default router;

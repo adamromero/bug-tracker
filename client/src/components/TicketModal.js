@@ -2,10 +2,10 @@ import React from "react";
 import Modal from "./Modal";
 import PrimaryButton from "../styles/Button";
 
-const TicketModal = () => {
+const TicketModal = ({ type }) => {
    return (
-      <Modal button="New Project">
-         <div className="header"> New Ticket </div>
+      <Modal button={type}>
+         <div className="header"> {type} Ticket </div>
          <form>
             <label htmlFor="">Title</label>
             <input type="text" name="title" placeholder="Title" />

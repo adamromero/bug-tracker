@@ -28,8 +28,8 @@ const updateTicket = async (projectId, ticketId, ticket) => {
    return response.data;
 };
 
-const deleteTicket = async (projectId, ticketId) => {
-   const response = await axios.delete(`/api/ticket/${projectId}/${ticketId}`);
+const deleteTicket = async (id) => {
+   const response = await axios.delete(`/api/ticket/${id}`);
    return response.data;
 };
 

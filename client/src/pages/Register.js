@@ -3,6 +3,9 @@ import { useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { register } from "../features/auth/authSlice";
 
+import PrimaryButton from "../styles/Button";
+import LoginBoxStyle from "../styles/LoginBoxStyle";
+
 const Register = () => {
    const initialState = {
       name: "",
@@ -48,41 +51,43 @@ const Register = () => {
    }, [user, isSuccess, navigate]);
 
    return (
-      <div>
-         <h1>Register</h1>
-         <form onSubmit={handleSubmit}>
-            <input
-               type="text"
-               name="name"
-               placeholder="Name"
-               onChange={handleChange}
-            />
-            <br />
-            <input
-               type="text"
-               name="email"
-               placeholder="Email"
-               onChange={handleChange}
-            />
-            <br />
-            <input
-               type="password"
-               name="password"
-               placeholder="Password"
-               onChange={handleChange}
-            />
-            <br />
-            <input
-               type="password"
-               name="confirmPassword"
-               placeholder="Confirm Password"
-               onChange={handleChange}
-            />
-            <br />
-            <button type="submit">Submit</button>
-         </form>
-         <Link to="/login">Login</Link>
-      </div>
+      <LoginBoxStyle>
+         <div className="login">
+            <h1>Register</h1>
+            <form onSubmit={handleSubmit}>
+               <input
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                  onChange={handleChange}
+               />
+               <br />
+               <input
+                  type="text"
+                  name="email"
+                  placeholder="Email"
+                  onChange={handleChange}
+               />
+               <br />
+               <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  onChange={handleChange}
+               />
+               <br />
+               <input
+                  type="password"
+                  name="confirmPassword"
+                  placeholder="Confirm Password"
+                  onChange={handleChange}
+               />
+               <br />
+               <PrimaryButton type="submit">Submit</PrimaryButton>
+            </form>
+            <Link to="/login">Login</Link>
+         </div>
+      </LoginBoxStyle>
    );
 };
 

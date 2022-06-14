@@ -67,13 +67,14 @@ const updateTicket = asyncHandler(async (req, res) => {
 });
 
 const deleteTicket = asyncHandler(async (req, res) => {
-   const ticket = await Ticket.findById(req.params.id);
-   if (!ticket) {
-      res.status(404);
-      throw new Error("Ticket not found");
-   }
-   await ticket.remove();
-   res.status(200).json({ id: req.params.id });
+   console.log(req.body._id);
+   // const ticket = await Ticket.findById(req.body._id);
+   // if (!ticket) {
+   //    res.status(404);
+   //    throw new Error("Ticket not found");
+   // }
+   // await ticket.remove();
+   // res.status(200).json({ id: req.params.id });
 });
 
 export {

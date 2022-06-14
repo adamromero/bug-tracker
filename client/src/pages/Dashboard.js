@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { getProjects } from "../features/projects/projectSlice";
+import { getProjects, deleteProject } from "../features/projects/projectSlice";
 
 import Spinner from "../styles/Spinner";
 import TrackerList from "../styles/TrackerList";
@@ -29,6 +29,10 @@ function Dashboard() {
       };
    }, [isError, message, dispatch]);
 
+   const handleDeleteProject = (id) => {
+      dispatch(deleteProject(id));
+   };
+
    if (isLoading) {
       return <Spinner />;
    }
@@ -51,7 +55,11 @@ function Dashboard() {
                      ))}
                   </Link>
                   <ProjectModal type="Edit" project={project} />
-                  <DeleteModal id={project._id} />
+                  <DeleteModal
+                     type="project"
+                     id={project._id}
+                     deleteHandler={handleDeleteProject}
+                  />
                </TrackerListItem>
             ))}
          </TrackerList>

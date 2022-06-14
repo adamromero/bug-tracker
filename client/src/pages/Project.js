@@ -5,6 +5,7 @@ import { getProject } from "../features/projects/projectSlice";
 import {
    createTicket,
    getProjectTickets,
+   deleteTicket,
 } from "../features/tickets/ticketSlice";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
@@ -14,6 +15,8 @@ import TrackerList from "../styles/TrackerList";
 import TrackerListItem from "../styles/TrackerListItem";
 import PrimaryButton from "../styles/Button";
 import ModalStyle from "../styles/ModalStyle";
+import TicketModal from "../components/TicketModal";
+import DeleteModal from "../components/DeleteModal";
 
 const Project = () => {
    const initialTicketDetails = {
@@ -43,6 +46,10 @@ const Project = () => {
    const handleNewTicket = (e) => {
       e.preventDefault();
       dispatch(createTicket(ticketDetails));
+   };
+
+   const handleDeleteTicket = (id) => {
+      dispatch(deleteTicket(id));
    };
 
    const handleOnChange = (e) => {
@@ -166,6 +173,12 @@ const Project = () => {
                         <p>{ticket.priority}</p>
                         <p>{ticket.status}</p>
                      </Link>
+                     <TicketModal type="Edit" />
+                     <DeleteModal
+                        type="ticket"
+                        id={ticket._id}
+                        deleteHandler={handleDeleteTicket}
+                     />
                   </TrackerListItem>
                ))}
             </TrackerList>

@@ -26,6 +26,7 @@ a {
 
 .container {
     display: flex;
+
 }
 
 .popup-content {
