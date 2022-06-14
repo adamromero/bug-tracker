@@ -1,31 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-   createProject,
-   updateProject,
-} from "../features/projects/projectSlice";
-import { getUsers } from "../features/users/allUsersSlice";
+import { updateProject } from "../../features/projects/projectSlice";
+import { getUsers } from "../../features/users/allUsersSlice";
 
-import Modal from "./Modal";
-import PrimaryButton from "../styles/Button";
-import { useEffect } from "react";
+import PrimaryButton from "../../styles/Button";
 
-const ProjectModal = ({ type, project }) => {
-   const initialProjectDetails = {
-      title: "",
-      description: "",
-      teamMembers: [],
-   };
-   const [projectDetails, setProjectDetails] = useState(
-      project ? project : initialProjectDetails
-   );
+const UpdateProject = ({ project }) => {
+   const [projectDetails, setProjectDetails] = useState(project);
+
    const dispatch = useDispatch();
    const { allUsers } = useSelector((state) => state.users);
-
-   const handleNewProject = (e) => {
-      e.preventDefault();
-      dispatch(createProject(projectDetails));
-   };
 
    const handleEditProject = (e) => {
       e.preventDefault();
@@ -54,11 +38,9 @@ const ProjectModal = ({ type, project }) => {
    }, [dispatch]);
 
    return (
-      <Modal button={type}>
-         <div className="header">{type} Project </div>
-         <form
-            onSubmit={type === "Edit" ? handleEditProject : handleNewProject}
-         >
+      <div>
+         <div className="header">Update Project </div>
+         <form onSubmit={handleEditProject}>
             <label htmlFor="">Title</label>
             <input
                type="text"
@@ -86,8 +68,8 @@ const ProjectModal = ({ type, project }) => {
             </select>
             <PrimaryButton type="submit">Submit</PrimaryButton>
          </form>
-      </Modal>
+      </div>
    );
 };
 
-export default ProjectModal;
+export default UpdateProject;

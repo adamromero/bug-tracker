@@ -67,7 +67,7 @@ const updateTicket = asyncHandler(async (req, res) => {
 });
 
 const deleteTicket = asyncHandler(async (req, res) => {
-   console.log(req.body._id);
+   console.log(req.body);
    // const ticket = await Ticket.findById(req.body._id);
    // if (!ticket) {
    //    res.status(404);

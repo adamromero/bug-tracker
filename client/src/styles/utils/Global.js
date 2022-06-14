@@ -19,6 +19,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+h2 {
+  margin: 0 0 16px;
+}
+
 a {
     text-decoration: none;
     color: ${green[300]};
@@ -41,5 +45,6 @@ a {
 main {
   flex: 1;
   padding: 0 24px;
+  margin: 24px 0;
 }
 `;

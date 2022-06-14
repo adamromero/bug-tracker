@@ -42,10 +42,10 @@ const Ticket = () => {
 
    return (
       <div>
-         <h1>Ticket</h1>
+         <h2>Ticket</h2>
          {data ? (
             <div>
-               <h2>{data.title}</h2>
+               <h3>{data.title}</h3>
                <h4>Description</h4>
                <p>{data.description}</p>
                <div

@@ -7,8 +7,10 @@ import Spinner from "../styles/Spinner";
 import TrackerList from "../styles/TrackerList";
 import TrackerListItem from "../styles/TrackerListItem";
 
-import ProjectModal from "../components/ProjectModal";
-import DeleteModal from "../components/DeleteModal";
+import Modal from "../components/Modal";
+import CreateProject from "../components/forms/CreateProject";
+import UpdateProject from "../components/forms/UpdateProject";
+import DeleteProject from "../components/forms/DeleteProject";
 
 function Dashboard() {
    const dispatch = useDispatch();
@@ -29,10 +31,6 @@ function Dashboard() {
       };
    }, [isError, message, dispatch]);
 
-   const handleDeleteProject = (id) => {
-      dispatch(deleteProject(id));
-   };
-
    if (isLoading) {
       return <Spinner />;
    }
@@ -42,7 +40,9 @@ function Dashboard() {
          <h2>Dashboard</h2>
          <div>
             <h3>Projects</h3>
-            <ProjectModal type="New" />
+            <Modal type="New">
+               <CreateProject />
+            </Modal>
          </div>
          <TrackerList>
             {projects.map((project) => (
@@ -54,12 +54,12 @@ function Dashboard() {
                         <span key={user._id}>{user.name}</span>
                      ))}
                   </Link>
-                  <ProjectModal type="Edit" project={project} />
-                  <DeleteModal
-                     type="project"
-                     id={project._id}
-                     deleteHandler={handleDeleteProject}
-                  />
+                  <Modal type="Edit">
+                     <UpdateProject project={project} />
+                  </Modal>
+                  <Modal type="Delete">
+                     <DeleteProject id={project._id} />
+                  </Modal>
                </TrackerListItem>
             ))}
          </TrackerList>
