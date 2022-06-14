@@ -1,35 +1,32 @@
 import axios from "axios";
 
-const getTickets = async (projectId, ticketId) => {
-   const response = await axios.get(`/api/ticket/${projectId}/${ticketId}`);
+const getTickets = async (ticketId) => {
+   const response = await axios.get(`/api/ticket/${ticketId}`);
    return response.data;
 };
 
-const getTicket = async (projectId, ticketId) => {
-   const response = await axios.get(`/api/ticket/${projectId}/${ticketId}`);
+const getTicket = async (ticketId) => {
+   const response = await axios.get(`/api/ticket/${ticketId}`);
    return response.data;
 };
 
-const getProjectTickets = async (projectId) => {
-   const response = await axios.get(`/api/ticket/${projectId}`);
+const getProjectTickets = async (ticketId) => {
+   const response = await axios.get(`/api/ticket/${ticketId}`);
    return response.data;
 };
 
 const createTicket = async (ticket) => {
-   const response = await axios.post(`/api/ticket/${ticket.project}`, ticket);
+   const response = await axios.post(`/api/ticket`, ticket);
    return response.data;
 };
 
-const updateTicket = async (projectId, ticketId, ticket) => {
-   const response = await axios.put(
-      `/api/ticket/${projectId}/${ticketId}`,
-      ticket
-   );
+const updateTicket = async (ticket) => {
+   const response = await axios.put(`/api/ticket/${ticket.id}`, ticket);
    return response.data;
 };
 
-const deleteTicket = async (id) => {
-   const response = await axios.delete(`/api/ticket/${id}`);
+const deleteTicket = async (ticketId) => {
+   const response = await axios.delete(`/api/ticket/${ticketId}`);
    return response.data;
 };
 

@@ -18,7 +18,7 @@ const getTicket = asyncHandler(async (req, res) => {
 });
 
 const getProjectTickets = asyncHandler(async (req, res) => {
-   const tickets = await Ticket.find({ project: req.params.projectId })
+   const tickets = await Ticket.find({ project: req.params.ticketId })
       .populate("assignedTo")
       .populate("createdBy")
       .populate("project");
@@ -53,7 +53,7 @@ const createTicket = asyncHandler(async (req, res) => {
 });
 
 const updateTicket = asyncHandler(async (req, res) => {
-   const ticket = await Ticket.findByIdAndUpdate(req.params.id, req.body, {
+   const ticket = await Ticket.findByIdAndUpdate(req.body._id, req.body, {
       new: true,
       runValidators: true,
    });
@@ -67,14 +67,13 @@ const updateTicket = asyncHandler(async (req, res) => {
 });
 
 const deleteTicket = asyncHandler(async (req, res) => {
-   console.log(req.body);
-   // const ticket = await Ticket.findById(req.body._id);
-   // if (!ticket) {
-   //    res.status(404);
-   //    throw new Error("Ticket not found");
-   // }
-   // await ticket.remove();
-   // res.status(200).json({ id: req.params.id });
+   const ticket = await Ticket.findById(req.params.ticketId);
+   if (!ticket) {
+      res.status(404);
+      throw new Error("Ticket not found");
+   }
+   await ticket.remove();
+   res.status(200).json({ id: req.params.id });
 });
 
 export {

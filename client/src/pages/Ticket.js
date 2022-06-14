@@ -86,7 +86,7 @@ const Ticket = () => {
             <textarea
                name=""
                id=""
-               cols="100"
+               cols="60"
                rows="10"
                onChange={(e) => {
                   setInput(e.target.value);
