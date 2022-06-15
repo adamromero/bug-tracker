@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getProject } from "../features/projects/projectSlice";
 import { getProjectTickets } from "../features/tickets/ticketSlice";
@@ -7,6 +7,10 @@ import { getProjectTickets } from "../features/tickets/ticketSlice";
 import Spinner from "../styles/Spinner";
 import TrackerList from "../styles/TrackerList";
 import TrackerListItem from "../styles/TrackerListItem";
+import PrimaryButton from "../styles/Button";
+
+import { MdDelete } from "react-icons/md";
+import { MdModeEditOutline } from "react-icons/md";
 
 import Modal from "../components/Modal";
 import CreateTicket from "../components/forms/CreateTicket";
@@ -48,7 +52,7 @@ const Project = () => {
             ) : (
                <p>No team members assigned</p>
             )}
-            <Modal type="New">
+            <Modal button={<PrimaryButton>New Ticket</PrimaryButton>}>
                <CreateTicket project={project} />
             </Modal>
          </div>
@@ -63,10 +67,22 @@ const Project = () => {
                         <p>{ticket.priority}</p>
                         <p>{ticket.status}</p>
                      </Link>
-                     <Modal type="Edit">
+                     <Modal
+                        button={
+                           <PrimaryButton>
+                              <MdModeEditOutline />
+                           </PrimaryButton>
+                        }
+                     >
                         <UpdateTicket project={project} ticket={ticket} />
                      </Modal>
-                     <Modal type="Delete">
+                     <Modal
+                        button={
+                           <PrimaryButton>
+                              <MdDelete />
+                           </PrimaryButton>
+                        }
+                     >
                         <DeleteTicket id={ticket._id} />
                      </Modal>
                   </TrackerListItem>

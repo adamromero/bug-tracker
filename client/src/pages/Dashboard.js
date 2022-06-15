@@ -6,6 +6,10 @@ import { getProjects, deleteProject } from "../features/projects/projectSlice";
 import Spinner from "../styles/Spinner";
 import TrackerList from "../styles/TrackerList";
 import TrackerListItem from "../styles/TrackerListItem";
+import PrimaryButton from "../styles/Button";
+
+import { MdDelete } from "react-icons/md";
+import { MdModeEditOutline } from "react-icons/md";
 
 import Modal from "../components/Modal";
 import CreateProject from "../components/forms/CreateProject";
@@ -40,7 +44,7 @@ function Dashboard() {
          <h2>Dashboard</h2>
          <div>
             <h3>Projects</h3>
-            <Modal type="New">
+            <Modal button={<PrimaryButton>New Project</PrimaryButton>}>
                <CreateProject />
             </Modal>
          </div>
@@ -54,10 +58,22 @@ function Dashboard() {
                         <span key={user._id}>{user.name}</span>
                      ))}
                   </Link>
-                  <Modal type="Edit">
+                  <Modal
+                     button={
+                        <PrimaryButton>
+                           <MdModeEditOutline />
+                        </PrimaryButton>
+                     }
+                  >
                      <UpdateProject project={project} />
                   </Modal>
-                  <Modal type="Delete">
+                  <Modal
+                     button={
+                        <PrimaryButton>
+                           <MdDelete />
+                        </PrimaryButton>
+                     }
+                  >
                      <DeleteProject id={project._id} />
                   </Modal>
                </TrackerListItem>

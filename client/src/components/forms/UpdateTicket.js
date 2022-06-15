@@ -16,7 +16,6 @@ const UpdateTicket = ({ project, ticket }) => {
 
    const handleOnChange = (e) => {
       let selectedOptionsArray;
-
       const selectedOptions = e.target.selectedOptions;
       if (selectedOptions && e.target.name === "teamMembers") {
          selectedOptionsArray = Array.from(
@@ -39,7 +38,7 @@ const UpdateTicket = ({ project, ticket }) => {
       <div>
          <div className="header"> Create Ticket </div>
          <form onSubmit={handleEditTicket}>
-            <label htmlFor="">Title</label>
+            <label>Title</label>
             <input
                type="text"
                name="title"
@@ -47,14 +46,14 @@ const UpdateTicket = ({ project, ticket }) => {
                value={ticketDetails.title || ""}
                onChange={handleOnChange}
             />
-            <label htmlFor="">Description</label>
+            <label>Description</label>
             <textarea
                placeholder="Description"
                name="description"
                value={ticketDetails.description || ""}
                onChange={handleOnChange}
             />
-            <label htmlFor="">Time Estimate</label>
+            <label>Time Estimate</label>
             <input
                type="number"
                name="estimate"
@@ -62,8 +61,13 @@ const UpdateTicket = ({ project, ticket }) => {
                value={ticketDetails.estimate || ""}
                onChange={handleOnChange}
             />
-            <label htmlFor="">Assign team member</label>
-            <select name="teamMembers" multiple>
+            <label>Assign team member</label>
+            <select
+               name="teamMembers"
+               value={ticketDetails.assignedTo || ""}
+               onChange={handleOnChange}
+               multiple
+            >
                <option value="">Select a team member</option>
                {project.teamMembers &&
                   project.teamMembers.map((user) => (
@@ -72,7 +76,7 @@ const UpdateTicket = ({ project, ticket }) => {
                      </option>
                   ))}
             </select>
-            <label htmlFor="">Status</label>
+            <label>Status</label>
             <select
                name="status"
                value={ticketDetails.status || ""}
@@ -83,7 +87,7 @@ const UpdateTicket = ({ project, ticket }) => {
                <option value="In Progress">In Progress</option>
                <option value="Completed">Completed</option>
             </select>
-            <label htmlFor="">Priority</label>
+            <label>Priority</label>
             <select
                name="priority"
                value={ticketDetails.priority || ""}

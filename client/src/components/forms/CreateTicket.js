@@ -44,14 +44,12 @@ const CreateTicket = ({ project }) => {
                type="text"
                name="title"
                placeholder="Title"
-               value={ticketDetails.title || ""}
                onChange={handleOnChange}
             />
             <label htmlFor="">Description</label>
             <textarea
                placeholder="Description"
                name="description"
-               value={ticketDetails.description || ""}
                onChange={handleOnChange}
             />
             <label htmlFor="">Time Estimate</label>
@@ -59,7 +57,6 @@ const CreateTicket = ({ project }) => {
                type="number"
                name="estimate"
                placeholder="Time estimate"
-               value={ticketDetails.estimate || ""}
                onChange={handleOnChange}
             />
             <label htmlFor="">Assign team member</label>
@@ -72,22 +69,14 @@ const CreateTicket = ({ project }) => {
                ))}
             </select>
             <label htmlFor="">Status</label>
-            <select
-               name="status"
-               value={ticketDetails.status || ""}
-               onChange={handleOnChange}
-            >
+            <select name="status" onChange={handleOnChange}>
                <option value="">Select a status</option>
                <option value="On Hold">On Hold</option>
                <option value="In Progress">In Progress</option>
                <option value="Completed">Completed</option>
             </select>
             <label htmlFor="">Priority</label>
-            <select
-               name="priority"
-               value={ticketDetails.priority || ""}
-               onChange={handleOnChange}
-            >
+            <select name="priority" onChange={handleOnChange}>
                <option value="">Select a priority</option>
                <option value="Low">Low</option>
                <option value="Medium">Medium</option>
