@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getComments, createComment } from "../features/comments/commentSlice";
 
@@ -8,21 +8,23 @@ import PrimaryButton from "../styles/Button";
 const Ticket = () => {
    const initialCommentDetails = {
       text: "",
-      //createdBy: "",
+      createdBy: "",
       ticket: "",
-      //createdAt: "",
+      createdAt: "",
    };
 
-   const [comments, setComments] = useState(initialCommentDetails);
+   const [commentDetails, setCommentDetails] = useState(initialCommentDetails);
    const [input, setInput] = useState("");
    const { id } = useParams();
    const dispatch = useDispatch();
    const location = useLocation();
    const data = location.state;
 
-   //  const { comments, isLoading, isError, message } = useSelector(
-   //     (state) => state.comments
-   //  );
+   const { user } = useSelector((state) => state.auth);
+
+   const { comments, isLoading, isError, message } = useSelector(
+      (state) => state.comments
+   );
 
    useEffect(() => {
       dispatch(getComments());
@@ -30,14 +32,20 @@ const Ticket = () => {
 
    const handleOnSubmit = (e) => {
       e.preventDefault();
-      setComments((prevState) => ({
-         ...prevState,
-         text: input,
-         [e.target.name]: e.target.value,
-      }));
       setInput("");
-      console.log(e.target.value);
-      dispatch(createComment(comments));
+      dispatch(createComment(commentDetails));
+   };
+
+   const handleOnChange = (e) => {
+      e.preventDefault();
+      setInput(e.target.value);
+      setCommentDetails((prevState) => ({
+         ...prevState,
+         [e.target.name]: e.target.value,
+         ticket: id,
+         createdBy: user._id,
+         createdAt: new Date(),
+      }));
    };
 
    return (
@@ -79,18 +87,19 @@ const Ticket = () => {
             <div>No data</div>
          )}
 
-         {/* {comments &&
-            comments.map((comment, index) => <p key={index}>{comment.text}</p>)} */}
+         <h4>Comments</h4>
+         {comments.map((comment) => (
+            <p key={comment._id}>
+               {comment.text}: Posted by {comment.createdBy.name}
+            </p>
+         ))}
 
          <form onSubmit={handleOnSubmit}>
             <textarea
-               name=""
-               id=""
+               name="text"
                cols="60"
                rows="10"
-               onChange={(e) => {
-                  setInput(e.target.value);
-               }}
+               onChange={handleOnChange}
                value={input}
             ></textarea>
             <br />

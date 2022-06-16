@@ -2,14 +2,13 @@ import asyncHandler from "express-async-handler";
 import Comment from "../models/commentModel.js";
 
 const getComments = asyncHandler(async (req, res) => {
-   const comments = await Comment.find();
+   const comments = await Comment.find().populate("createdBy", "name");
    res.status(200).json(comments);
 });
 
 const createComment = asyncHandler(async (req, res) => {
-   console.log("req.body: ", req.body);
-   //const comment = await Comment.create(req.body);
-   //res.status(200).json(comment);
+   const comment = await Comment.create(req.body);
+   res.status(200).json(comment);
 });
 
 const updateComment = asyncHandler(async (req, res) => {
