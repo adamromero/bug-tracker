@@ -27,7 +27,7 @@ const Ticket = () => {
    );
 
    useEffect(() => {
-      dispatch(getComments());
+      dispatch(getComments(id));
    }, [dispatch]);
 
    const handleOnSubmit = (e) => {
@@ -76,9 +76,7 @@ const Ticket = () => {
                      <p>{data.estimate}</p>
                   </div>
                </div>
-
                <h4>Assigned to</h4>
-
                {data.assignedTo.map((member) => (
                   <p key={member._id}>{member.name}</p>
                ))}
@@ -88,12 +86,31 @@ const Ticket = () => {
          )}
 
          <h4>Comments</h4>
-         {comments.map((comment) => (
-            <p key={comment._id}>
-               {comment.text}: Posted by {comment.createdBy.name}
-            </p>
-         ))}
-
+         <div style={{ marginBottom: "40px" }}>
+            {comments &&
+               comments.map((comment) => (
+                  <div
+                     style={{
+                        borderBottom: "1px solid gray",
+                        paddingBottom: "20px",
+                     }}
+                     key={comment._id}
+                  >
+                     <p>{comment.text}</p>
+                     <div
+                        style={{
+                           fontSize: "12px",
+                           fontWeight: "bold",
+                        }}
+                     >
+                        <em>
+                           Posted by {comment.createdBy.name} at{" "}
+                           {new Date(comment.createdAt).toLocaleString()}
+                        </em>
+                     </div>
+                  </div>
+               ))}
+         </div>
          <form onSubmit={handleOnSubmit}>
             <textarea
                name="text"

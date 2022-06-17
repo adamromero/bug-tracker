@@ -9,9 +9,12 @@ const initialState = {
    message: "",
 };
 
-export const getComments = createAsyncThunk("comment/getComments", async () => {
-   return await commentService.getComments();
-});
+export const getComments = createAsyncThunk(
+   "comment/getComments",
+   async (id) => {
+      return await commentService.getComments(id);
+   }
+);
 
 export const createComment = createAsyncThunk(
    "comment/createComment",

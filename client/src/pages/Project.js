@@ -61,7 +61,11 @@ const Project = () => {
             <TrackerList>
                {tickets.map((ticket) => (
                   <TrackerListItem key={ticket._id}>
-                     <Link to={`/ticket/${id}`} key={ticket._id} state={ticket}>
+                     <Link
+                        to={`/ticket/${ticket._id}`}
+                        key={ticket._id}
+                        state={ticket}
+                     >
                         <h4>{ticket.title}</h4>
                         <p>{ticket.description}</p>
                         <p>{ticket.priority}</p>

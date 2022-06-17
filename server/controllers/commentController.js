@@ -2,7 +2,10 @@ import asyncHandler from "express-async-handler";
 import Comment from "../models/commentModel.js";
 
 const getComments = asyncHandler(async (req, res) => {
-   const comments = await Comment.find().populate("createdBy", "name");
+   const comments = await Comment.find({ ticket: req.params.id }).populate(
+      "createdBy",
+      "name"
+   );
    res.status(200).json(comments);
 });
 
