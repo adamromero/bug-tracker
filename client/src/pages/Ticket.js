@@ -33,7 +33,10 @@ const Ticket = () => {
    const handleOnSubmit = (e) => {
       e.preventDefault();
       setInput("");
-      dispatch(createComment(commentDetails));
+
+      if (commentDetails.text.trim()) {
+         dispatch(createComment(commentDetails));
+      }
    };
 
    const handleOnChange = (e) => {
@@ -120,7 +123,9 @@ const Ticket = () => {
                value={input}
             ></textarea>
             <br />
-            <PrimaryButton type="submit">Submit</PrimaryButton>
+            <PrimaryButton type="submit" disabled={!input}>
+               Submit
+            </PrimaryButton>
          </form>
       </div>
    );

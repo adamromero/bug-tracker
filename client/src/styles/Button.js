@@ -13,6 +13,12 @@ const PrimaryButton = styled.button`
    &:hover {
       background-color: ${green[200]};
       color: white;
+   }
+
+   &:disabled {
+      background-color: ${green[100]};
+      cursor: not-allowed;
+   }
 `;
 
 export default PrimaryButton;
