@@ -16,7 +16,7 @@ const getProjectTickets = async (ticketId) => {
 };
 
 const createTicket = async (ticket) => {
-   const response = await axios.post(`/api/ticket`, ticket);
+   const response = await axios.post(`/api/ticket/${ticket.id}`, ticket);
    return response.data;
 };
 

@@ -33,7 +33,7 @@ const createTicket = asyncHandler(async (req, res) => {
       throw new Error("Project not found");
    }
 
-   if (!req.body.title || !req.body.description || !req.body.teamMembers) {
+   if (!req.body.title || !req.body.description) {
       res.status(400);
       throw new Error("Please provide a title and description");
    }

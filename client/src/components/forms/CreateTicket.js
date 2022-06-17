@@ -5,7 +5,16 @@ import { createTicket } from "../../features/tickets/ticketSlice";
 import PrimaryButton from "../../styles/Button";
 
 const CreateTicket = ({ project }) => {
-   const [ticketDetails, setTicketDetails] = useState(project);
+   const initialTicketDetails = {
+      title: "",
+      description: "",
+      estimate: "",
+      teamMembers: [],
+      status: "",
+      priority: "",
+      project: project._id,
+   };
+   const [ticketDetails, setTicketDetails] = useState(initialTicketDetails);
 
    const dispatch = useDispatch();
 
@@ -27,7 +36,6 @@ const CreateTicket = ({ project }) => {
 
       setTicketDetails((prevState) => ({
          ...prevState,
-         project: project._id,
          [e.target.name]: e.target.value,
          teamMembers: selectedOptionsArray
             ? selectedOptionsArray
@@ -37,7 +45,7 @@ const CreateTicket = ({ project }) => {
 
    return (
       <div>
-         <div className="header"> Create Ticket </div>
+         <div className="header">Create Ticket</div>
          <form onSubmit={handleNewTicket}>
             <label htmlFor="">Title</label>
             <input
