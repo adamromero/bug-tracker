@@ -11,6 +11,7 @@ const UpdateTicket = ({ project, ticket }) => {
 
    const handleEditTicket = (e) => {
       e.preventDefault();
+      console.log(ticketDetails);
       dispatch(updateTicket(ticketDetails));
    };
 
@@ -62,12 +63,7 @@ const UpdateTicket = ({ project, ticket }) => {
                onChange={handleOnChange}
             />
             <label>Assign team member</label>
-            <select
-               name="teamMembers"
-               value={ticketDetails.assignedTo || ""}
-               onChange={handleOnChange}
-               multiple
-            >
+            <select name="teamMembers" onChange={handleOnChange} multiple>
                <option value="">Select a team member</option>
                {project.teamMembers &&
                   project.teamMembers.map((user) => (

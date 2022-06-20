@@ -80,7 +80,7 @@ const Ticket = () => {
                   </div>
                </div>
                <h4>Assigned to</h4>
-               {data.assignedTo.map((member) => (
+               {data.teamMembers.map((member) => (
                   <p key={member._id}>{member.name}</p>
                ))}
             </div>

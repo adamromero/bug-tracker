@@ -33,7 +33,7 @@ const ticketSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "Project",
    },
-   assignedTo: [
+   teamMembers: [
       {
          type: mongoose.Schema.Types.ObjectId,
          ref: "User",

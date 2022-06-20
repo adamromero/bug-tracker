@@ -4,14 +4,14 @@ import Project from "../models/projectModel.js";
 
 const getTickets = asyncHandler(async (req, res) => {
    const tickets = await Ticket.find()
-      .populate("assignedTo")
+      .populate("teamMembers")
       .populate("createdBy");
    res.status(200).json(tickets);
 });
 
 const getTicket = asyncHandler(async (req, res) => {
    const ticket = await Ticket.findById(req.params.ticketId)
-      .populate("assignedTo")
+      .populate("teamMembers")
       .populate("createdBy")
       .populate("project");
    res.status(200).json(ticket);
@@ -19,7 +19,7 @@ const getTicket = asyncHandler(async (req, res) => {
 
 const getProjectTickets = asyncHandler(async (req, res) => {
    const tickets = await Ticket.find({ project: req.params.ticketId })
-      .populate("assignedTo")
+      .populate("teamMembers")
       .populate("createdBy")
       .populate("project");
 
@@ -42,7 +42,7 @@ const createTicket = asyncHandler(async (req, res) => {
       ...req.body,
       title: req.body.title,
       description: req.body.description,
-      assignedTo: req.body.teamMembers,
+      teamMembers: req.body.teamMembers,
       //createdBy: req.user._id,
    };
 
