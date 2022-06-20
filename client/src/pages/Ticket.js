@@ -28,7 +28,7 @@ const Ticket = () => {
 
    useEffect(() => {
       dispatch(getComments(id));
-   }, [dispatch]);
+   }, [dispatch, comments]);
 
    const handleOnSubmit = (e) => {
       e.preventDefault();
