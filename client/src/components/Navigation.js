@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
 
 import NavigationStyle from "../styles/NavigationStyle";
-import PrimaryButton from "../styles/Button";
+import { PrimaryButton } from "../styles/Button";
 
 const Navigation = () => {
    const dispatch = useDispatch();

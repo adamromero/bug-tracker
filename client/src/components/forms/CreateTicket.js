@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { createTicket } from "../../features/tickets/ticketSlice";
 
-import PrimaryButton from "../../styles/Button";
+import { PrimaryButton } from "../../styles/Button";
 
 const CreateTicket = ({ project }) => {
    const initialTicketDetails = {

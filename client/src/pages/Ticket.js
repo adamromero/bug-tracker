@@ -3,7 +3,7 @@ import { useParams, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getComments, createComment } from "../features/comments/commentSlice";
 
-import PrimaryButton from "../styles/Button";
+import { PrimaryButton } from "../styles/Button";
 
 const Ticket = () => {
    const initialCommentDetails = {
@@ -15,6 +15,7 @@ const Ticket = () => {
 
    const [commentDetails, setCommentDetails] = useState(initialCommentDetails);
    const [input, setInput] = useState("");
+   const [update, setUpdate] = useState(false);
    const { id } = useParams();
    const dispatch = useDispatch();
    const location = useLocation();
@@ -28,7 +29,7 @@ const Ticket = () => {
 
    useEffect(() => {
       dispatch(getComments(id));
-   }, [dispatch, comments]);
+   }, [dispatch]);
 
    const handleOnSubmit = (e) => {
       e.preventDefault();
@@ -37,6 +38,8 @@ const Ticket = () => {
       if (commentDetails.text.trim()) {
          dispatch(createComment(commentDetails));
       }
+
+      setUpdate(!update);
    };
 
    const handleOnChange = (e) => {

@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { deleteProject } from "../../features/projects/projectSlice";
 
-import PrimaryButton from "../../styles/Button";
+import { PrimaryButton } from "../../styles/Button";
 
 const DeleteProject = (projectId) => {
    const dispatch = useDispatch();

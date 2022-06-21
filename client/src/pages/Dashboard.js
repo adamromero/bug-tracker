@@ -6,7 +6,8 @@ import { getProjects, deleteProject } from "../features/projects/projectSlice";
 import Spinner from "../styles/Spinner";
 import TrackerList from "../styles/TrackerList";
 import TrackerListItem from "../styles/TrackerListItem";
-import PrimaryButton from "../styles/Button";
+import { PrimaryButton } from "../styles/Button";
+import { SecondaryButton } from "../styles/Button";
 
 import { MdDelete } from "react-icons/md";
 import { MdModeEditOutline } from "react-icons/md";
@@ -52,30 +53,34 @@ function Dashboard() {
             {projects.map((project) => (
                <TrackerListItem key={project._id}>
                   <Link to={`/project/${project._id}`} key={project._id}>
-                     <h4>{project.title}</h4>
-                     <p>{project.description}</p>
-                     {project.teamMembers.map((user) => (
-                        <span key={user._id}>{user.name}</span>
-                     ))}
+                     <div>{project.title}</div>
+                     <div>{project.description}</div>
+                     <div>
+                        {project.teamMembers.map((user) => (
+                           <div key={user._id}>{user.name}</div>
+                        ))}
+                     </div>
                   </Link>
-                  <Modal
-                     button={
-                        <PrimaryButton>
-                           <MdModeEditOutline />
-                        </PrimaryButton>
-                     }
-                  >
-                     <UpdateProject project={project} />
-                  </Modal>
-                  <Modal
-                     button={
-                        <PrimaryButton>
-                           <MdDelete />
-                        </PrimaryButton>
-                     }
-                  >
-                     <DeleteProject id={project._id} />
-                  </Modal>
+                  <div>
+                     <Modal
+                        button={
+                           <SecondaryButton>
+                              <MdModeEditOutline />
+                           </SecondaryButton>
+                        }
+                     >
+                        <UpdateProject project={project} />
+                     </Modal>
+                     <Modal
+                        button={
+                           <SecondaryButton>
+                              <MdDelete />
+                           </SecondaryButton>
+                        }
+                     >
+                        <DeleteProject id={project._id} />
+                     </Modal>
+                  </div>
                </TrackerListItem>
             ))}
          </TrackerList>

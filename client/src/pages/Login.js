@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { login } from "../features/auth/authSlice";
 
-import PrimaryButton from "../styles/Button";
+import { PrimaryButton } from "../styles/Button";
 import LoginBoxStyle from "../styles/LoginBoxStyle";
 
 const Login = () => {

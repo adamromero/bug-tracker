@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { green } from "./utils/colors";
+import { green } from "../utils/colors";
 
-const PrimaryButton = styled.button`
+export const PrimaryButton = styled.button`
    background-color: ${green[300]};
    border: 0;
    color: white;
@@ -20,5 +20,3 @@ const PrimaryButton = styled.button`
       cursor: not-allowed;
    }
 `;
-
-export default PrimaryButton;

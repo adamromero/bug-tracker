@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { deleteTicket } from "../../features/tickets/ticketSlice";
 
-import PrimaryButton from "../../styles/Button";
+import { PrimaryButton } from "../../styles/Button";
 
 const DeleteTicket = (ticketId) => {
    const dispatch = useDispatch();

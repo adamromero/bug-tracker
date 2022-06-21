@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateTicket } from "../../features/tickets/ticketSlice";
 
-import PrimaryButton from "../../styles/Button";
+import { PrimaryButton } from "../../styles/Button";
 
 const UpdateTicket = ({ project, ticket }) => {
    const [ticketDetails, setTicketDetails] = useState(ticket);
@@ -11,7 +11,6 @@ const UpdateTicket = ({ project, ticket }) => {
 
    const handleEditTicket = (e) => {
       e.preventDefault();
-      console.log(ticketDetails);
       dispatch(updateTicket(ticketDetails));
    };
 

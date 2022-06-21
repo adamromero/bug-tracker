@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { createProject } from "../../features/projects/projectSlice";
 import { getUsers } from "../../features/users/allUsersSlice";
 
-import PrimaryButton from "../../styles/Button";
+import { PrimaryButton } from "../../styles/Button";
 
 const CreateProject = () => {
    const initialProjectDetails = {
