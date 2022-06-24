@@ -31,10 +31,10 @@ function Dashboard() {
          navigate("/login");
       }
 
-      return () => {
-         dispatch(getProjects());
-      };
-   }, [isError, message, dispatch]);
+      //return () => {
+      dispatch(getProjects());
+      //};
+   }, [user, isError, message, dispatch]);
 
    if (isLoading) {
       return <Spinner />;
@@ -84,6 +84,11 @@ function Dashboard() {
                </TrackerListItem>
             ))}
          </TrackerList>
+         <div>
+            <PrimaryButton>1</PrimaryButton>
+            <PrimaryButton>2</PrimaryButton>
+            <PrimaryButton>3</PrimaryButton>
+         </div>
       </>
    );
 }
