@@ -8,7 +8,7 @@ import {
 
 import { PrimaryButton } from "../styles/Button";
 
-const Comments = ({ id }) => {
+const Comments = ({ ticketId }) => {
    const initialCommentDetails = {
       text: "",
       createdBy: "",
@@ -29,7 +29,7 @@ const Comments = ({ id }) => {
    const { user } = useSelector((state) => state.auth);
 
    useEffect(() => {
-      dispatch(getComments(id));
+      dispatch(getComments(ticketId));
    }, [dispatch]);
 
    const handleOnSubmit = (e) => {
@@ -47,7 +47,7 @@ const Comments = ({ id }) => {
       setCommentDetails((prevState) => ({
          ...prevState,
          [e.target.name]: e.target.value,
-         ticket: id,
+         ticket: ticketId,
          createdBy: user._id,
          createdAt: new Date(),
       }));
@@ -65,29 +65,35 @@ const Comments = ({ id }) => {
                comments.map((comment) => (
                   <div
                      style={{
-                        borderBottom: "1px solid gray",
-                        paddingBottom: "20px",
+                        background: "#ededed",
+                        padding: "20px",
+                        marginBottom: "10px",
                      }}
                      key={comment._id}
                   >
+                     <strong style={{ fontSize: "12px" }}>
+                        {" "}
+                        <em>
+                           {comment.createdBy.name} -{" "}
+                           {new Date(comment.createdAt).toLocaleString("en-US")}
+                        </em>
+                     </strong>
+
                      <p>{comment.text}</p>
                      <div
                         style={{
                            fontSize: "12px",
                            fontWeight: "bold",
                         }}
-                     >
-                        <em>
-                           Posted by {comment.createdBy.name} at{" "}
-                           {new Date(comment.createdAt).toLocaleString("en-US")}
-                        </em>
-                     </div>
-                     <div>
-                        <button>Edit</button>
-                        <button onClick={() => handleOnDelete(comment._id)}>
-                           Delete
-                        </button>
-                     </div>
+                     ></div>
+                     {user._id === comment.createdBy._id && (
+                        <div>
+                           <button>Edit</button>
+                           <button onClick={() => handleOnDelete(comment._id)}>
+                              Delete
+                           </button>
+                        </div>
+                     )}
                   </div>
                ))}
          </div>

@@ -46,7 +46,7 @@ const Ticket = () => {
             <div>No data</div>
          )}
 
-         <Comments id={id} />
+         <Comments ticketId={id} />
       </div>
    );
 };
