@@ -22,11 +22,11 @@ const Project = () => {
    const dispatch = useDispatch();
    const { id } = useParams();
 
-   const { project, isLoading, isError, message } = useSelector(
-      (state) => state.projects
-   );
+   const { project } = useSelector((state) => state.projects);
 
-   const { tickets } = useSelector((state) => state.tickets);
+   const { tickets, isLoading, isError, message } = useSelector(
+      (state) => state.tickets
+   );
 
    useEffect(() => {
       dispatch(getProject(id));

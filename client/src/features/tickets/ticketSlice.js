@@ -90,6 +90,47 @@ export const ticketSlice = createSlice({
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload;
+         })
+         .addCase(createTicket.pending, (state) => {
+            state.isLoading = true;
+         })
+         .addCase(createTicket.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.tickets.push(action.payload);
+         })
+         .addCase(createTicket.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
+         })
+         .addCase(updateTicket.pending, (state) => {
+            state.isLoading = true;
+         })
+         .addCase(updateTicket.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.ticket = action.payload;
+         })
+         .addCase(updateTicket.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
+         })
+         .addCase(deleteTicket.pending, (state) => {
+            state.isLoading = true;
+         })
+         .addCase(deleteTicket.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.tickets = state.tickets.filter(
+               (ticket) => ticket.id !== action.payload
+            );
+         })
+         .addCase(deleteTicket.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
          });
    },
 });

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { getProjects, deleteProject } from "../features/projects/projectSlice";
@@ -18,6 +18,7 @@ import UpdateProject from "../components/forms/UpdateProject";
 import DeleteProject from "../components/forms/DeleteProject";
 
 function Dashboard() {
+   const [isUpdated, setIsUpdated] = useState(false);
    const dispatch = useDispatch();
    const navigate = useNavigate();
 
@@ -31,14 +32,14 @@ function Dashboard() {
          navigate("/login");
       }
 
-      //return () => {
       dispatch(getProjects());
-      //};
    }, [user, isError, message, dispatch]);
 
    if (isLoading) {
       return <Spinner />;
    }
+
+   console.log("render: ");
 
    return (
       <>

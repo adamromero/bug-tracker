@@ -55,6 +55,34 @@ export const commentSlice = createSlice({
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload;
+         })
+         .addCase(createComment.pending, (state) => {
+            state.isLoading = true;
+         })
+         .addCase(createComment.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.comments.push(action.payload);
+         })
+         .addCase(createComment.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
+         })
+         .addCase(deleteComment.pending, (state) => {
+            state.isLoading = true;
+         })
+         .addCase(deleteComment.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.comments = state.comments.filter(
+               (comment) => comment.id !== action.payload
+            );
+         })
+         .addCase(deleteComment.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
          });
    },
 });

@@ -70,6 +70,54 @@ export const projectSlice = createSlice({
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload;
+         })
+         .addCase(createProject.pending, (state) => {
+            state.isLoading = true;
+         })
+         .addCase(createProject.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.projects.push(action.payload);
+         })
+         .addCase(createProject.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
+         })
+
+         .addCase(updateProject.pending, (state) => {
+            state.isLoading = true;
+         })
+         .addCase(updateProject.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            console.log(action.payload);
+            state.projects = state.projects.map((project) => {
+               if (project._id === action.payload._id) {
+                  return action.payload;
+               }
+               return project;
+            });
+         })
+         .addCase(updateProject.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
+         })
+         .addCase(deleteProject.pending, (state) => {
+            state.isLoading = true;
+         })
+         .addCase(deleteProject.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.projects = state.projects.filter(
+               (project) => project._id !== action.payload.id
+            );
+         })
+         .addCase(deleteProject.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
          });
    },
 });

@@ -18,7 +18,6 @@ const Comments = ({ ticketId }) => {
 
    const [commentDetails, setCommentDetails] = useState(initialCommentDetails);
    const [input, setInput] = useState("");
-   const [update, setUpdate] = useState(false);
 
    const dispatch = useDispatch();
 

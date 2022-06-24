@@ -20,7 +20,6 @@ const createProject = asyncHandler(async (req, res) => {
       res.status(400);
       throw new Error("Please provide a title, description, and team members");
    }
-
    const project = await Project.create(req.body);
    res.status(200).json(project);
 });
