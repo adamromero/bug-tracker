@@ -7,6 +7,8 @@ import {
 } from "../features/comments/commentSlice";
 
 import { PrimaryButton } from "../styles/Button";
+import { SecondaryButton } from "../styles/Button";
+import { MdDelete } from "react-icons/md";
 
 const Comments = ({ ticketId }) => {
    const initialCommentDetails = {
@@ -87,10 +89,11 @@ const Comments = ({ ticketId }) => {
                      ></div>
                      {user._id === comment.createdBy._id && (
                         <div>
-                           <button>Edit</button>
-                           <button onClick={() => handleOnDelete(comment._id)}>
-                              Delete
-                           </button>
+                           <SecondaryButton
+                              onClick={() => handleOnDelete(comment._id)}
+                           >
+                              <MdDelete />
+                           </SecondaryButton>
                         </div>
                      )}
                   </div>

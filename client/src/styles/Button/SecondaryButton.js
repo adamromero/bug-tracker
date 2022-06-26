@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { green } from "../utils/colors";
 
 export const SecondaryButton = styled.button`
-   background-color: white;
+   background-color: transparent;
    border: 0;
    color: ${green[300]};
    padding: 6px 12px;
