@@ -72,13 +72,26 @@ const Comments = ({ ticketId }) => {
                      }}
                      key={comment._id}
                   >
-                     <strong style={{ fontSize: "12px" }}>
-                        {" "}
-                        <em>
-                           {comment.createdBy.name} -{" "}
-                           {new Date(comment.createdAt).toLocaleString("en-US")}
-                        </em>
-                     </strong>
+                     <div style={{ display: "flex", alignItems: "center" }}>
+                        <strong style={{ fontSize: "12px" }}>
+                           {" "}
+                           <em>
+                              {comment.createdBy.name} -{" "}
+                              {new Date(comment.createdAt).toLocaleString(
+                                 "en-US"
+                              )}
+                           </em>
+                        </strong>
+                        {user._id === comment.createdBy._id && (
+                           <div>
+                              <SecondaryButton
+                                 onClick={() => handleOnDelete(comment._id)}
+                              >
+                                 <MdDelete />
+                              </SecondaryButton>
+                           </div>
+                        )}
+                     </div>
 
                      <p>{comment.text}</p>
                      <div
@@ -87,15 +100,6 @@ const Comments = ({ ticketId }) => {
                            fontWeight: "bold",
                         }}
                      ></div>
-                     {user._id === comment.createdBy._id && (
-                        <div>
-                           <SecondaryButton
-                              onClick={() => handleOnDelete(comment._id)}
-                           >
-                              <MdDelete />
-                           </SecondaryButton>
-                        </div>
-                     )}
                   </div>
                ))}
          </div>
