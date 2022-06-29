@@ -38,8 +38,8 @@ const UpdateProject = ({ project }) => {
    }, [dispatch]);
 
    return (
-      <div>
-         <div className="header">Update Project </div>
+      <>
+         <h2>Update Project </h2>
          <form onSubmit={handleEditProject}>
             <label htmlFor="">Title</label>
             <input
@@ -53,7 +53,7 @@ const UpdateProject = ({ project }) => {
             <textarea
                name="description"
                placeholder="Description"
-               rows="4"
+               rows="5"
                value={projectDetails.description || ""}
                onChange={handleOnChange}
             />
@@ -68,7 +68,7 @@ const UpdateProject = ({ project }) => {
             </select>
             <PrimaryButton type="submit">Submit</PrimaryButton>
          </form>
-      </div>
+      </>
    );
 };
 

@@ -13,12 +13,12 @@ const DeleteProject = (projectId) => {
    };
 
    return (
-      <div>
+      <>
+         <p>Would you like to delete this project?</p>
          <form onSubmit={handleDeleteProject}>
-            <div className="header">Would you like to delete this project?</div>
             <PrimaryButton type="submit">Delete</PrimaryButton>
          </form>
-      </div>
+      </>
    );
 };
 

@@ -13,12 +13,12 @@ const DeleteTicket = (ticketId) => {
    };
 
    return (
-      <div>
+      <>
+         <p>Would you like to delete this ticket?</p>
          <form onSubmit={handleDeleteTicket}>
-            <div className="header">Would you like to delete this ticket?</div>
             <PrimaryButton type="submit">Delete</PrimaryButton>
          </form>
-      </div>
+      </>
    );
 };
 

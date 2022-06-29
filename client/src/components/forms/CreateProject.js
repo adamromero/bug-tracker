@@ -43,8 +43,8 @@ const CreateProject = () => {
    }, [dispatch]);
 
    return (
-      <div>
-         <div className="header">Create Project </div>
+      <>
+         <h2>Create Project </h2>
          <form onSubmit={handleNewProject}>
             <label htmlFor="">Title</label>
             <input
@@ -57,7 +57,7 @@ const CreateProject = () => {
             <textarea
                name="description"
                placeholder="Description"
-               rows="4"
+               rows="5"
                onChange={handleOnChange}
             />
             <label htmlFor="">Assign team member</label>
@@ -71,7 +71,7 @@ const CreateProject = () => {
             </select>
             <PrimaryButton type="submit">Submit</PrimaryButton>
          </form>
-      </div>
+      </>
    );
 };
 

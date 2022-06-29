@@ -44,8 +44,8 @@ const CreateTicket = ({ project }) => {
    };
 
    return (
-      <div>
-         <div className="header">Create Ticket</div>
+      <>
+         <h2>Create Ticket</h2>
          <form onSubmit={handleNewTicket}>
             <label htmlFor="">Title</label>
             <input
@@ -56,8 +56,9 @@ const CreateTicket = ({ project }) => {
             />
             <label htmlFor="">Description</label>
             <textarea
-               placeholder="Description"
                name="description"
+               placeholder="Description"
+               rows="5"
                onChange={handleOnChange}
             />
             <label htmlFor="">Time Estimate</label>
@@ -92,7 +93,7 @@ const CreateTicket = ({ project }) => {
             </select>
             <PrimaryButton type="submit">Submit</PrimaryButton>
          </form>
-      </div>
+      </>
    );
 };
 

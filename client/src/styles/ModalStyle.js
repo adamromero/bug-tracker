@@ -1,12 +1,21 @@
 import styled from "styled-components";
+import Popup from "reactjs-popup";
 
-const ModalStyle = styled.div`
-   background: white;
-   padding: 18px;
+const ModalStyle = styled(Popup)`
+   &-content {
+      background: white !important;
+      padding: 18px !important;
 
-   form {
-      display: flex;
-      flex-direction: column;
+      form {
+         display: flex;
+         flex-direction: column;
+      }
+
+      input,
+      select,
+      textarea {
+         margin-bottom: 1rem;
+      }
    }
 `;
 

@@ -35,8 +35,8 @@ const UpdateTicket = ({ project, ticket }) => {
    };
 
    return (
-      <div>
-         <div className="header"> Create Ticket </div>
+      <>
+         <h2> Update Ticket</h2>
          <form onSubmit={handleEditTicket}>
             <label>Title</label>
             <input
@@ -50,6 +50,7 @@ const UpdateTicket = ({ project, ticket }) => {
             <textarea
                placeholder="Description"
                name="description"
+               rows="5"
                value={ticketDetails.description || ""}
                onChange={handleOnChange}
             />
@@ -95,7 +96,7 @@ const UpdateTicket = ({ project, ticket }) => {
             </select>
             <PrimaryButton type="submit">Submit</PrimaryButton>
          </form>
-      </div>
+      </>
    );
 };
 
