@@ -78,7 +78,11 @@ const Comments = ({ ticketId }) => {
                            <em>
                               {comment.createdBy.name} -{" "}
                               {new Date(comment.createdAt).toLocaleString(
-                                 "en-US"
+                                 "en-US",
+                                 {
+                                    dateStyle: "long",
+                                    timeStyle: "long",
+                                 }
                               )}
                            </em>
                         </strong>

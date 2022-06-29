@@ -10,11 +10,18 @@ const NavigationStyle = styled.nav`
 
    ul {
       list-style: none;
-      padding: 0;
+      padding: 15px 0;
+      border-top: 1px solid #9f9f9f;
+      border-bottom: 1px solid #9f9f9f;
    }
 
    li {
+      font-size: 18px;
       padding: 0 0 10px;
+
+      &:last-child {
+         padding: 0;
+      }
    }
 
    h1 {
