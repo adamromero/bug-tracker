@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const getTickets = async (ticketId) => {
-   const response = await axios.get(`/api/ticket/${ticketId}`);
+const getTicketsByUser = async (userId) => {
+   const response = await axios.get(`/api/ticket/user/${userId}`);
    return response.data;
 };
 
@@ -31,7 +31,7 @@ const deleteTicket = async (ticketId) => {
 };
 
 const ticketService = {
-   getTickets,
+   getTicketsByUser,
    getTicket,
    getProjectTickets,
    createTicket,

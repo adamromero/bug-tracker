@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
 import {
-   getTickets,
+   getTicketsByUser,
    getTicket,
    getProjectTickets,
    createTicket,
@@ -14,8 +14,9 @@ router
    .get(getProjectTickets)
    .post(createTicket)
    .delete(deleteTicket)
-   .get(getTickets)
    .get(getTicket)
    .put(updateTicket);
+
+router.route("/user/:userId").get(getTicketsByUser);
 
 export default router;

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getTickets } from "../features/tickets/ticketSlice";
+import { getTicketsByUser } from "../features/tickets/ticketSlice";
 
 const Tickets = () => {
    const { user } = useSelector((state) => state.auth);
@@ -9,8 +9,8 @@ const Tickets = () => {
    const dispatch = useDispatch();
 
    useEffect(() => {
-      dispatch(getTickets());
-   }, [tickets]);
+      dispatch(getTicketsByUser(user._id));
+   }, []);
 
    return (
       <div>

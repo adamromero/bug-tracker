@@ -10,9 +10,12 @@ const initialState = {
    message: "",
 };
 
-export const getTickets = createAsyncThunk("ticket/getTickets", async () => {
-   return await ticketService.getTickets();
-});
+export const getTicketsByUser = createAsyncThunk(
+   "ticket/getTickets",
+   async (id) => {
+      return await ticketService.getTicketsByUser(id);
+   }
+);
 
 export const getTicket = createAsyncThunk("ticket/getTicket", async (id) => {
    return await ticketService.getTicket(id);
@@ -52,15 +55,15 @@ export const ticketSlice = createSlice({
    reducers: {},
    extraReducers: (builder) => {
       builder
-         .addCase(getTickets.pending, (state) => {
+         .addCase(getTicketsByUser.pending, (state) => {
             state.isLoading = true;
          })
-         .addCase(getTickets.fulfilled, (state, action) => {
+         .addCase(getTicketsByUser.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isSuccess = true;
             state.tickets = action.payload;
          })
-         .addCase(getTickets.rejected, (state, action) => {
+         .addCase(getTicketsByUser.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload;

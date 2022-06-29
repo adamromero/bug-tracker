@@ -2,10 +2,11 @@ import asyncHandler from "express-async-handler";
 import Ticket from "../models/ticketModel.js";
 import Project from "../models/projectModel.js";
 
-const getTickets = asyncHandler(async (req, res) => {
-   const tickets = await Ticket.find()
+const getTicketsByUser = asyncHandler(async (req, res) => {
+   const tickets = await Ticket.find({ teamMembers: req.params.userId })
       .populate("teamMembers")
-      .populate("createdBy");
+      .populate("createdBy")
+      .populate("project");
    res.status(200).json(tickets);
 });
 
@@ -77,7 +78,7 @@ const deleteTicket = asyncHandler(async (req, res) => {
 });
 
 export {
-   getTickets,
+   getTicketsByUser,
    getTicket,
    getProjectTickets,
    createTicket,
