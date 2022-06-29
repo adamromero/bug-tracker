@@ -17,6 +17,8 @@ import CreateProject from "../components/forms/CreateProject";
 import UpdateProject from "../components/forms/UpdateProject";
 import DeleteProject from "../components/forms/DeleteProject";
 
+import Chart from "../components/Chart";
+
 function Dashboard() {
    const dispatch = useDispatch();
    const navigate = useNavigate();
@@ -87,6 +89,7 @@ function Dashboard() {
             <PrimaryButton>2</PrimaryButton>
             <PrimaryButton>3</PrimaryButton>
          </div>
+         <Chart />
       </>
    );
 }

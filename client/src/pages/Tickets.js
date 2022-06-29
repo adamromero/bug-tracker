@@ -21,7 +21,8 @@ const Tickets = () => {
          <p>
             {tickets.map((ticket) => (
                <li key={ticket._id}>
-                  {ticket.title} - {ticket.description}
+                  {ticket.title} - {ticket.description} - {ticket.priority} -{" "}
+                  {ticket.status}
                </li>
             ))}
          </p>
