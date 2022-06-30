@@ -82,7 +82,7 @@ const Chart = () => {
                      </text>
                   )
                }
-               style={{ height: "200px", width: "200px" }}
+               style={{ height: "150px", width: "150px" }}
             ></PieChart>
             <h4 style={{ textAlign: "center" }}>Ticket Priority</h4>
          </div>
@@ -108,7 +108,7 @@ const Chart = () => {
                      </text>
                   )
                }
-               style={{ height: "200px", width: "200px" }}
+               style={{ height: "150px", width: "150px" }}
             ></PieChart>
             <h4 style={{ textAlign: "center" }}>Ticket Status</h4>
          </div>
