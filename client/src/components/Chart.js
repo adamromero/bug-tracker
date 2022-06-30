@@ -13,8 +13,10 @@ const Chart = () => {
    const dispatch = useDispatch();
 
    useEffect(() => {
-      dispatch(getTicketsByUser(user._id));
-      getChartData();
+      if (user) {
+         dispatch(getTicketsByUser(user._id));
+         getChartData();
+      }
    }, []);
 
    const getPriorityCount = (priority) => {
@@ -26,6 +28,22 @@ const Chart = () => {
    const getStatusCount = (status) => {
       return tickets.filter((ticket) => ticket.status.toLowerCase() === status)
          .length;
+   };
+
+   const isPriorityOnAnyTickets = () => {
+      return (
+         getPriorityCount("low") > 0 ||
+         getPriorityCount("medium") > 0 ||
+         getPriorityCount("high") > 0
+      );
+   };
+
+   const isStatusOnAnyTickets = () => {
+      return (
+         getStatusCount("open") > 0 ||
+         getStatusCount("in progress") > 0 ||
+         getStatusCount("closed") > 0
+      );
    };
 
    const getChartData = () => {
@@ -58,62 +76,72 @@ const Chart = () => {
       ]);
    };
 
-   return (
-      <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-         <div>
-            <PieChart
-               data={priorityCount}
-               label={({ x, y, dx, dy, dataEntry }) =>
-                  dataEntry.value > 0 && (
-                     <text
-                        key={dataEntry.title}
-                        x={x}
-                        y={y}
-                        dx={dx}
-                        dy={dy}
-                        dominantBaseline="central"
-                        textAnchor="middle"
-                        style={{
-                           fontSize: "8px",
-                           fontFamily: "sans-serif",
-                        }}
-                     >
-                        {dataEntry.title}
-                     </text>
-                  )
-               }
-               style={{ height: "150px", width: "150px" }}
-            ></PieChart>
-            <h4 style={{ textAlign: "center" }}>Ticket Priority</h4>
+   if (isPriorityOnAnyTickets() || isStatusOnAnyTickets()) {
+      return (
+         <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+            <div>
+               {isPriorityOnAnyTickets() && (
+                  <>
+                     <PieChart
+                        data={priorityCount}
+                        label={({ x, y, dx, dy, dataEntry }) =>
+                           dataEntry.value > 0 && (
+                              <text
+                                 key={dataEntry.title}
+                                 x={x}
+                                 y={y}
+                                 dx={dx}
+                                 dy={dy}
+                                 dominantBaseline="central"
+                                 textAnchor="middle"
+                                 style={{
+                                    fontSize: "8px",
+                                    fontFamily: "sans-serif",
+                                 }}
+                              >
+                                 {dataEntry.title}
+                              </text>
+                           )
+                        }
+                        style={{ height: "150px", width: "150px" }}
+                     ></PieChart>
+                     <h4 style={{ textAlign: "center" }}>Ticket Priority</h4>
+                  </>
+               )}
+            </div>
+            <div>
+               {isStatusOnAnyTickets() && (
+                  <>
+                     <PieChart
+                        data={statusCount}
+                        label={({ x, y, dx, dy, dataEntry }) =>
+                           dataEntry.value > 0 && (
+                              <text
+                                 key={dataEntry.title}
+                                 x={x}
+                                 y={y}
+                                 dx={dx}
+                                 dy={dy}
+                                 dominantBaseline="central"
+                                 textAnchor="middle"
+                                 style={{
+                                    fontSize: "8px",
+                                    fontFamily: "sans-serif",
+                                 }}
+                              >
+                                 {dataEntry.title}
+                              </text>
+                           )
+                        }
+                        style={{ height: "150px", width: "150px" }}
+                     ></PieChart>
+                     <h4 style={{ textAlign: "center" }}>Ticket Status</h4>
+                  </>
+               )}
+            </div>
          </div>
-         <div>
-            <PieChart
-               data={statusCount}
-               label={({ x, y, dx, dy, dataEntry }) =>
-                  dataEntry.value > 0 && (
-                     <text
-                        key={dataEntry.title}
-                        x={x}
-                        y={y}
-                        dx={dx}
-                        dy={dy}
-                        dominantBaseline="central"
-                        textAnchor="middle"
-                        style={{
-                           fontSize: "8px",
-                           fontFamily: "sans-serif",
-                        }}
-                     >
-                        {dataEntry.title}
-                     </text>
-                  )
-               }
-               style={{ height: "150px", width: "150px" }}
-            ></PieChart>
-            <h4 style={{ textAlign: "center" }}>Ticket Status</h4>
-         </div>
-      </div>
-   );
+      );
+   }
 };
 
 export default Chart;
