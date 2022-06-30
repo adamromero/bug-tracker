@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
 
@@ -9,6 +9,8 @@ import { PrimaryButton } from "../styles/Button";
 const Navigation = () => {
    const dispatch = useDispatch();
    const navigate = useNavigate();
+   const location = useLocation();
+
    const { user } = useSelector((state) => state.auth);
 
    const handleLogout = () => {
@@ -26,13 +28,26 @@ const Navigation = () => {
 
             <h2>{user.name}</h2>
             <ul>
-               <li>
+               <li
+                  style={{
+                     fontWeight: location.pathname === "/" ? "bold" : "",
+                  }}
+               >
                   <Link to="/">Dashboard</Link>
                </li>
-               <li>
+               <li
+                  style={{
+                     fontWeight: location.pathname === "/tickets" ? "bold" : "",
+                  }}
+               >
                   <Link to="/tickets">Tickets</Link>
                </li>
-               <li>
+               <li
+                  style={{
+                     fontWeight:
+                        location.pathname === "/administration" ? "bold" : "",
+                  }}
+               >
                   <Link to="/administration">Administration</Link>
                </li>
             </ul>
