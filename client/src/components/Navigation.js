@@ -6,6 +6,10 @@ import { logout, reset } from "../features/auth/authSlice";
 import NavigationStyle from "../styles/NavigationStyle";
 import { PrimaryButton } from "../styles/Button";
 
+import { MdDashboard } from "react-icons/md";
+import { FaTicketAlt } from "react-icons/fa";
+import { RiAdminFill } from "react-icons/ri";
+
 const Navigation = () => {
    const dispatch = useDispatch();
    const navigate = useNavigate();
@@ -33,14 +37,26 @@ const Navigation = () => {
                      fontWeight: location.pathname === "/" ? "bold" : "",
                   }}
                >
-                  <Link to="/">Dashboard</Link>
+                  <Link
+                     to="/"
+                     style={{ display: "flex", alignItems: "center" }}
+                  >
+                     <MdDashboard style={{ marginRight: "8px" }} />
+                     Dashboard
+                  </Link>
                </li>
                <li
                   style={{
                      fontWeight: location.pathname === "/tickets" ? "bold" : "",
                   }}
                >
-                  <Link to="/tickets">Tickets</Link>
+                  <Link
+                     to="/tickets"
+                     style={{ display: "flex", alignItems: "center" }}
+                  >
+                     <FaTicketAlt style={{ marginRight: "8px" }} />
+                     Tickets
+                  </Link>
                </li>
                <li
                   style={{
@@ -48,7 +64,13 @@ const Navigation = () => {
                         location.pathname === "/administration" ? "bold" : "",
                   }}
                >
-                  <Link to="/administration">Administration</Link>
+                  <Link
+                     to="/administration"
+                     style={{ display: "flex", alignItems: "center" }}
+                  >
+                     <RiAdminFill style={{ marginRight: "8px" }} />
+                     Administration
+                  </Link>
                </li>
             </ul>
             <PrimaryButton onClick={handleLogout}>Logout</PrimaryButton>
