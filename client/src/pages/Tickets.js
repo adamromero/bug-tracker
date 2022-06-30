@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getTicketsByUser } from "../features/tickets/ticketSlice";
 
@@ -15,17 +16,19 @@ const Tickets = () => {
    return (
       <div>
          <h2>Tickets</h2>
-
-         <p>{user.name}'s tickets</p>
-         <p>{user.isAdmin ? "Administrator" : "Non-Administrator"}</p>
-         <p>
+         <div>
             {tickets.map((ticket) => (
-               <li key={ticket._id}>
+               <Link
+                  key={ticket._id}
+                  to={`/ticket/${ticket._id}`}
+                  state={ticket}
+               >
                   {ticket.title} - {ticket.description} - {ticket.priority} -{" "}
                   {ticket.status}
-               </li>
+                  <br />
+               </Link>
             ))}
-         </p>
+         </div>
       </div>
    );
 };

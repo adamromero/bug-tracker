@@ -5,7 +5,8 @@ import { getTicketsByUser } from "../features/tickets/ticketSlice";
 import { PieChart } from "react-minimal-pie-chart";
 
 const Chart = () => {
-   const [data, setData] = useState([]);
+   const [priorityCount, setPriorityCount] = useState([]);
+   const [statusCount, setStatusCount] = useState([]);
    const { user } = useSelector((state) => state.auth);
    const { tickets } = useSelector((state) => state.tickets);
 
@@ -22,8 +23,13 @@ const Chart = () => {
       ).length;
    };
 
+   const getStatusCount = (status) => {
+      return tickets.filter((ticket) => ticket.status.toLowerCase() === status)
+         .length;
+   };
+
    const getChartData = () => {
-      setData([
+      setPriorityCount([
          { title: "Low", value: getPriorityCount("low"), color: "#d10f2a" },
          {
             title: "Medium",
@@ -32,32 +38,80 @@ const Chart = () => {
          },
          { title: "High", value: getPriorityCount("high"), color: "#4c86af" },
       ]);
+
+      setStatusCount([
+         {
+            title: "On Hold",
+            value: getStatusCount("on hold"),
+            color: "#d10f2a",
+         },
+         {
+            title: "In Progress",
+            value: getStatusCount("in progress"),
+            color: "#cddc39",
+         },
+         {
+            title: "Completed",
+            value: getStatusCount("completed"),
+            color: "#4c86af",
+         },
+      ]);
    };
 
    return (
-      <div>
-         <PieChart
-            data={data}
-            label={({ x, y, dx, dy, dataEntry }) => (
-               <text
-                  key={dataEntry.title}
-                  x={x}
-                  y={y}
-                  dx={dx}
-                  dy={dy}
-                  dominantBaseline="central"
-                  textAnchor="middle"
-                  style={{
-                     fontSize: "8px",
-                     fontFamily: "sans-serif",
-                  }}
-               >
-                  {dataEntry.title}
-               </text>
-            )}
-            style={{ height: "200px", width: "200px" }}
-         ></PieChart>
-         <h4>Ticket Priority</h4>
+      <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+         <div>
+            <PieChart
+               data={priorityCount}
+               label={({ x, y, dx, dy, dataEntry }) =>
+                  dataEntry.value > 0 && (
+                     <text
+                        key={dataEntry.title}
+                        x={x}
+                        y={y}
+                        dx={dx}
+                        dy={dy}
+                        dominantBaseline="central"
+                        textAnchor="middle"
+                        style={{
+                           fontSize: "8px",
+                           fontFamily: "sans-serif",
+                        }}
+                     >
+                        {dataEntry.title}
+                     </text>
+                  )
+               }
+               style={{ height: "200px", width: "200px" }}
+            ></PieChart>
+            <h4 style={{ textAlign: "center" }}>Ticket Priority</h4>
+         </div>
+         <div>
+            <PieChart
+               data={statusCount}
+               label={({ x, y, dx, dy, dataEntry }) =>
+                  dataEntry.value > 0 && (
+                     <text
+                        key={dataEntry.title}
+                        x={x}
+                        y={y}
+                        dx={dx}
+                        dy={dy}
+                        dominantBaseline="central"
+                        textAnchor="middle"
+                        style={{
+                           fontSize: "8px",
+                           fontFamily: "sans-serif",
+                        }}
+                     >
+                        {dataEntry.title}
+                     </text>
+                  )
+               }
+               style={{ height: "200px", width: "200px" }}
+            ></PieChart>
+            <h4 style={{ textAlign: "center" }}>Ticket Status</h4>
+         </div>
       </div>
    );
 };

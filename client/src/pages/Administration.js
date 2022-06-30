@@ -4,6 +4,7 @@ import { getUsers } from "../features/users/allUsersSlice";
 
 const Administration = () => {
    const dispatch = useDispatch();
+   const { user } = useSelector((state) => state.auth);
    const { allUsers } = useSelector((state) => state.users);
 
    useEffect(() => {
@@ -13,6 +14,10 @@ const Administration = () => {
    return (
       <div>
          <h2>Administration</h2>
+         <p>
+            {user.name} is {user.isAdmin ? "an" : "a"}{" "}
+            {user.isAdmin ? "Administrator" : "Non-Administrator"}
+         </p>
          <ul>
             {allUsers.map((user) => (
                <li key={user._id}>
