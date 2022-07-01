@@ -59,42 +59,54 @@ const Project = () => {
          </div>
          <h3>Tickets</h3>
          {tickets && tickets.length > 0 ? (
-            <TrackerList>
-               {tickets.map((ticket) => (
-                  <TrackerListItem key={ticket._id}>
-                     <Link
-                        to={`/ticket/${ticket._id}`}
-                        key={ticket._id}
-                        state={ticket}
-                     >
-                        <h4>{ticket.title}</h4>
-                        <p>{ticket.description}</p>
-                        <p>{ticket.priority}</p>
-                        <p>{ticket.status}</p>
-                     </Link>
-                     <div>
-                        <Modal
-                           button={
-                              <SecondaryButton>
-                                 <MdModeEditOutline />
-                              </SecondaryButton>
-                           }
-                        >
-                           <UpdateTicket project={project} ticket={ticket} />
-                        </Modal>
-                        <Modal
-                           button={
-                              <SecondaryButton>
-                                 <MdDelete />
-                              </SecondaryButton>
-                           }
-                        >
-                           <DeleteTicket id={ticket._id} />
-                        </Modal>
-                     </div>
-                  </TrackerListItem>
-               ))}
-            </TrackerList>
+            <table>
+               <thead>
+                  <tr>
+                     <th>Title</th>
+                     <th>Description</th>
+                     <th>Priority</th>
+                     <th>Status</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  {tickets.map((ticket) => (
+                     <tr key={ticket._id}>
+                        <th>
+                           <Link
+                              to={`/ticket/${ticket._id}`}
+                              key={ticket._id}
+                              state={ticket}
+                           >
+                              <td>{ticket.title}</td>
+                           </Link>
+                        </th>
+                        <td>{ticket.description}</td>
+                        <td>{ticket.priority}</td>
+                        <td>{ticket.status}</td>
+                        <div>
+                           <Modal
+                              button={
+                                 <SecondaryButton>
+                                    <MdModeEditOutline />
+                                 </SecondaryButton>
+                              }
+                           >
+                              <UpdateTicket project={project} ticket={ticket} />
+                           </Modal>
+                           <Modal
+                              button={
+                                 <SecondaryButton>
+                                    <MdDelete />
+                                 </SecondaryButton>
+                              }
+                           >
+                              <DeleteTicket id={ticket._id} />
+                           </Modal>
+                        </div>
+                     </tr>
+                  ))}
+               </tbody>
+            </table>
          ) : (
             <div>No tickets</div>
          )}

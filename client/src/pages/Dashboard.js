@@ -49,41 +49,53 @@ function Dashboard() {
                <CreateProject />
             </Modal>
          </div>
-         <TrackerList>
-            {projects.map((project) => (
-               <TrackerListItem key={project._id}>
-                  <Link to={`/project/${project._id}`} key={project._id}>
-                     <div>{project.title}</div>
-                     <div>{project.description}</div>
-                     <div>
+         <table style={{ width: "100%" }}>
+            <thead>
+               <tr>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Team</th>
+               </tr>
+            </thead>
+            <tbody>
+               {projects.map((project) => (
+                  <tr key={project._id}>
+                     <th>
+                        <Link to={`/project/${project._id}`} key={project._id}>
+                           <td>{project.title}</td>
+                        </Link>
+                     </th>
+
+                     <td>{project.description}</td>
+                     <td>
                         {project.teamMembers.map((user) => (
                            <div key={user._id}>{user.name}</div>
                         ))}
-                     </div>
-                  </Link>
-                  <div>
-                     <Modal
-                        button={
-                           <SecondaryButton>
-                              <MdModeEditOutline />
-                           </SecondaryButton>
-                        }
-                     >
-                        <UpdateProject project={project} />
-                     </Modal>
-                     <Modal
-                        button={
-                           <SecondaryButton>
-                              <MdDelete />
-                           </SecondaryButton>
-                        }
-                     >
-                        <DeleteProject id={project._id} />
-                     </Modal>
-                  </div>
-               </TrackerListItem>
-            ))}
-         </TrackerList>
+                     </td>
+                     <td>
+                        <Modal
+                           button={
+                              <SecondaryButton>
+                                 <MdModeEditOutline />
+                              </SecondaryButton>
+                           }
+                        >
+                           <UpdateProject project={project} />
+                        </Modal>
+                        <Modal
+                           button={
+                              <SecondaryButton>
+                                 <MdDelete />
+                              </SecondaryButton>
+                           }
+                        >
+                           <DeleteProject id={project._id} />
+                        </Modal>
+                     </td>
+                  </tr>
+               ))}
+            </tbody>
+         </table>
          <div>
             <PrimaryButton>1</PrimaryButton>
             <PrimaryButton>2</PrimaryButton>
