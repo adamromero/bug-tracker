@@ -9,7 +9,6 @@ const getComments = asyncHandler(async (req, res) => {
 });
 
 const createComment = asyncHandler(async (req, res) => {
-   console.log("calling createComment");
    const comment = await Comment.create(req.body).then((comment) => {
       return Comment.findById(comment._id).populate("createdBy");
    });

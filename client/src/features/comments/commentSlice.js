@@ -76,7 +76,7 @@ export const commentSlice = createSlice({
             state.isLoading = false;
             state.isSuccess = true;
             state.comments = state.comments.filter(
-               (comment) => comment.id !== action.payload
+               (comment) => comment._id !== action.payload._id
             );
          })
          .addCase(deleteComment.rejected, (state, action) => {

@@ -10,6 +10,8 @@ import { PrimaryButton } from "../styles/Button";
 import { SecondaryButton } from "../styles/Button";
 import { MdDelete } from "react-icons/md";
 
+import Spinner from "../styles/Spinner";
+
 const Comments = ({ ticketId }) => {
    const initialCommentDetails = {
       text: "",
@@ -58,6 +60,10 @@ const Comments = ({ ticketId }) => {
       dispatch(deleteComment(id));
    };
 
+   if (isLoading) {
+      return <Spinner />;
+   }
+
    return (
       <div>
          <h4>Comments</h4>
@@ -96,7 +102,6 @@ const Comments = ({ ticketId }) => {
                            </div>
                         )}
                      </div>
-
                      <p>{comment.text}</p>
                      <div
                         style={{
