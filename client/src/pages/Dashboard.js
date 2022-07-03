@@ -43,13 +43,19 @@ function Dashboard() {
    return (
       <>
          <h2>Dashboard</h2>
-         <div>
+         <div
+            style={{
+               display: "flex",
+               justifyContent: "space-between",
+               alignItems: "center",
+            }}
+         >
             <h3>Projects</h3>
             <Modal button={<PrimaryButton>New Project</PrimaryButton>}>
                <CreateProject />
             </Modal>
          </div>
-         <table style={{ width: "100%" }}>
+         <table style={{ width: "100%", textAlign: "left" }}>
             <thead>
                <tr>
                   <th>Title</th>

@@ -53,13 +53,21 @@ const Project = () => {
             ) : (
                <p>No team members assigned</p>
             )}
+         </div>
+         <div
+            style={{
+               display: "flex",
+               justifyContent: "space-between",
+               alignItems: "center",
+            }}
+         >
+            <h3>Tickets</h3>
             <Modal button={<PrimaryButton>New Ticket</PrimaryButton>}>
                <CreateTicket project={project} />
             </Modal>
          </div>
-         <h3>Tickets</h3>
          {tickets && tickets.length > 0 ? (
-            <table>
+            <table style={{ width: "100%", textAlign: "left" }}>
                <thead>
                   <tr>
                      <th>Title</th>
@@ -83,7 +91,7 @@ const Project = () => {
                         <td>{ticket.description}</td>
                         <td>{ticket.priority}</td>
                         <td>{ticket.status}</td>
-                        <div>
+                        <td>
                            <Modal
                               button={
                                  <SecondaryButton>
@@ -93,6 +101,8 @@ const Project = () => {
                            >
                               <UpdateTicket project={project} ticket={ticket} />
                            </Modal>
+                        </td>
+                        <td>
                            <Modal
                               button={
                                  <SecondaryButton>
@@ -102,7 +112,7 @@ const Project = () => {
                            >
                               <DeleteTicket id={ticket._id} />
                            </Modal>
-                        </div>
+                        </td>
                      </tr>
                   ))}
                </tbody>
