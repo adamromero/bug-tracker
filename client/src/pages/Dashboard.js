@@ -55,7 +55,14 @@ function Dashboard() {
                <CreateProject />
             </Modal>
          </div>
-         <table style={{ width: "100%", textAlign: "left" }}>
+         <table
+            style={{
+               width: "100%",
+               textAlign: "left",
+               borderCollapse: "collapse",
+               marginBottom: "20px",
+            }}
+         >
             <thead>
                <tr>
                   <th>Title</th>
@@ -66,12 +73,11 @@ function Dashboard() {
             <tbody>
                {projects.map((project) => (
                   <tr key={project._id}>
-                     <th>
+                     <td>
                         <Link to={`/project/${project._id}`} key={project._id}>
-                           <td>{project.title}</td>
+                           {project.title}
                         </Link>
-                     </th>
-
+                     </td>
                      <td>{project.description}</td>
                      <td>
                         {project.teamMembers.map((user) => (

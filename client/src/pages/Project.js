@@ -67,7 +67,14 @@ const Project = () => {
             </Modal>
          </div>
          {tickets && tickets.length > 0 ? (
-            <table style={{ width: "100%", textAlign: "left" }}>
+            <table
+               style={{
+                  width: "100%",
+                  textAlign: "left",
+                  borderCollapse: "collapse",
+                  marginBottom: "20px",
+               }}
+            >
                <thead>
                   <tr>
                      <th>Title</th>
@@ -79,15 +86,15 @@ const Project = () => {
                <tbody>
                   {tickets.map((ticket) => (
                      <tr key={ticket._id}>
-                        <th>
+                        <td>
                            <Link
                               to={`/ticket/${ticket._id}`}
                               key={ticket._id}
                               state={ticket}
                            >
-                              <td>{ticket.title}</td>
+                              {ticket.title}
                            </Link>
-                        </th>
+                        </td>
                         <td>{ticket.description}</td>
                         <td>{ticket.priority}</td>
                         <td>{ticket.status}</td>

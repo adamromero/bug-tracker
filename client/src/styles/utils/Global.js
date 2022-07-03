@@ -47,4 +47,10 @@ main {
   padding: 0 24px;
   margin: 24px 0;
 }
+
+td {
+  padding: 12px 12px 12px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
 `;
