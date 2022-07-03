@@ -16,19 +16,37 @@ const Tickets = () => {
    return (
       <div>
          <h2>Tickets</h2>
-         <div>
-            {tickets.map((ticket) => (
-               <Link
-                  key={ticket._id}
-                  to={`/ticket/${ticket._id}`}
-                  state={ticket}
-               >
-                  {ticket.title} - {ticket.description} - {ticket.priority} -{" "}
-                  {ticket.status}
-                  <br />
-               </Link>
-            ))}
-         </div>
+         <table
+            style={{
+               width: "100%",
+               textAlign: "left",
+               borderCollapse: "collapse",
+               marginBottom: "20px",
+            }}
+         >
+            <thead>
+               <tr>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Priority</th>
+                  <th>Status</th>
+               </tr>
+            </thead>
+            <tbody>
+               {tickets.map((ticket) => (
+                  <tr key={ticket._id}>
+                     <td>
+                        <Link to={`/ticket/${ticket._id}`} state={ticket}>
+                           {ticket.title}
+                        </Link>
+                     </td>
+                     <td>{ticket.description}</td>
+                     <td>{ticket.priority}</td>
+                     <td>{ticket.status}</td>
+                  </tr>
+               ))}
+            </tbody>
+         </table>
       </div>
    );
 };
