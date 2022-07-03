@@ -3,14 +3,17 @@ import Comment from "../models/commentModel.js";
 
 const getComments = asyncHandler(async (req, res) => {
    const comments = await Comment.find({ ticket: req.params.id }).populate(
-      "createdBy",
-      "name"
+      "createdBy"
    );
    res.status(200).json(comments);
 });
 
 const createComment = asyncHandler(async (req, res) => {
-   const comment = await Comment.create(req.body);
+   console.log("calling createComment");
+   const comment = await Comment.create(req.body).then((comment) => {
+      return Comment.findById(comment._id).populate("createdBy");
+   });
+
    res.status(200).json(comment);
 });
 
