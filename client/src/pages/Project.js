@@ -5,8 +5,6 @@ import { getProject } from "../features/projects/projectSlice";
 import { getProjectTickets } from "../features/tickets/ticketSlice";
 
 import Spinner from "../styles/Spinner";
-import TrackerList from "../styles/TrackerList";
-import TrackerListItem from "../styles/TrackerListItem";
 import { PrimaryButton } from "../styles/Button";
 import { SecondaryButton } from "../styles/Button";
 
@@ -38,7 +36,7 @@ const Project = () => {
    }
 
    return (
-      <div>
+      <>
          <div>
             <h2>Project</h2>
             <h3>{project.title}</h3>
@@ -127,7 +125,7 @@ const Project = () => {
          ) : (
             <div>No tickets</div>
          )}
-      </div>
+      </>
    );
 };
 

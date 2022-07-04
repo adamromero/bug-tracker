@@ -4,8 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { getProjects } from "../features/projects/projectSlice";
 
 import Spinner from "../styles/Spinner";
-import TrackerList from "../styles/TrackerList";
-import TrackerListItem from "../styles/TrackerListItem";
 import { PrimaryButton } from "../styles/Button";
 import { SecondaryButton } from "../styles/Button";
 

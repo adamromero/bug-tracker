@@ -14,7 +14,7 @@ const Tickets = () => {
    }, []);
 
    return (
-      <div>
+      <>
          <h2>Tickets</h2>
          <table
             style={{
@@ -47,7 +47,7 @@ const Tickets = () => {
                ))}
             </tbody>
          </table>
-      </div>
+      </>
    );
 };
 

@@ -10,7 +10,7 @@ const Ticket = () => {
    const data = location.state;
 
    return (
-      <div>
+      <>
          <h2>Ticket</h2>
          {data ? (
             <div>
@@ -47,7 +47,7 @@ const Ticket = () => {
          )}
 
          <Comments ticketId={id} />
-      </div>
+      </>
    );
 };
 
