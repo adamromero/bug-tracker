@@ -4,10 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getProject } from "../features/projects/projectSlice";
 
 import Spinner from "../styles/Spinner";
-import { PrimaryButton } from "../styles/Button";
 
-import Modal from "../components/Modal";
-import CreateTicket from "../components/forms/CreateTicket";
 import ProjectTickets from "../components/ProjectTickets";
 
 const Project = () => {
@@ -43,18 +40,7 @@ const Project = () => {
                <p>No team members assigned</p>
             )}
          </div>
-         <div
-            style={{
-               display: "flex",
-               justifyContent: "space-between",
-               alignItems: "center",
-            }}
-         >
-            <h3>Tickets</h3>
-            <Modal button={<PrimaryButton>New Ticket</PrimaryButton>}>
-               <CreateTicket project={project} />
-            </Modal>
-         </div>
+
          {project.tickets && project.tickets.length > 0 ? (
             <ProjectTickets project={project} />
          ) : (
