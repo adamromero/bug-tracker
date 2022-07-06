@@ -10,8 +10,8 @@ const getTicket = async (ticketId) => {
    return response.data;
 };
 
-const getProjectTickets = async (ticketId) => {
-   const response = await axios.get(`/api/ticket/${ticketId}`);
+const getProjectTickets = async (projectId) => {
+   const response = await axios.get(`/api/ticket/project/${projectId}`);
    return response.data;
 };
 

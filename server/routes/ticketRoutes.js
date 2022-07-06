@@ -11,7 +11,6 @@ import {
 
 router
    .route("/:ticketId")
-   .get(getProjectTickets)
    .post(createTicket)
    .delete(deleteTicket)
    .get(getTicket)
