@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import UpdateUser from "../components/forms/UpdateUser";
 import { getUsers } from "../features/users/allUsersSlice";
 
 const Administration = () => {
@@ -7,9 +8,16 @@ const Administration = () => {
    const { user } = useSelector((state) => state.auth);
    const { allUsers } = useSelector((state) => state.users);
 
+   const [selectedUser, setSelectedUser] = useState(user);
+
    useEffect(() => {
       dispatch(getUsers());
-   }, [dispatch]);
+   }, [dispatch, selectedUser.name]);
+
+   const handleUserData = (user) => {
+      setSelectedUser(user);
+      //console.log(user);
+   };
 
    return (
       <div>
@@ -20,11 +28,12 @@ const Administration = () => {
          </p>
          <ul>
             {allUsers.map((user) => (
-               <li key={user._id}>
-                  {user.name} - {user.email}
+               <li key={user._id} onClick={() => handleUserData(user)}>
+                  {user.name}
                </li>
             ))}
          </ul>
+         {user.isAdmin && <UpdateUser selectedUser={selectedUser} />}
       </div>
    );
 };
