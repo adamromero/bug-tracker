@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getProject } from "../features/projects/projectSlice";
@@ -10,13 +10,26 @@ import { SecondaryButton } from "../styles/Button";
 
 import { MdDelete } from "react-icons/md";
 import { MdModeEditOutline } from "react-icons/md";
+import { FaArrowCircleDown, FaArrowCircleUp } from "react-icons/fa";
 
 import Modal from "../components/Modal";
 import CreateTicket from "../components/forms/CreateTicket";
 import UpdateTicket from "../components/forms/UpdateTicket";
 import DeleteTicket from "../components/forms/DeleteTicket";
+import {
+   sortTicketsByPriorityAscending,
+   sortTicketsByPriorityDescending,
+} from "../utils/sortTicketsPriority";
+
+import {
+   sortTicketsByStatusAscending,
+   sortTicketsByStatusDescending,
+} from "../utils/sortTicketsStatus";
 
 const Project = () => {
+   const [priorityToggle, setPriorityToggle] = useState(false);
+   const [statusToggle, setStatusToggle] = useState(false);
+   const [ticketsState, setTicketsState] = useState([]);
    const dispatch = useDispatch();
    const { id } = useParams();
 
@@ -29,7 +42,26 @@ const Project = () => {
    useEffect(() => {
       dispatch(getProject(id));
       dispatch(getProjectTickets(id));
+      setTicketsState(tickets);
    }, [dispatch]);
+
+   const sortTicketsByPriority = () => {
+      if (priorityToggle) {
+         setTicketsState(sortTicketsByPriorityAscending(ticketsState));
+      } else {
+         setTicketsState(sortTicketsByPriorityDescending(ticketsState));
+      }
+      setPriorityToggle(!priorityToggle);
+   };
+
+   const sortTicketsByStatus = () => {
+      if (statusToggle) {
+         setTicketsState(sortTicketsByStatusAscending(ticketsState));
+      } else {
+         setTicketsState(sortTicketsByStatusDescending(ticketsState));
+      }
+      setStatusToggle(!statusToggle);
+   };
 
    if (isLoading) {
       return <Spinner />;
@@ -77,12 +109,32 @@ const Project = () => {
                   <tr>
                      <th>Title</th>
                      <th>Description</th>
-                     <th>Priority</th>
-                     <th>Status</th>
+                     <th
+                        onClick={() => sortTicketsByPriority()}
+                        style={{ display: "inline-flex", cursor: "pointer" }}
+                     >
+                        Priority{" "}
+                        {priorityToggle ? (
+                           <FaArrowCircleDown />
+                        ) : (
+                           <FaArrowCircleUp />
+                        )}
+                     </th>
+                     <th
+                        onClick={() => sortTicketsByStatus()}
+                        style={{ cursor: "pointer" }}
+                     >
+                        Status
+                        {statusToggle ? (
+                           <FaArrowCircleDown />
+                        ) : (
+                           <FaArrowCircleUp />
+                        )}
+                     </th>
                   </tr>
                </thead>
                <tbody>
-                  {tickets.map((ticket) => (
+                  {ticketsState.map((ticket) => (
                      <tr key={ticket._id}>
                         <td>
                            <Link

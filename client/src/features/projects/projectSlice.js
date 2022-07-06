@@ -91,7 +91,6 @@ export const projectSlice = createSlice({
          .addCase(updateProject.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isSuccess = true;
-            console.log(action.payload);
             state.projects = state.projects.map((project) => {
                if (project._id === action.payload._id) {
                   return action.payload;

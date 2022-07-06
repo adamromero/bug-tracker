@@ -113,7 +113,12 @@ export const ticketSlice = createSlice({
          .addCase(updateTicket.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isSuccess = true;
-            state.ticket = action.payload;
+            state.tickets = state.tickets.map((ticket) => {
+               if (ticket._id === action.payload._id) {
+                  return action.payload;
+               }
+               return ticket;
+            });
          })
          .addCase(updateTicket.rejected, (state, action) => {
             state.isLoading = false;
@@ -127,7 +132,7 @@ export const ticketSlice = createSlice({
             state.isLoading = false;
             state.isSuccess = true;
             state.tickets = state.tickets.filter(
-               (ticket) => ticket.id !== action.payload
+               (ticket) => ticket._id !== action.payload.id
             );
          })
          .addCase(deleteTicket.rejected, (state, action) => {
