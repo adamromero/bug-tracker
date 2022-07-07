@@ -6,4 +6,21 @@ const getUsers = asyncHandler(async (req, res) => {
    res.status(200).json(users);
 });
 
-export { getUsers };
+const updateUser = asyncHandler(async (req, res) => {
+   const { _id } = req.body;
+   console.log(_id);
+   const user = await User.findByIdAndUpdate(_id, req.body, {
+      new: true,
+      runValidators: true,
+   });
+   res.status(200).json(user);
+});
+
+const deleteUser = asyncHandler(async (req, res) => {
+   const { id } = req.params;
+   const user = await User.findById(id);
+   await user.remove();
+   res.status(200).json(user);
+});
+
+export { getUsers, updateUser, deleteUser };

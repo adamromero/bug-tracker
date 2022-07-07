@@ -14,9 +14,14 @@ const Administration = () => {
       dispatch(getUsers());
    }, [dispatch, selectedUser.name]);
 
-   const handleUserData = (user) => {
-      setSelectedUser(user);
-      //console.log(user);
+   const handleOnChange = (e) => {
+      if (e.target.value !== "") {
+         allUsers.filter((user) => {
+            if (user._id === e.target.value) {
+               setSelectedUser(user);
+            }
+         });
+      }
    };
 
    return (
@@ -26,13 +31,16 @@ const Administration = () => {
             {user.name} is {user.isAdmin ? "an" : "a"}{" "}
             {user.isAdmin ? "Administrator" : "Non-Administrator"}
          </p>
-         <ul>
+
+         <select name="teamMembers" onChange={handleOnChange}>
+            <option value="">Select a dev</option>
             {allUsers.map((user) => (
-               <li key={user._id} onClick={() => handleUserData(user)}>
+               <option key={user._id} value={user._id}>
                   {user.name}
-               </li>
+               </option>
             ))}
-         </ul>
+         </select>
+
          {user.isAdmin && <UpdateUser selectedUser={selectedUser} />}
       </div>
    );

@@ -12,6 +12,14 @@ export const getUsers = createAsyncThunk("users/getUsers", async () => {
    return await allUsersService.getUsers();
 });
 
+export const updateUser = createAsyncThunk("users/updateUser", async (user) => {
+   return await allUsersService.updateUser(user);
+});
+
+export const deleteUser = createAsyncThunk("users/deleteUser", async (id) => {
+   return await allUsersService.deleteUser(id);
+});
+
 export const allUsersSlice = createSlice({
    name: "users",
    initialState,
@@ -24,13 +32,45 @@ export const allUsersSlice = createSlice({
          .addCase(getUsers.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isSuccess = true;
-            //state.allUsers.push(action.payload);
             state.allUsers = action.payload;
          })
          .addCase(getUsers.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
-            //state.allUsers = action.payload;
+         })
+         .addCase(updateUser.pending, (state) => {
+            state.isLoading = true;
+         })
+         .addCase(updateUser.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.allUsers = state.allUsers.filter((user) => {
+               if (user._id === action.payload._id) {
+                  return action.payload;
+               }
+               return user;
+            });
+         })
+         .addCase(updateUser.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+         })
+         .addCase(deleteUser.pending, (state) => {
+            state.isLoading = true;
+         })
+         .addCase(deleteUser.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.allUsers = state.allUsers.filter((user) => {
+               if (user._id !== action.payload._id) {
+                  return action.payload;
+               }
+               return user;
+            });
+         })
+         .addCase(deleteUser.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
          });
    },
 });
