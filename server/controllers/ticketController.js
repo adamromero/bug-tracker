@@ -3,7 +3,7 @@ import Ticket from "../models/ticketModel.js";
 import Project from "../models/projectModel.js";
 
 const getTicketsByUser = asyncHandler(async (req, res) => {
-   const tickets = await Ticket.find({ teamMembers: req.params.userId })
+   const tickets = await Ticket.find({ teamMembers: req.params.id })
       .populate("teamMembers")
       .populate("createdBy")
       .populate("project");
@@ -11,7 +11,7 @@ const getTicketsByUser = asyncHandler(async (req, res) => {
 });
 
 const getTicket = asyncHandler(async (req, res) => {
-   const ticket = await Ticket.findById(req.params.ticketId)
+   const ticket = await Ticket.findById(req.params.id)
       .populate("teamMembers")
       .populate("createdBy")
       .populate("project");
@@ -19,7 +19,7 @@ const getTicket = asyncHandler(async (req, res) => {
 });
 
 const getProjectTickets = asyncHandler(async (req, res) => {
-   const tickets = await Ticket.find({ project: req.params.projectId })
+   const tickets = await Ticket.find({ project: req.params.id })
       .populate("teamMembers")
       .populate("createdBy")
       .populate("project");
@@ -44,7 +44,7 @@ const createTicket = asyncHandler(async (req, res) => {
       title: req.body.title,
       description: req.body.description,
       teamMembers: req.body.teamMembers,
-      //createdBy: req.user._id,
+      createdBy: req.user._id,
    };
 
    const ticket = await Ticket.create(newTicket);

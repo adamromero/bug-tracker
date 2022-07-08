@@ -22,6 +22,8 @@ const Ticket = () => {
       return <Spinner />;
    }
 
+   console.log(ticket);
+
    return (
       <>
          <h2>Ticket</h2>

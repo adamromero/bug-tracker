@@ -16,7 +16,7 @@ router
    .get(getTicket)
    .put(updateTicket);
 
-router.route("/user/:userId").get(getTicketsByUser);
-router.route("/project/:projectId").get(getProjectTickets);
+router.route("/user/:id").get(getTicketsByUser);
+router.route("/project/:id").get(getProjectTickets);
 
 export default router;

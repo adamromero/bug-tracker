@@ -40,8 +40,6 @@ const ProjectTickets = ({ project }) => {
       (state) => state.tickets
    );
 
-   //console.log(tickets);
-
    useEffect(() => {
       dispatch(getProjectTickets(id));
    }, [dispatch]);

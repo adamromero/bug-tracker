@@ -8,7 +8,6 @@ const getUsers = asyncHandler(async (req, res) => {
 
 const updateUser = asyncHandler(async (req, res) => {
    const { _id } = req.body;
-   console.log(_id);
    const user = await User.findByIdAndUpdate(_id, req.body, {
       new: true,
       runValidators: true,

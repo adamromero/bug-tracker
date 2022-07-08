@@ -5,8 +5,8 @@ const getTicketsByUser = async (userId) => {
    return response.data;
 };
 
-const getTicket = async (ticketId) => {
-   const response = await axios.get(`/api/ticket/${ticketId}`);
+const getTicket = async (id) => {
+   const response = await axios.get(`/api/ticket/${id}`);
    return response.data;
 };
 
