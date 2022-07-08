@@ -69,48 +69,56 @@ const Comments = ({ ticketId }) => {
          <h4>Comments</h4>
          <div style={{ marginBottom: "40px" }}>
             {comments &&
-               comments.map((comment) => (
-                  <div
-                     style={{
-                        background: "#ededed",
-                        padding: "20px",
-                        marginBottom: "10px",
-                     }}
-                     key={comment._id}
-                  >
-                     <div style={{ display: "flex", alignItems: "center" }}>
-                        <strong style={{ fontSize: "12px" }}>
-                           {" "}
-                           <em>
-                              {comment.createdBy.name} -{" "}
-                              {new Date(comment.createdAt).toLocaleString(
-                                 "en-US",
-                                 {
-                                    dateStyle: "long",
-                                    timeStyle: "long",
-                                 }
+               comments.map((comment) => {
+                  if (comment.createdBy) {
+                     return (
+                        <div
+                           style={{
+                              background: "#ededed",
+                              padding: "20px",
+                              marginBottom: "10px",
+                           }}
+                           key={comment._id}
+                        >
+                           <div
+                              style={{ display: "flex", alignItems: "center" }}
+                           >
+                              <strong style={{ fontSize: "12px" }}>
+                                 {" "}
+                                 <em>
+                                    {comment.createdBy.name} -{" "}
+                                    {new Date(comment.createdAt).toLocaleString(
+                                       "en-US",
+                                       {
+                                          dateStyle: "long",
+                                          timeStyle: "long",
+                                       }
+                                    )}
+                                 </em>
+                              </strong>
+                              {user._id === comment.createdBy._id && (
+                                 <div>
+                                    <SecondaryButton
+                                       onClick={() =>
+                                          handleOnDelete(comment._id)
+                                       }
+                                    >
+                                       <MdDelete />
+                                    </SecondaryButton>
+                                 </div>
                               )}
-                           </em>
-                        </strong>
-                        {user._id === comment.createdBy._id && (
-                           <div>
-                              <SecondaryButton
-                                 onClick={() => handleOnDelete(comment._id)}
-                              >
-                                 <MdDelete />
-                              </SecondaryButton>
                            </div>
-                        )}
-                     </div>
-                     <p>{comment.text}</p>
-                     <div
-                        style={{
-                           fontSize: "12px",
-                           fontWeight: "bold",
-                        }}
-                     ></div>
-                  </div>
-               ))}
+                           <p>{comment.text}</p>
+                           <div
+                              style={{
+                                 fontSize: "12px",
+                                 fontWeight: "bold",
+                              }}
+                           ></div>
+                        </div>
+                     );
+                  }
+               })}
          </div>
          <form onSubmit={handleOnSubmit}>
             <textarea
