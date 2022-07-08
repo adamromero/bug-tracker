@@ -68,7 +68,7 @@ const updateTicket = asyncHandler(async (req, res) => {
 });
 
 const deleteTicket = asyncHandler(async (req, res) => {
-   const ticket = await Ticket.findById(req.params.ticketId);
+   const ticket = await Ticket.findById(req.params.id);
    if (!ticket) {
       res.status(404);
       throw new Error("Ticket not found");

@@ -10,7 +10,7 @@ import {
 } from "../controllers/ticketController.js";
 
 router
-   .route("/:ticketId")
+   .route("/:id")
    .post(createTicket)
    .delete(deleteTicket)
    .get(getTicket)
