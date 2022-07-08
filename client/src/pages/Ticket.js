@@ -1,22 +1,35 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { getTicket } from "../features/tickets/ticketSlice";
 
 import Comments from "../components/Comments";
 
+import Spinner from "../styles/Spinner";
+
 const Ticket = () => {
    const { id } = useParams();
+   const dispatch = useDispatch();
+   const { ticket, isLoading, isError, isSuccess } = useSelector(
+      (state) => state.tickets
+   );
 
-   const location = useLocation();
-   const data = location.state;
+   useEffect(() => {
+      dispatch(getTicket(id));
+   }, [dispatch]);
+
+   if (isLoading) {
+      return <Spinner />;
+   }
 
    return (
       <>
          <h2>Ticket</h2>
-         {data ? (
+         {ticket ? (
             <div>
-               <h3>{data.title}</h3>
+               <h3>{ticket.title}</h3>
                <h4>Description</h4>
-               <p>{data.description}</p>
+               <p>{ticket.description}</p>
                <div
                   style={{
                      display: "flex",
@@ -26,24 +39,25 @@ const Ticket = () => {
                >
                   <div>
                      <h4>Priority</h4>
-                     <p>{data.priority}</p>
+                     <p>{ticket.priority}</p>
                   </div>
                   <div>
                      <h4>Status</h4>
-                     <p>{data.status}</p>
+                     <p>{ticket.status}</p>
                   </div>
                   <div>
                      <h4>Estimate</h4>
-                     <p>{data.estimate}</p>
+                     <p>{ticket.estimate}</p>
                   </div>
                </div>
                <h4>Assigned to</h4>
-               {data.teamMembers.map((member) => (
-                  <p key={member._id}>{member.name}</p>
-               ))}
+               {ticket.teamMembers &&
+                  ticket.teamMembers.map((member) => (
+                     <p key={member._id}>{member.name}</p>
+                  ))}
             </div>
          ) : (
-            <div>No data</div>
+            <div>No ticket found</div>
          )}
 
          <Comments ticketId={id} />

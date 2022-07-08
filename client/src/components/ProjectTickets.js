@@ -40,6 +40,8 @@ const ProjectTickets = ({ project }) => {
       (state) => state.tickets
    );
 
+   //console.log(tickets);
+
    useEffect(() => {
       dispatch(getProjectTickets(id));
    }, [dispatch]);
@@ -92,7 +94,7 @@ const ProjectTickets = ({ project }) => {
                <tr>
                   <th>Title</th>
                   <th>Description</th>
-                  <th>Estimate</th>
+                  <th>Estimate (hours)</th>
                   <th
                      onClick={() => sortTicketsByPriority()}
                      style={{ display: "inline-flex", cursor: "pointer" }}
@@ -121,11 +123,7 @@ const ProjectTickets = ({ project }) => {
                {tickets.map((ticket) => (
                   <tr key={ticket._id}>
                      <td>
-                        <Link
-                           to={`/ticket/${ticket._id}`}
-                           key={ticket._id}
-                           state={ticket}
-                        >
+                        <Link to={`/ticket/${ticket._id}`} key={ticket._id}>
                            {ticket.title}
                         </Link>
                      </td>
