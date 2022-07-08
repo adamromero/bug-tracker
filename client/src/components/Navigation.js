@@ -1,4 +1,3 @@
-import React from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
@@ -29,7 +28,6 @@ const Navigation = () => {
             <Link to="/">
                <h1>Bug Tracker</h1>
             </Link>
-
             <h2>{user.name}</h2>
             <ul>
                <li

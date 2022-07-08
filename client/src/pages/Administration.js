@@ -7,8 +7,8 @@ const Administration = () => {
    const dispatch = useDispatch();
    const { user } = useSelector((state) => state.auth);
    const { allUsers } = useSelector((state) => state.users);
-
    const [selectedUser, setSelectedUser] = useState(user);
+   const [isCurrentUserAdmin, setIsCurrentUserAdmin] = useState(user.isAdmin);
 
    useEffect(() => {
       dispatch(getUsers());
@@ -33,7 +33,9 @@ const Administration = () => {
                      {allUsers.map((user) => (
                         <tr
                            key={user._id}
-                           style={{ cursor: "pointer" }}
+                           style={
+                              isCurrentUserAdmin ? { cursor: "pointer" } : {}
+                           }
                            onClick={() => setSelectedUser(user)}
                         >
                            <td>{user.name}</td>
