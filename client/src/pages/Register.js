@@ -61,28 +61,24 @@ const Register = () => {
                   placeholder="Name"
                   onChange={handleChange}
                />
-               <br />
                <input
                   type="text"
                   name="email"
                   placeholder="Email"
                   onChange={handleChange}
                />
-               <br />
                <input
                   type="password"
                   name="password"
                   placeholder="Password"
                   onChange={handleChange}
                />
-               <br />
                <input
                   type="password"
                   name="confirmPassword"
                   placeholder="Confirm Password"
                   onChange={handleChange}
                />
-               <br />
                <PrimaryButton type="submit">Submit</PrimaryButton>
             </form>
             <Link to="/login">Login</Link>
