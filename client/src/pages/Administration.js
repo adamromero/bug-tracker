@@ -14,34 +14,38 @@ const Administration = () => {
       dispatch(getUsers());
    }, [dispatch, selectedUser.name]);
 
-   const handleOnChange = (e) => {
-      if (e.target.value !== "") {
-         allUsers.filter((user) => {
-            if (user._id === e.target.value) {
-               setSelectedUser(user);
-            }
-         });
-      }
-   };
-
    return (
       <div>
          <h2>Administration</h2>
-         <p>
-            {user.name} is {user.isAdmin ? "an" : "a"}{" "}
-            {user.isAdmin ? "Administrator" : "Non-Administrator"}
-         </p>
-
-         <select name="teamMembers" onChange={handleOnChange}>
-            <option value="">Select a dev</option>
-            {allUsers.map((user) => (
-               <option key={user._id} value={user._id}>
-                  {user.name}
-               </option>
-            ))}
-         </select>
-
-         {user.isAdmin && <UpdateUser selectedUser={selectedUser} />}
+         <p>{user.isAdmin ? "You have administrator privileges" : ""}</p>
+         <div style={{ display: "flex", gap: "45px" }}>
+            <div>
+               <h3>Team</h3>
+               <table style={{ textAlign: "left", width: "100%" }}>
+                  <thead>
+                     <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Is Admin</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     {allUsers.map((user) => (
+                        <tr
+                           key={user._id}
+                           style={{ cursor: "pointer" }}
+                           onClick={() => setSelectedUser(user)}
+                        >
+                           <td>{user.name}</td>
+                           <td>{user.email}</td>
+                           <td>{user.isAdmin ? "Yes" : "No"}</td>
+                        </tr>
+                     ))}
+                  </tbody>
+               </table>
+            </div>
+            {user.isAdmin && <UpdateUser selectedUser={selectedUser} />}
+         </div>
       </div>
    );
 };

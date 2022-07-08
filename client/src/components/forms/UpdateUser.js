@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updateUser, deleteUser } from "../../features/users/allUsersSlice";
+import { PrimaryButton } from "../../styles/Button";
+import UserEditStyle from "../../styles/UserEditStyle";
 
 const UpdateUser = ({ selectedUser }) => {
    const [userDetails, setUserDetails] = useState({});
@@ -9,7 +11,6 @@ const UpdateUser = ({ selectedUser }) => {
 
    const handleEditUser = (e) => {
       e.preventDefault();
-      console.log(userDetails);
       dispatch(updateUser(userDetails));
    };
 
@@ -35,9 +36,9 @@ const UpdateUser = ({ selectedUser }) => {
    }, [selectedUser]);
 
    return (
-      <div>
+      <UserEditStyle>
          <h3>Update user information</h3>
-         {selectedUser.name}
+         <h4>{selectedUser.name}</h4>
 
          <form onSubmit={handleEditUser}>
             <label>
@@ -50,7 +51,6 @@ const UpdateUser = ({ selectedUser }) => {
                   value={userDetails.name || ""}
                />
             </label>
-            <br />
             <label>
                Email:
                <input
@@ -61,8 +61,8 @@ const UpdateUser = ({ selectedUser }) => {
                   value={userDetails.email || ""}
                />
             </label>
-            <br />
-            <label>
+
+            <label className="inline-label">
                Administrator:
                <input
                   type="checkbox"
@@ -74,13 +74,14 @@ const UpdateUser = ({ selectedUser }) => {
                   value={isAdminChecked}
                />
             </label>
-            <br />
-            <button type="submit">Submit</button>
-            <button type="submit" onClick={handleDeleteUser}>
-               Remove User
-            </button>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+               <PrimaryButton type="submit">Submit</PrimaryButton>
+               <PrimaryButton onClick={handleDeleteUser}>
+                  Remove User
+               </PrimaryButton>
+            </div>
          </form>
-      </div>
+      </UserEditStyle>
    );
 };
 
