@@ -11,8 +11,8 @@ const NavigationStyle = styled.nav`
    ul {
       list-style: none;
       padding: 15px 0;
-      border-top: 1px solid #9f9f9f;
-      border-bottom: 1px solid #9f9f9f;
+      border-top: 1px solid #e0e0e0;
+      border-bottom: 1px solid #e0e0e0;
    }
 
    li {
