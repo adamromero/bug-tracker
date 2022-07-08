@@ -51,7 +51,6 @@ export const projectSlice = createSlice({
          .addCase(getProjects.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isSuccess = true;
-            console.log(action.payload);
             state.projects = action.payload;
          })
          .addCase(getProjects.rejected, (state, action) => {
