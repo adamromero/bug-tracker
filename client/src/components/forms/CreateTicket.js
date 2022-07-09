@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { createTicket } from "../../features/tickets/ticketSlice";
 
 import { PrimaryButton } from "../../styles/Button";
@@ -13,10 +13,13 @@ const CreateTicket = ({ project }) => {
       status: "",
       priority: "",
       project: project._id,
+      createdBy: "",
    };
    const [ticketDetails, setTicketDetails] = useState(initialTicketDetails);
 
    const dispatch = useDispatch();
+
+   const { user } = useSelector((state) => state.auth);
 
    const handleNewTicket = (e) => {
       e.preventDefault();
@@ -40,6 +43,7 @@ const CreateTicket = ({ project }) => {
          teamMembers: selectedOptionsArray
             ? selectedOptionsArray
             : prevState.teamMembers,
+         createdBy: user._id,
       }));
    };
 

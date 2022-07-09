@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import Ticket from "../models/ticketModel.js";
 import Project from "../models/projectModel.js";
+import User from "../models/userModel.js";
 
 const getTicketsByUser = asyncHandler(async (req, res) => {
    const tickets = await Ticket.find({ teamMembers: req.params.id })
@@ -44,7 +45,7 @@ const createTicket = asyncHandler(async (req, res) => {
       title: req.body.title,
       description: req.body.description,
       teamMembers: req.body.teamMembers,
-      createdBy: req.user._id,
+      createdBy: req.body.createdBy,
    };
 
    const ticket = await Ticket.create(newTicket);

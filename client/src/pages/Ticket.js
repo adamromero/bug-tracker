@@ -22,8 +22,6 @@ const Ticket = () => {
       return <Spinner />;
    }
 
-   console.log(ticket);
-
    return (
       <>
          <h2>Ticket</h2>
@@ -51,6 +49,12 @@ const Ticket = () => {
                      <h4>Estimate</h4>
                      <p>{ticket.estimate}</p>
                   </div>
+                  {ticket.createdBy ? (
+                     <div>
+                        <h4>Created By</h4>
+                        <p>{ticket.createdBy.name}</p>
+                     </div>
+                  ) : null}
                </div>
                <h4>Assigned to</h4>
                {ticket.teamMembers &&
