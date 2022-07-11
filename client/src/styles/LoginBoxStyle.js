@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { gray } from "./utils/colors";
+import { gray, green } from "./utils/colors";
 
 const LoginBoxStyle = styled.div`
    display: flex;
@@ -8,11 +8,12 @@ const LoginBoxStyle = styled.div`
 
    .login {
       background: ${gray[100]};
-      max-width: 530px;
-      width: 100%;
-      height: 400px;
-      margin: auto;
       text-align: center;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      flex: 1;
 
       form {
          display: flex;
@@ -22,6 +23,19 @@ const LoginBoxStyle = styled.div`
          margin: auto;
          padding-bottom: 20px;
       }
+   }
+
+   .landing-panel {
+      background: ${green[300]};
+      color: white;
+      padding: 20px;
+      width: 100%;
+      height: 100vh;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
    }
 `;
 

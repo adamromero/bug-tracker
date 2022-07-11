@@ -39,26 +39,35 @@ const Login = () => {
 
    return (
       <LoginBoxStyle>
+         <div className="landing-panel">
+            <h1>Welcome to Bug Tracker</h1>
+            <p>
+               This is a simple bug tracker app that allows you to create,
+               update, and delete bugs.
+            </p>
+         </div>
          <div className="login">
-            <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
-               <input
-                  type="text"
-                  name="email"
-                  placeholder="Email"
-                  onChange={handleChange}
-               />
+            <div>
+               <h1>Login</h1>
+               <form onSubmit={handleSubmit}>
+                  <input
+                     type="text"
+                     name="email"
+                     placeholder="Email"
+                     onChange={handleChange}
+                  />
 
-               <input
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  onChange={handleChange}
-               />
+                  <input
+                     type="password"
+                     name="password"
+                     placeholder="Password"
+                     onChange={handleChange}
+                  />
 
-               <PrimaryButton type="submit">Login</PrimaryButton>
-            </form>
-            <Link to="/register">Register</Link>
+                  <PrimaryButton type="submit">Login</PrimaryButton>
+               </form>
+               <Link to="/register">Register</Link>
+            </div>
          </div>
       </LoginBoxStyle>
    );
