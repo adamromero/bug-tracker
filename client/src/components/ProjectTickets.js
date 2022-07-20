@@ -40,25 +40,49 @@ const ProjectTickets = ({ project }) => {
       (state) => state.tickets
    );
 
+   // const [displayTickets, setDisplayTickets] = useState(
+   //    JSON.parse(localStorage.getItem("tickets"))
+   //       ? JSON.parse(localStorage.getItem("tickets"))
+   //       : tickets
+   // );
+
    useEffect(() => {
       dispatch(getProjectTickets(id));
+      // setDisplayTickets(
+      //    JSON.parse(localStorage.getItem("tickets"))
+      //       ? JSON.parse(localStorage.getItem("tickets"))
+      //       : tickets
+      // );
+
+      // return () => {
+      //    localStorage.removeItem("tickets");
+      // };
    }, [dispatch]);
 
+   //console.log("tickets: ", tickets);
+   //console.log("displaytickets: ", displayTickets);
+
    const sortTicketsByPriority = () => {
+      let sortedTickets;
       if (priorityToggle) {
-         //setDisplayTickets(sortTicketsByPriorityAscending(tickets));
+         //sortedTickets = sortTicketsByPriorityAscending(displayTickets);
       } else {
-         //setDisplayTickets(sortTicketsByPriorityDescending(tickets));
+         //sortedTickets = sortTicketsByPriorityDescending(displayTickets);
       }
+      localStorage.setItem("tickets", JSON.stringify(sortedTickets));
+      //setDisplayTickets(sortedTickets);
       setPriorityToggle(!priorityToggle);
    };
 
    const sortTicketsByStatus = () => {
+      let sortedTickets;
       if (statusToggle) {
-         //setDisplayTickets(sortTicketsByStatusAscending(tickets));
+         //sortedTickets = sortTicketsByStatusAscending(displayTickets);
       } else {
-         //setDisplayTickets(sortTicketsByStatusDescending(tickets));
+         // sortedTickets = sortTicketsByStatusDescending(displayTickets);
       }
+      localStorage.setItem("tickets", JSON.stringify(sortedTickets));
+      //setDisplayTickets(sortedTickets);
       setStatusToggle(!statusToggle);
    };
 
@@ -119,7 +143,14 @@ const ProjectTickets = ({ project }) => {
             </thead>
             <tbody>
                {tickets.map((ticket) => (
-                  <tr key={ticket._id}>
+                  <tr
+                     key={ticket._id}
+                     style={
+                        ticket.status === "Completed"
+                           ? { color: "#bbbbbb" }
+                           : null
+                     }
+                  >
                      <td>
                         <Link to={`/ticket/${ticket._id}`} key={ticket._id}>
                            {ticket.title}
