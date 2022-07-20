@@ -40,12 +40,7 @@ const Project = () => {
                <p>No team members assigned</p>
             )}
          </div>
-
-         {project.tickets && project.tickets.length > 0 ? (
-            <ProjectTickets project={project} />
-         ) : (
-            <p>No tickets</p>
-         )}
+         <ProjectTickets project={project} />
       </>
    );
 };
