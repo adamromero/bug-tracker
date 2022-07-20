@@ -34,7 +34,7 @@ export const allUsersSlice = createSlice({
             state.isSuccess = true;
             state.allUsers = action.payload;
          })
-         .addCase(getUsers.rejected, (state, action) => {
+         .addCase(getUsers.rejected, (state) => {
             state.isLoading = false;
             state.isError = true;
          })
@@ -51,7 +51,7 @@ export const allUsersSlice = createSlice({
                return user;
             });
          })
-         .addCase(updateUser.rejected, (state, action) => {
+         .addCase(updateUser.rejected, (state) => {
             state.isLoading = false;
             state.isError = true;
          })
@@ -61,14 +61,11 @@ export const allUsersSlice = createSlice({
          .addCase(deleteUser.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isSuccess = true;
-            state.allUsers = state.allUsers.filter((user) => {
-               if (user._id !== action.payload._id) {
-                  return action.payload;
-               }
-               return user;
-            });
+            state.allUsers = state.allUsers.filter(
+               (user) => user._id !== action.payload._id
+            );
          })
-         .addCase(deleteUser.rejected, (state, action) => {
+         .addCase(deleteUser.rejected, (state) => {
             state.isLoading = false;
             state.isError = true;
          });

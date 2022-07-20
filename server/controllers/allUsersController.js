@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import User from "../models/userModel.js";
+import Comment from "../models/commentModel.js";
 
 const getUsers = asyncHandler(async (req, res) => {
    const users = await User.find();
@@ -17,9 +18,9 @@ const updateUser = asyncHandler(async (req, res) => {
 
 const deleteUser = asyncHandler(async (req, res) => {
    const { id } = req.params;
-   const user = await User.findById(id);
-   await user.remove();
-   res.status(200).json(user);
+   await User.findByIdAndDelete(id);
+   await Comment.findOneAndDelete({ createdBy: id });
+   res.status(200);
 });
 
 export { getUsers, updateUser, deleteUser };
