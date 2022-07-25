@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getTicketsByUser } from "../features/tickets/ticketSlice";
+import PageStyle from "../styles/PageStyle";
 
 const Tickets = () => {
    const { user } = useSelector((state) => state.auth);
@@ -14,7 +15,7 @@ const Tickets = () => {
    }, []);
 
    return (
-      <>
+      <PageStyle>
          <h2>Tickets</h2>
          {tickets.length > 0 ? (
             <table
@@ -53,7 +54,7 @@ const Tickets = () => {
          ) : (
             <p>You currently have no tickets assigned</p>
          )}
-      </>
+      </PageStyle>
    );
 };
 

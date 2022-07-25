@@ -10,6 +10,7 @@ const Spinner = styled.div`
    border: 0.25em solid currentColor;
    border-right-color: transparent;
    border-radius: 50%;
+   margin: 0 24px;
    -webkit-animation: spinner-border 0.75s linear infinite;
    animation: spinner-border 0.75s linear infinite;
 

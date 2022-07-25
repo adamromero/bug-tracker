@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getProject } from "../features/projects/projectSlice";
 
 import Spinner from "../styles/Spinner";
+import PageStyle from "../styles/PageStyle";
 
 import ProjectTickets from "../components/ProjectTickets";
 
@@ -24,7 +25,7 @@ const Project = () => {
    }
 
    return (
-      <>
+      <PageStyle>
          <div>
             <h2>Project</h2>
             <h3>{project.title}</h3>
@@ -41,7 +42,7 @@ const Project = () => {
             )}
          </div>
          <ProjectTickets project={project} />
-      </>
+      </PageStyle>
    );
 };
 

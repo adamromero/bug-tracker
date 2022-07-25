@@ -2,19 +2,25 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import UpdateUser from "../components/forms/UpdateUser";
 import { getUsers } from "../features/users/allUsersSlice";
+import Spinner from "../styles/Spinner";
+import PageStyle from "../styles/PageStyle";
 
 const Administration = () => {
    const dispatch = useDispatch();
    const { user } = useSelector((state) => state.auth);
-   const { allUsers } = useSelector((state) => state.users);
+   const { allUsers, isLoading } = useSelector((state) => state.users);
    const [selectedUser, setSelectedUser] = useState(user);
 
    useEffect(() => {
       dispatch(getUsers());
    }, [dispatch, selectedUser.name]);
 
+   if (isLoading) {
+      return <Spinner />;
+   }
+
    return (
-      <div>
+      <PageStyle>
          <h2>Administration</h2>
          <p>{user.isAdmin ? "You have administrator privileges" : ""}</p>
          <div style={{ display: "flex", gap: "45px" }}>
@@ -45,7 +51,7 @@ const Administration = () => {
             </div>
             {user.isAdmin && <UpdateUser selectedUser={selectedUser} />}
          </div>
-      </div>
+      </PageStyle>
    );
 };
 

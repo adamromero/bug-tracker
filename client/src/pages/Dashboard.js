@@ -6,6 +6,7 @@ import { getProjects } from "../features/projects/projectSlice";
 import Spinner from "../styles/Spinner";
 import { PrimaryButton } from "../styles/Button";
 import { SecondaryButton } from "../styles/Button";
+import PageStyle from "../styles/PageStyle";
 
 import { MdDelete } from "react-icons/md";
 import { MdModeEditOutline } from "react-icons/md";
@@ -39,7 +40,7 @@ function Dashboard() {
    }
 
    return (
-      <>
+      <PageStyle>
          <h2>Dashboard</h2>
          <div
             style={{
@@ -112,7 +113,7 @@ function Dashboard() {
             <PrimaryButton>3</PrimaryButton>
          </div>
          <Chart />
-      </>
+      </PageStyle>
    );
 }
 

@@ -6,6 +6,7 @@ import { getTicket } from "../features/tickets/ticketSlice";
 import Comments from "../components/Comments";
 
 import Spinner from "../styles/Spinner";
+import PageStyle from "../styles/PageStyle";
 
 const Ticket = () => {
    const { id } = useParams();
@@ -23,7 +24,7 @@ const Ticket = () => {
    }
 
    return (
-      <>
+      <PageStyle>
          <h2>Ticket</h2>
          {ticket ? (
             <div>
@@ -67,7 +68,7 @@ const Ticket = () => {
          )}
 
          <Comments ticketId={id} />
-      </>
+      </PageStyle>
    );
 };
 
