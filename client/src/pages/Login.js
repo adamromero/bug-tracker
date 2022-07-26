@@ -6,6 +6,8 @@ import { login } from "../features/auth/authSlice";
 import { PrimaryButton } from "../styles/Button";
 import LoginBoxStyle from "../styles/LoginBoxStyle";
 
+import LoginLanding from "../components/LoginLanding";
+
 const Login = () => {
    const initialState = {
       email: "",
@@ -39,13 +41,7 @@ const Login = () => {
 
    return (
       <LoginBoxStyle>
-         <div className="landing-panel">
-            <h1>Welcome to Bug Tracker</h1>
-            <p>
-               This is a simple bug tracker app that allows you to create,
-               update, and delete bugs.
-            </p>
-         </div>
+         <LoginLanding />
          <div className="login">
             <div>
                <h1>Login</h1>
