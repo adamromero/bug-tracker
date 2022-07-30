@@ -42,7 +42,7 @@ const Tickets = () => {
                         key={ticket._id}
                         className="border-b-[1px] border-slate-200"
                      >
-                        <td className="py-2">
+                        <td className="py-2 text-[#087e8b]">
                            <Link to={`/ticket/${ticket._id}`} state={ticket}>
                               {ticket.title}
                            </Link>

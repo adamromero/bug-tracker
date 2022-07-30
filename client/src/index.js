@@ -25,7 +25,11 @@ const App = () => {
       <React.StrictMode>
          <Provider store={store}>
             <Router>
-               <div className={`flex ${darkMode ? "dark" : ""}`}>
+               <div
+                  className={`flex flex-col md:flex-row ${
+                     darkMode ? "dark" : ""
+                  }`}
+               >
                   <Navigation />
                   <main className="flex-1 dark:bg-zinc-800 dark:text-white">
                      <Routes>

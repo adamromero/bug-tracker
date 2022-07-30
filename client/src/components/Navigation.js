@@ -30,31 +30,36 @@ const Navigation = () => {
 
    if (user) {
       return (
-         <nav className="min-h-screen bg-zinc-300 max-w-[275px] w-full p-5 dark:bg-zinc-900">
-            <div className="flex justify-between	 items-center mb-2">
+         <nav className="md:min-h-screen md:max-w-[275px] bg-zinc-300 w-full p-5 dark:bg-zinc-900 text-[#087e8b] dark:text-white">
+            <div className="flex justify-between items-center mb-2">
                <Link to="/">
                   <h1 className="font-bold text-3xl ">Bug Tracker</h1>
                </Link>
                {darkMode ? (
-                  <MdLightMode
-                     className="text-2xl text-[#087e8b] rounded p-1 bg-white cursor-pointer"
-                     title="Light Mode"
+                  <button
                      onClick={() => {
                         theme.dispatch({ type: "TOGGLE_THEME" });
                      }}
-                  />
+                  >
+                     <MdLightMode
+                        className="text-2xl text-[#087e8b] rounded p-1 bg-white cursor-pointer"
+                        title="Light Mode"
+                     />
+                  </button>
                ) : (
-                  <MdDarkMode
-                     className="text-2xl text-white rounded p-1 bg-[#087e8b] cursor-pointer"
-                     title="Dark Mode"
+                  <button
                      onClick={() => {
                         theme.dispatch({ type: "TOGGLE_THEME" });
                      }}
-                  />
+                  >
+                     <MdDarkMode
+                        className="text-2xl text-white rounded p-1 bg-[#087e8b] cursor-pointer"
+                        title="Dark Mode"
+                     />
+                  </button>
                )}
             </div>
-
-            <h2 className="font-bold text-xl">
+            <h2 className="font-bold text-lg">
                <Link to="/profile">{user.name}</Link>
             </h2>
             <ul className="py-2 mt-2 mb-4 border-y-[1px] border-gray-600">
@@ -64,10 +69,7 @@ const Navigation = () => {
                      fontWeight: location.pathname === "/" ? "bold" : "",
                   }}
                >
-                  <Link
-                     to="/"
-                     style={{ display: "flex", alignItems: "center" }}
-                  >
+                  <Link className="inline-flex items-center" to="/">
                      <MdDashboard style={{ marginRight: "8px" }} />
                      Dashboard
                   </Link>
@@ -78,10 +80,7 @@ const Navigation = () => {
                      fontWeight: location.pathname === "/tickets" ? "bold" : "",
                   }}
                >
-                  <Link
-                     to="/tickets"
-                     style={{ display: "flex", alignItems: "center" }}
-                  >
+                  <Link className="inline-flex items-center" to="/tickets">
                      <FaTicketAlt style={{ marginRight: "8px" }} />
                      Tickets
                   </Link>
@@ -97,8 +96,8 @@ const Navigation = () => {
                      }}
                   >
                      <Link
+                        className="inline-flex items-center"
                         to="/administration"
-                        style={{ display: "flex", alignItems: "center" }}
                      >
                         <RiAdminFill style={{ marginRight: "8px" }} />
                         Administration

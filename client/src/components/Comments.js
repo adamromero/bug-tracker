@@ -100,7 +100,6 @@ const Comments = ({ ticketId }) => {
                            )}
                         </div>
                         <p>{comment.text}</p>
-                        <div className="font-bold text-xs"></div>
                      </div>
                   );
                }

@@ -47,7 +47,7 @@ const UpdateUser = ({ selectedUser, dispatch }) => {
             <label>
                Name:
                <input
-                  className="border	border-gray-500"
+                  className="border	border-gray-500 dark:text-black"
                   type="text"
                   name="name"
                   placeholder="Name"
@@ -58,7 +58,7 @@ const UpdateUser = ({ selectedUser, dispatch }) => {
             <label>
                Email:
                <input
-                  className="border	border-gray-500"
+                  className="border	border-gray-500 dark:text-black"
                   type="text"
                   name="email"
                   placeholder="Email"

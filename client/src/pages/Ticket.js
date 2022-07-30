@@ -28,6 +28,19 @@ const Ticket = () => {
       }
    };
 
+   const statusColor = (status) => {
+      switch (status) {
+         case "Open":
+            return "bg-yellow-500";
+         case "In Progress":
+            return "bg-sky-400";
+         case "Completed":
+            return "bg-green-500";
+         default:
+            return "bg-gray-500";
+      }
+   };
+
    useEffect(() => {
       dispatch(getTicket(id));
    }, [dispatch]);
@@ -65,7 +78,11 @@ const Ticket = () => {
                   </div>
                   <div>
                      <h4>Status:</h4>
-                     <p className="bg-sky-400 text-center text-white rounded px-2">
+                     <p
+                        className={`${statusColor(
+                           ticket.status
+                        )} text-center text-white rounded px-2`}
+                     >
                         {ticket.status}
                      </p>
                   </div>

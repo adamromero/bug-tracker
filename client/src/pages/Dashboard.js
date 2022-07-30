@@ -62,7 +62,7 @@ function Dashboard() {
                      key={project._id}
                      className="border-b-[1px] border-slate-200"
                   >
-                     <td>
+                     <td className="text-[#087e8b]">
                         <Link to={`/project/${project._id}`} key={project._id}>
                            {project.title}
                         </Link>
