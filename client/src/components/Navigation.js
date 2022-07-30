@@ -1,18 +1,24 @@
+import { useContext } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
 
-import NavigationStyle from "../styles/NavigationStyle";
 import { PrimaryButton } from "../styles/Button";
 
 import { MdDashboard } from "react-icons/md";
 import { FaTicketAlt } from "react-icons/fa";
 import { RiAdminFill } from "react-icons/ri";
+import { MdDarkMode } from "react-icons/md";
+import { MdLightMode } from "react-icons/md";
+
+import { ThemeContext } from "../contexts/ThemeContext";
 
 const Navigation = () => {
    const dispatch = useDispatch();
    const navigate = useNavigate();
    const location = useLocation();
+   const theme = useContext(ThemeContext);
+   const darkMode = theme.state.darkMode;
 
    const { user } = useSelector((state) => state.auth);
 
@@ -24,10 +30,30 @@ const Navigation = () => {
 
    if (user) {
       return (
-         <nav className="min-h-screen bg-zinc-300	 max-w-[275px]	w-full p-5 dark:bg-zinc-900	">
-            <Link to="/">
-               <h1 className="font-bold text-3xl mb-2">Bug Tracker</h1>
-            </Link>
+         <nav className="min-h-screen bg-zinc-300 max-w-[275px] w-full p-5 dark:bg-zinc-900">
+            <div className="flex justify-between	 items-center mb-2">
+               <Link to="/">
+                  <h1 className="font-bold text-3xl ">Bug Tracker</h1>
+               </Link>
+               {darkMode ? (
+                  <MdLightMode
+                     className="text-2xl text-[#087e8b] rounded p-1 bg-white cursor-pointer"
+                     title="Light Mode"
+                     onClick={() => {
+                        theme.dispatch({ type: "TOGGLE_THEME" });
+                     }}
+                  />
+               ) : (
+                  <MdDarkMode
+                     className="text-2xl text-white rounded p-1 bg-[#087e8b] cursor-pointer"
+                     title="Dark Mode"
+                     onClick={() => {
+                        theme.dispatch({ type: "TOGGLE_THEME" });
+                     }}
+                  />
+               )}
+            </div>
+
             <h2 className="font-bold text-xl">
                <Link to="/profile">{user.name}</Link>
             </h2>

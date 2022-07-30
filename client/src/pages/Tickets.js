@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getTicketsByUser } from "../features/tickets/ticketSlice";
-import PageStyle from "../styles/PageStyle";
 
 const Tickets = () => {
    const { user } = useSelector((state) => state.auth);
@@ -16,7 +15,9 @@ const Tickets = () => {
 
    return (
       <div className="m-5">
-         <h2 className="text-2xl	font-bold">Tickets</h2>
+         <h2 className="text-2xl	font-bold mb-5">
+            Tickets <div className="text-sm">assigned to {user.name}</div>
+         </h2>
          {tickets.length > 0 ? (
             <table
                style={{
@@ -28,8 +29,8 @@ const Tickets = () => {
             >
                <thead>
                   <tr>
-                     <th>Title</th>
-                     <th>Description</th>
+                     <th className="font-normal">Title</th>
+                     <th className="font-normal">Description</th>
                      {/* <th>Estimate (hours)</th>
                      <th>Priority</th>
                      <th>Status</th> */}

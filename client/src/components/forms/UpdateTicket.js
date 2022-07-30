@@ -37,7 +37,7 @@ const UpdateTicket = ({ project, ticket }) => {
    return (
       <>
          <h2> Update Ticket</h2>
-         <form onSubmit={handleEditTicket}>
+         <form className="flex flex-col" onSubmit={handleEditTicket}>
             <label>Title</label>
             <input
                type="text"

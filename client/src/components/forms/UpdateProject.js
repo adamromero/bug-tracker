@@ -40,7 +40,7 @@ const UpdateProject = ({ project }) => {
    return (
       <>
          <h2>Update Project </h2>
-         <form onSubmit={handleEditProject}>
+         <form className="flex flex-col" onSubmit={handleEditProject}>
             <label htmlFor="">Title</label>
             <input
                type="text"

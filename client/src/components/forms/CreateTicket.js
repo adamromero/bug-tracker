@@ -50,7 +50,7 @@ const CreateTicket = ({ project }) => {
    return (
       <>
          <h2>Create Ticket</h2>
-         <form onSubmit={handleNewTicket}>
+         <form className="flex flex-col" onSubmit={handleNewTicket}>
             <label htmlFor="">Title</label>
             <input
                type="text"

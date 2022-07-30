@@ -65,61 +65,46 @@ const Comments = ({ ticketId }) => {
    }
 
    return (
-      <div>
+      <>
          <h4 className="text-lg font-bold mb-5">Comments</h4>
-         <div style={{ marginBottom: "40px" }}>
-            {comments &&
-               comments.map((comment) => {
-                  if (comment.createdBy) {
-                     return (
-                        <div
-                           className="text-black bg-[#ededed] dark:text-white dark:bg-[#087e8b]"
-                           style={{
-                              padding: "20px",
-                              marginBottom: "10px",
-                           }}
-                           key={comment._id}
-                        >
-                           <div
-                              style={{ display: "flex", alignItems: "center" }}
-                           >
-                              <strong style={{ fontSize: "12px" }}>
-                                 {" "}
-                                 <em>
-                                    {comment.createdBy.name} -{" "}
-                                    {new Date(comment.createdAt).toLocaleString(
-                                       "en-US",
-                                       {
-                                          dateStyle: "long",
-                                          timeStyle: "long",
-                                       }
-                                    )}
-                                 </em>
-                              </strong>
-                              {user._id === comment.createdBy._id && (
-                                 <div>
-                                    <SecondaryButton
-                                       onClick={() =>
-                                          handleOnDelete(comment._id)
-                                       }
-                                    >
-                                       <MdDelete />
-                                    </SecondaryButton>
-                                 </div>
-                              )}
-                           </div>
-                           <p>{comment.text}</p>
-                           <div
-                              style={{
-                                 fontSize: "12px",
-                                 fontWeight: "bold",
-                              }}
-                           ></div>
+         {comments &&
+            comments.map((comment) => {
+               if (comment.createdBy) {
+                  return (
+                     <div
+                        className="text-black bg-[#ededed] dark:text-white dark:bg-[#087e8b] p-5 mb-2"
+                        key={comment._id}
+                     >
+                        <div className="flex items-center">
+                           <strong className="text-xs">
+                              {" "}
+                              <em>
+                                 {comment.createdBy.name} -{" "}
+                                 {new Date(comment.createdAt).toLocaleString(
+                                    "en-US",
+                                    {
+                                       dateStyle: "long",
+                                       timeStyle: "long",
+                                    }
+                                 )}
+                              </em>
+                           </strong>
+                           {user._id === comment.createdBy._id && (
+                              <div>
+                                 <SecondaryButton
+                                    onClick={() => handleOnDelete(comment._id)}
+                                 >
+                                    <MdDelete />
+                                 </SecondaryButton>
+                              </div>
+                           )}
                         </div>
-                     );
-                  }
-               })}
-         </div>
+                        <p>{comment.text}</p>
+                        <div className="font-bold text-xs"></div>
+                     </div>
+                  );
+               }
+            })}
          <form onSubmit={handleOnSubmit}>
             <textarea
                className="border border-gray-500 p-2 w-full dark:bg-zinc-800"
@@ -134,7 +119,7 @@ const Comments = ({ ticketId }) => {
                Submit
             </PrimaryButton>
          </form>
-      </div>
+      </>
    );
 };
 
