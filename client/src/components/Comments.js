@@ -66,7 +66,7 @@ const Comments = ({ ticketId }) => {
 
    return (
       <div>
-         <h4>Comments</h4>
+         <h4 className="text-lg font-bold mb-5">Comments</h4>
          <div style={{ marginBottom: "40px" }}>
             {comments &&
                comments.map((comment) => {

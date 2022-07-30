@@ -32,19 +32,19 @@ const Ticket = () => {
          </div>
 
          {ticket ? (
-            <div>
+            <div className="mb-5 pb-5 border-b-[1px] border-slate-200">
                <p className="my-5 text-lg italic">{ticket.description}</p>
                <div className="flex justify-between max-w-lg mb-5">
                   <div>
-                     <h4>Priority</h4>
+                     <h4>Priority:</h4>
                      <p>{ticket.priority}</p>
                   </div>
                   <div>
-                     <h4>Status</h4>
+                     <h4>Status:</h4>
                      <p>{ticket.status}</p>
                   </div>
                   <div>
-                     <h4>Estimate</h4>
+                     <h4>Estimate:</h4>
                      <p>{ticket.estimate}</p>
                   </div>
                   {ticket.createdBy ? (
@@ -54,7 +54,7 @@ const Ticket = () => {
                      </div>
                   ) : null}
                </div>
-               <h4>Assigned to</h4>
+               <h4>Assigned to:</h4>
                {ticket.teamMembers &&
                   ticket.teamMembers.map((member) => (
                      <p key={member._id}>{member.name}</p>

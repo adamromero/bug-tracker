@@ -30,9 +30,9 @@ const Tickets = () => {
                   <tr>
                      <th>Title</th>
                      <th>Description</th>
-                     <th>Estimate (hours)</th>
+                     {/* <th>Estimate (hours)</th>
                      <th>Priority</th>
-                     <th>Status</th>
+                     <th>Status</th> */}
                   </tr>
                </thead>
                <tbody>
@@ -47,9 +47,9 @@ const Tickets = () => {
                            </Link>
                         </td>
                         <td className="py-2">{ticket.description}</td>
-                        <td className="py-2">{ticket.estimate}</td>
+                        {/* <td className="py-2">{ticket.estimate}</td>
                         <td className="py-2">{ticket.priority}</td>
-                        <td className="py-2">{ticket.status}</td>
+                        <td className="py-2">{ticket.status}</td> */}
                      </tr>
                   ))}
                </tbody>

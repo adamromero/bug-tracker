@@ -45,7 +45,7 @@ const CreateProject = () => {
    return (
       <>
          <h2>Create Project </h2>
-         <form onSubmit={handleNewProject}>
+         <form className="flex flex-col" onSubmit={handleNewProject}>
             <label htmlFor="">Title</label>
             <input
                type="text"

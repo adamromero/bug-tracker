@@ -42,7 +42,7 @@ function Dashboard() {
    return (
       <div className="m-5">
          <h2 className="text-2xl	font-bold">Dashboard</h2>
-         <div className="flex justify-between items-center">
+         <div className="flex justify-between items-center mb-5 py-5 border-b-[1px] border-slate-200">
             <h3 className="text-xl">Projects</h3>
             <Modal button={<PrimaryButton>New Project</PrimaryButton>}>
                <CreateProject />
@@ -51,9 +51,9 @@ function Dashboard() {
          <table className="w-full border-collapse text-left mb-5">
             <thead>
                <tr>
-                  <th>Title</th>
-                  <th>Description</th>
-                  <th>Team</th>
+                  <th className="font-normal">Title</th>
+                  <th className="font-normal">Description</th>
+                  <th className="font-normal">Team</th>
                </tr>
             </thead>
             <tbody>

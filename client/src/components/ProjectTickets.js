@@ -93,7 +93,7 @@ const ProjectTickets = ({ project }) => {
    return (
       <>
          <div className="flex justify-between items-center">
-            <h3>Tickets</h3>
+            <h3 className="text-lg font-bold">Tickets</h3>
             <Modal button={<PrimaryButton>New Ticket</PrimaryButton>}>
                <CreateTicket project={project} />
             </Modal>
@@ -101,9 +101,9 @@ const ProjectTickets = ({ project }) => {
          <table className="w-full border-collapse text-left mb-5">
             <thead>
                <tr>
-                  <th>Title</th>
-                  <th>Description</th>
-                  <th>Estimate (hours)</th>
+                  <th className="font-normal">Title</th>
+                  <th className="font-normal">Description</th>
+                  {/* <th>Estimate (hours)</th>
                   <th
                      onClick={() => sortTicketsByPriority()}
                      style={{ display: "inline-flex", cursor: "pointer" }}
@@ -125,7 +125,7 @@ const ProjectTickets = ({ project }) => {
                      ) : (
                         <FaArrowCircleUp />
                      )}
-                  </th>
+                  </th> */}
                </tr>
             </thead>
             <tbody>
@@ -145,9 +145,9 @@ const ProjectTickets = ({ project }) => {
                         </Link>
                      </td>
                      <td>{ticket.description}</td>
-                     <td>{ticket.estimate}</td>
+                     {/* <td>{ticket.estimate}</td>
                      <td>{ticket.priority}</td>
-                     <td>{ticket.status}</td>
+                     <td>{ticket.status}</td> */}
                      <td>
                         <Modal
                            button={

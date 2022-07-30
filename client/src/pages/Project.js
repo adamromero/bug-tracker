@@ -26,7 +26,7 @@ const Project = () => {
 
    return (
       <div className="m-5">
-         <div>
+         <div className="mb-5 pb-5 border-b-[1px] border-slate-200">
             <div className="flex gap-4 items-center">
                <h2 className="text-2xl	font-bold">Project</h2>
                <div>&gt;</div>
@@ -36,7 +36,7 @@ const Project = () => {
             <p className="my-5 text-lg italic">{project.description}</p>
             {project.teamMembers && project.teamMembers.length > 0 ? (
                <div>
-                  <h4>Assigned To</h4>
+                  <h4>Assigned To:</h4>
                   {project.teamMembers.map((member) => (
                      <p key={member._id}>{member.name}</p>
                   ))}
