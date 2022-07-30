@@ -13,7 +13,7 @@ const Administration = () => {
 
    useEffect(() => {
       dispatch(getUsers());
-   }, [dispatch, selectedUser.name]);
+   }, [dispatch]);
 
    if (isLoading) {
       return <Spinner />;
@@ -23,10 +23,10 @@ const Administration = () => {
       <PageStyle>
          <h2>Administration</h2>
          <p>{user.isAdmin ? "You have administrator privileges" : ""}</p>
-         <div style={{ display: "flex", gap: "45px" }}>
+         <div className="flex gap-11">
             <div>
                <h3>Team</h3>
-               <table style={{ textAlign: "left", width: "100%" }}>
+               <table className="text-left w-full">
                   <thead>
                      <tr>
                         <th>Name</th>
@@ -38,7 +38,7 @@ const Administration = () => {
                      {allUsers.map((currentUser) => (
                         <tr
                            key={currentUser._id}
-                           style={user.isAdmin ? { cursor: "pointer" } : {}}
+                           style={{ cursor: "pointer" }}
                            onClick={() => setSelectedUser(currentUser)}
                         >
                            <td>{currentUser.name}</td>
@@ -49,7 +49,8 @@ const Administration = () => {
                   </tbody>
                </table>
             </div>
-            {user.isAdmin && <UpdateUser selectedUser={selectedUser} />}
+            {/* <UpdateUser selectedUser={selectedUser} /> */}
+            <UpdateUser selectedUser={selectedUser} dispatch={dispatch} />
          </div>
       </PageStyle>
    );

@@ -92,26 +92,13 @@ const ProjectTickets = ({ project }) => {
 
    return (
       <>
-         <div
-            style={{
-               display: "flex",
-               justifyContent: "space-between",
-               alignItems: "center",
-            }}
-         >
+         <div className="flex justify-between items-center">
             <h3>Tickets</h3>
             <Modal button={<PrimaryButton>New Ticket</PrimaryButton>}>
                <CreateTicket project={project} />
             </Modal>
          </div>
-         <table
-            style={{
-               width: "100%",
-               textAlign: "left",
-               borderCollapse: "collapse",
-               marginBottom: "20px",
-            }}
-         >
+         <table className="w-full border-collapse text-left mb-5">
             <thead>
                <tr>
                   <th>Title</th>

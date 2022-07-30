@@ -53,6 +53,24 @@ const loginUser = asyncHandler(async (req, res) => {
    }
 });
 
+const updatePassword = asyncHandler(async (req, res) => {
+   const { oldPassword, newPassword } = req.body;
+
+   const user = await User.findById(req.user._id);
+
+   if (user && (await bcrypt.compare(oldPassword, user.password))) {
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(newPassword, salt);
+      await User.findByIdAndUpdate(req.user._id, { password: hashedPassword });
+      res.status(200).json({
+         message: "Password updated successfully",
+      });
+   } else {
+      res.status(400);
+      throw new Error("Invalid credentials");
+   }
+});
+
 const getUser = asyncHandler(async (req, res) => {
    res.status(200).json(req.user);
 });
@@ -63,4 +81,4 @@ const generateToken = (id) => {
    });
 };
 
-export { registerUser, loginUser, getUser };
+export { registerUser, loginUser, getUser, updatePassword };

@@ -11,21 +11,22 @@ import Ticket from "./pages/Ticket";
 import Administration from "./pages/Administration";
 import Project from "./pages/Project";
 import Navigation from "./components/Navigation";
+import Profile from "./pages/Profile";
 import { GlobalStyle } from "./styles/utils";
+import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
    <React.StrictMode>
-      <GlobalStyle />
-
       <Provider store={store}>
          <Router>
-            <div className="container">
+            <div className="flex">
                <Navigation />
-               <main>
+               <main className="flex-1 dark:bg-slate-800 dark:text-white">
                   <Routes>
                      <Route exact path="/" element={<Dashboard />} />
                      <Route path="/login" element={<Login />} />
+                     <Route path="/profile" element={<Profile />} />
                      <Route path="/register" element={<Register />} />
                      <Route path="/tickets" element={<Tickets />} />
                      <Route path="/ticket/:id" element={<Ticket />} />

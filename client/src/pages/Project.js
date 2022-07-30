@@ -25,9 +25,9 @@ const Project = () => {
    }
 
    return (
-      <PageStyle>
+      <div className="m-5">
          <div>
-            <h2>Project</h2>
+            <h2 className="text-2xl	font-bold">Project</h2>
             <h3>{project.title}</h3>
             <p>{project.description}</p>
             {project.teamMembers && project.teamMembers.length > 0 ? (
@@ -42,7 +42,7 @@ const Project = () => {
             )}
          </div>
          <ProjectTickets project={project} />
-      </PageStyle>
+      </div>
    );
 };
 

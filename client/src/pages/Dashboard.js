@@ -40,28 +40,15 @@ function Dashboard() {
    }
 
    return (
-      <PageStyle>
-         <h2>Dashboard</h2>
-         <div
-            style={{
-               display: "flex",
-               justifyContent: "space-between",
-               alignItems: "center",
-            }}
-         >
+      <div className="m-5">
+         <h2 className="text-2xl	font-bold">Dashboard</h2>
+         <div className="flex justify-between items-center">
             <h3>Projects</h3>
             <Modal button={<PrimaryButton>New Project</PrimaryButton>}>
                <CreateProject />
             </Modal>
          </div>
-         <table
-            style={{
-               width: "100%",
-               textAlign: "left",
-               borderCollapse: "collapse",
-               marginBottom: "20px",
-            }}
-         >
+         <table className="w-full border-collapse text-left mb-5">
             <thead>
                <tr>
                   <th>Title</th>
@@ -113,7 +100,7 @@ function Dashboard() {
             <PrimaryButton>3</PrimaryButton>
          </div>
          <Chart />
-      </PageStyle>
+      </div>
    );
 }
 

@@ -24,13 +24,16 @@ const Navigation = () => {
 
    if (user) {
       return (
-         <NavigationStyle>
+         <nav className="min-h-screen	bg-slate-200 max-w-[275px]	w-full p-5	">
             <Link to="/">
-               <h1>Bug Tracker</h1>
+               <h1 className="font-bold text-3xl mb-2">Bug Tracker</h1>
             </Link>
-            <h2>{user.name}</h2>
-            <ul>
+            <h2>
+               <Link to="/profile">{user.name}</Link>
+            </h2>
+            <ul className="py-5">
                <li
+                  className="pb-2"
                   style={{
                      fontWeight: location.pathname === "/" ? "bold" : "",
                   }}
@@ -44,6 +47,7 @@ const Navigation = () => {
                   </Link>
                </li>
                <li
+                  className="pb-2"
                   style={{
                      fontWeight: location.pathname === "/tickets" ? "bold" : "",
                   }}
@@ -56,23 +60,28 @@ const Navigation = () => {
                      Tickets
                   </Link>
                </li>
-               <li
-                  style={{
-                     fontWeight:
-                        location.pathname === "/administration" ? "bold" : "",
-                  }}
-               >
-                  <Link
-                     to="/administration"
-                     style={{ display: "flex", alignItems: "center" }}
+               {user.isAdmin && (
+                  <li
+                     className="pb-2"
+                     style={{
+                        fontWeight:
+                           location.pathname === "/administration"
+                              ? "bold"
+                              : "",
+                     }}
                   >
-                     <RiAdminFill style={{ marginRight: "8px" }} />
-                     Administration
-                  </Link>
-               </li>
+                     <Link
+                        to="/administration"
+                        style={{ display: "flex", alignItems: "center" }}
+                     >
+                        <RiAdminFill style={{ marginRight: "8px" }} />
+                        Administration
+                     </Link>
+                  </li>
+               )}
             </ul>
             <PrimaryButton onClick={handleLogout}>Logout</PrimaryButton>
-         </NavigationStyle>
+         </nav>
       );
    } else {
       return null;

@@ -3,10 +3,13 @@ import { gray } from "./utils/colors";
 
 const NavigationStyle = styled.nav`
    background: ${gray[100]};
-   min-height: 100vh;
    padding: 20px;
-   max-width: 275px;
    width: 100%;
+
+   @media (min-width: 768px) {
+      min-height: 100vh;
+      max-width: 275px;
+   }
 
    ul {
       list-style: none;

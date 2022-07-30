@@ -4,19 +4,21 @@ import { updateUser, deleteUser } from "../../features/users/allUsersSlice";
 import { PrimaryButton } from "../../styles/Button";
 import UserEditStyle from "../../styles/UserEditStyle";
 
-const UpdateUser = ({ selectedUser }) => {
-   const [userDetails, setUserDetails] = useState({});
+const UpdateUser = ({ selectedUser, dispatch }) => {
+   const [userDetails, setUserDetails] = useState(selectedUser);
    const [isAdminChecked, setIsAdminChecked] = useState(false);
-   const dispatch = useDispatch();
+   //const dispatch = useDispatch();
 
    const handleEditUser = (e) => {
       e.preventDefault();
       dispatch(updateUser(userDetails));
+      //console.log(userDetails);
    };
 
    const handleDeleteUser = (e) => {
       e.preventDefault();
-      dispatch(deleteUser(userDetails._id));
+      //dispatch(deleteUser(userDetails._id));
+      console.log("delete user: ", userDetails._id);
    };
 
    const handleOnChange = (e) => {
@@ -33,17 +35,19 @@ const UpdateUser = ({ selectedUser }) => {
    useEffect(() => {
       setUserDetails(selectedUser);
       setIsAdminChecked(selectedUser.isAdmin);
-   }, [selectedUser]);
+      console.log("rendering UpdateUser");
+   }, [dispatch, selectedUser.name]);
 
    return (
       <UserEditStyle>
          <h3>Update user information</h3>
          <h4>{selectedUser.name}</h4>
 
-         <form onSubmit={handleEditUser}>
+         <form>
             <label>
                Name:
                <input
+                  className="border	border-gray-500"
                   type="text"
                   name="name"
                   placeholder="Name"
@@ -54,6 +58,7 @@ const UpdateUser = ({ selectedUser }) => {
             <label>
                Email:
                <input
+                  className="border	border-gray-500"
                   type="text"
                   name="email"
                   placeholder="Email"
@@ -75,7 +80,7 @@ const UpdateUser = ({ selectedUser }) => {
                />
             </label>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-               <PrimaryButton type="submit">Submit</PrimaryButton>
+               <PrimaryButton onClick={handleEditUser}>Submit</PrimaryButton>
                <PrimaryButton onClick={handleDeleteUser}>
                   Remove User
                </PrimaryButton>
