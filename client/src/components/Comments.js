@@ -73,8 +73,8 @@ const Comments = ({ ticketId }) => {
                   if (comment.createdBy) {
                      return (
                         <div
+                           className="text-black bg-[#ededed] dark:text-white dark:bg-[#087e8b]"
                            style={{
-                              background: "#ededed",
                               padding: "20px",
                               marginBottom: "10px",
                            }}
@@ -122,7 +122,7 @@ const Comments = ({ ticketId }) => {
          </div>
          <form onSubmit={handleOnSubmit}>
             <textarea
-               className="border border-gray-500 p-2 w-full"
+               className="border border-gray-500 p-2 w-full dark:bg-zinc-800"
                name="text"
                cols="60"
                rows="6"
