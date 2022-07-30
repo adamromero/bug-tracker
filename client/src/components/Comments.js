@@ -122,9 +122,10 @@ const Comments = ({ ticketId }) => {
          </div>
          <form onSubmit={handleOnSubmit}>
             <textarea
+               className="border border-gray-500 p-2 w-full"
                name="text"
                cols="60"
-               rows="10"
+               rows="6"
                onChange={handleOnChange}
                value={input}
             ></textarea>

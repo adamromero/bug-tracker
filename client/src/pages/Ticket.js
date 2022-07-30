@@ -24,20 +24,17 @@ const Ticket = () => {
    }
 
    return (
-      <PageStyle>
-         <h2>Ticket</h2>
+      <div className="m-5">
+         <div className="flex gap-4 items-center">
+            <h2 className="text-2xl	font-bold">Ticket</h2>
+            <div>&gt;</div>
+            <h2 className="text-2xl font-bold">{ticket && ticket.title}</h2>
+         </div>
+
          {ticket ? (
             <div>
-               <h3>{ticket.title}</h3>
-               <h4>Description</h4>
-               <p>{ticket.description}</p>
-               <div
-                  style={{
-                     display: "flex",
-                     justifyContent: "space-between",
-                     maxWidth: "450px",
-                  }}
-               >
+               <p className="my-5 text-lg italic">{ticket.description}</p>
+               <div className="flex justify-between max-w-lg mb-5">
                   <div>
                      <h4>Priority</h4>
                      <p>{ticket.priority}</p>
@@ -68,7 +65,7 @@ const Ticket = () => {
          )}
 
          <Comments ticketId={id} />
-      </PageStyle>
+      </div>
    );
 };
 

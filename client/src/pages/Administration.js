@@ -20,8 +20,8 @@ const Administration = () => {
    }
 
    return (
-      <PageStyle>
-         <h2>Administration</h2>
+      <div className="m-5">
+         <h2 className="text-2xl	font-bold">Administration</h2>
          <p>{user.isAdmin ? "You have administrator privileges" : ""}</p>
          <div className="flex gap-11">
             <div>
@@ -52,7 +52,7 @@ const Administration = () => {
             {/* <UpdateUser selectedUser={selectedUser} /> */}
             <UpdateUser selectedUser={selectedUser} dispatch={dispatch} />
          </div>
-      </PageStyle>
+      </div>
    );
 };
 

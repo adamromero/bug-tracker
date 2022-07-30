@@ -131,6 +131,7 @@ const ProjectTickets = ({ project }) => {
             <tbody>
                {tickets.map((ticket) => (
                   <tr
+                     className="border-b-[1px] border-slate-200"
                      key={ticket._id}
                      style={
                         ticket.status === "Completed"

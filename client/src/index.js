@@ -22,7 +22,7 @@ root.render(
          <Router>
             <div className="flex">
                <Navigation />
-               <main className="flex-1 dark:bg-slate-800 dark:text-white">
+               <main className="flex-1 dark:bg-zinc-800 dark:text-white">
                   <Routes>
                      <Route exact path="/" element={<Dashboard />} />
                      <Route path="/login" element={<Login />} />

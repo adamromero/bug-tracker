@@ -43,7 +43,7 @@ function Dashboard() {
       <div className="m-5">
          <h2 className="text-2xl	font-bold">Dashboard</h2>
          <div className="flex justify-between items-center">
-            <h3>Projects</h3>
+            <h3 className="text-xl">Projects</h3>
             <Modal button={<PrimaryButton>New Project</PrimaryButton>}>
                <CreateProject />
             </Modal>
@@ -58,7 +58,10 @@ function Dashboard() {
             </thead>
             <tbody>
                {projects.map((project) => (
-                  <tr key={project._id}>
+                  <tr
+                     key={project._id}
+                     className="border-b-[1px] border-slate-200"
+                  >
                      <td>
                         <Link to={`/project/${project._id}`} key={project._id}>
                            {project.title}

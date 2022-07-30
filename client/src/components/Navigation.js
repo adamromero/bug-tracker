@@ -24,14 +24,14 @@ const Navigation = () => {
 
    if (user) {
       return (
-         <nav className="min-h-screen	bg-slate-200 max-w-[275px]	w-full p-5	">
+         <nav className="min-h-screen bg-zinc-300	 max-w-[275px]	w-full p-5 dark:bg-zinc-900	">
             <Link to="/">
                <h1 className="font-bold text-3xl mb-2">Bug Tracker</h1>
             </Link>
-            <h2>
+            <h2 className="font-bold text-xl">
                <Link to="/profile">{user.name}</Link>
             </h2>
-            <ul className="py-5">
+            <ul className="py-2 mt-2 mb-4 border-y-[1px] border-gray-600">
                <li
                   className="pb-2"
                   style={{

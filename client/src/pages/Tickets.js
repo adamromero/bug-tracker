@@ -15,8 +15,8 @@ const Tickets = () => {
    }, []);
 
    return (
-      <PageStyle>
-         <h2>Tickets</h2>
+      <div className="m-5">
+         <h2 className="text-2xl	font-bold">Tickets</h2>
          {tickets.length > 0 ? (
             <table
                style={{
@@ -37,16 +37,19 @@ const Tickets = () => {
                </thead>
                <tbody>
                   {tickets.map((ticket) => (
-                     <tr key={ticket._id}>
-                        <td>
+                     <tr
+                        key={ticket._id}
+                        className="border-b-[1px] border-slate-200"
+                     >
+                        <td className="py-2">
                            <Link to={`/ticket/${ticket._id}`} state={ticket}>
                               {ticket.title}
                            </Link>
                         </td>
-                        <td>{ticket.description}</td>
-                        <td>{ticket.estimate}</td>
-                        <td>{ticket.priority}</td>
-                        <td>{ticket.status}</td>
+                        <td className="py-2">{ticket.description}</td>
+                        <td className="py-2">{ticket.estimate}</td>
+                        <td className="py-2">{ticket.priority}</td>
+                        <td className="py-2">{ticket.status}</td>
                      </tr>
                   ))}
                </tbody>
@@ -54,7 +57,7 @@ const Tickets = () => {
          ) : (
             <p>You currently have no tickets assigned</p>
          )}
-      </PageStyle>
+      </div>
    );
 };
 
