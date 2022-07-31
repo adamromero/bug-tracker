@@ -183,59 +183,69 @@ const ProjectTickets = ({ project }) => {
                )}
             </tbody>
          </table>
-         <h3 className="text-lg font-bold">Completed Tickets</h3>
-         <table className="w-full border-collapse text-left mb-5">
-            <thead>
-               <tr>
-                  <th className="font-normal">Title</th>
-                  <th className="font-normal">Description</th>
-               </tr>
-            </thead>
-            <tbody>
-               {tickets.map((ticket) =>
-                  ticket.status === "Completed" ? (
-                     <tr
-                        className="border-b-[1px] border-slate-200"
-                        key={ticket._id}
-                        style={
-                           ticket.status === "Completed"
-                              ? { color: "#bbbbbb" }
-                              : null
-                        }
-                     >
-                        <td className="text-[#087e8b]">
-                           <Link to={`/ticket/${ticket._id}`} key={ticket._id}>
-                              {ticket.title}
-                           </Link>
-                        </td>
-                        <td>{ticket.description}</td>
-                        <td>
-                           <Modal
-                              button={
-                                 <SecondaryButton>
-                                    <MdModeEditOutline />
-                                 </SecondaryButton>
-                              }
-                           >
-                              <UpdateTicket project={project} ticket={ticket} />
-                           </Modal>
-                        </td>
-                        <td>
-                           <Modal
-                              button={
-                                 <SecondaryButton>
-                                    <MdDelete />
-                                 </SecondaryButton>
-                              }
-                           >
-                              <DeleteTicket id={ticket._id} />
-                           </Modal>
-                        </td>
+         {tickets.filter((ticket) => ticket.status === "Completed").length ? (
+            <>
+               <h3 className="text-lg font-bold">Completed Tickets</h3>
+               <table className="w-full border-collapse text-left mb-5">
+                  <thead>
+                     <tr>
+                        <th className="font-normal">Title</th>
+                        <th className="font-normal">Description</th>
                      </tr>
-                  ) : null
-               )}
-            </tbody>
-         </table>
+                  </thead>
+                  <tbody>
+                     {tickets.map((ticket) =>
+                        ticket.status === "Completed" ? (
+                           <tr
+                              className="border-b-[1px] border-slate-200"
+                              key={ticket._id}
+                              style={
+                                 ticket.status === "Completed"
+                                    ? { color: "#bbbbbb" }
+                                    : null
+                              }
+                           >
+                              <td className="text-[#087e8b]">
+                                 <Link
+                                    to={`/ticket/${ticket._id}`}
+                                    key={ticket._id}
+                                 >
+                                    {ticket.title}
+                                 </Link>
+                              </td>
+                              <td>{ticket.description}</td>
+                              <td>
+                                 <Modal
+                                    button={
+                                       <SecondaryButton>
+                                          <MdModeEditOutline />
+                                       </SecondaryButton>
+                                    }
+                                 >
+                                    <UpdateTicket
+                                       project={project}
+                                       ticket={ticket}
+                                    />
+                                 </Modal>
+                              </td>
+                              <td>
+                                 <Modal
+                                    button={
+                                       <SecondaryButton>
+                                          <MdDelete />
+                                       </SecondaryButton>
+                                    }
+                                 >
+                                    <DeleteTicket id={ticket._id} />
+                                 </Modal>
+                              </td>
+                           </tr>
+                        ) : null
+                     )}
+                  </tbody>
+               </table>
+            </>
+         ) : null}
       </>
    );
 };

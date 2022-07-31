@@ -3,12 +3,16 @@ import { createContext, useReducer } from "react";
 export const ThemeContext = createContext();
 
 const initialState = {
-   darkMode: false,
+   darkMode: JSON.parse(localStorage.getItem("darkMode"))
+      ? JSON.parse(localStorage.getItem("darkMode"))
+      : false,
 };
 
 const themeReducer = (state, action) => {
    switch (action.type) {
       case "TOGGLE_THEME":
+         localStorage.setItem("darkMode", !state.darkMode);
+         console.log("darkMode: ", !state.darkMode);
          return {
             ...state,
             darkMode: !state.darkMode,

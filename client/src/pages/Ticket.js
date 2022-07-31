@@ -94,7 +94,7 @@ const Ticket = () => {
                   </div>
                   {ticket.createdBy ? (
                      <div>
-                        <h4>Created By</h4>
+                        <h4>Created By:</h4>
                         <p>{ticket.createdBy.name}</p>
                      </div>
                   ) : null}

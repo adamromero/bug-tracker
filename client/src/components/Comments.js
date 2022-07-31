@@ -94,7 +94,7 @@ const Comments = ({ ticketId }) => {
                                  <SecondaryButton
                                     onClick={() => handleOnDelete(comment._id)}
                                  >
-                                    <MdDelete />
+                                    <MdDelete className="dark:text-white" />
                                  </SecondaryButton>
                               </div>
                            )}
