@@ -150,6 +150,13 @@ const ProjectTickets = ({ project }) => {
                      <td>{ticket.priority}</td>
                      <td>{ticket.status}</td> */}
                         <td>
+                           {ticket.priority === "High" ? (
+                              <div className="bg-red-500 text-center text-white font-bold w-5 rounded">
+                                 H
+                              </div>
+                           ) : null}
+                        </td>
+                        <td>
                            <Modal
                               button={
                                  <SecondaryButton>
