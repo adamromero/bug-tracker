@@ -1,6 +1,5 @@
 import React from "react";
 import "reactjs-popup/dist/index.css";
-import ModalStyle from "../styles/ModalStyle";
 import Popup from "reactjs-popup";
 import { CloseButton } from "../styles/Button";
 
@@ -9,13 +8,7 @@ const Modal = ({ button, children }) => {
       <Popup trigger={button} modal nested>
          {(close) => (
             <>
-               <div
-                  style={{
-                     position: "absolute",
-                     right: "19px",
-                     top: "10px",
-                  }}
-               >
+               <div className="close">
                   <CloseButton onClick={close}>&times;</CloseButton>
                </div>
                {children}

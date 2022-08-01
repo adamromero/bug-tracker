@@ -7,3 +7,30 @@ body {
    padding: 0;
    font-family: "Nunito", sans-serif;
 }
+
+.popup-content {
+   width: 100%;
+   max-width: 500px;
+   padding: 20px;
+}
+
+.popup-content form {
+   display: flex;
+   flex-direction: column;
+   gap: 5px;
+}
+
+.popup-content form input,
+.popup-content textarea,
+.popup-content select {
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   padding: 5px;
+   width: 100%;
+}
+
+.popup-content .close {
+   position: absolute;
+   top: 10px;
+   right: 19px;
+}
