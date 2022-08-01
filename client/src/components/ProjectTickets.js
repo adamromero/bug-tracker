@@ -1,39 +1,26 @@
-import React, { useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import { PrimaryButton } from "../styles/Button";
-import { SecondaryButton } from "../styles/Button";
-import Modal from "./Modal";
-
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
-import { getProjectTickets } from "../features/tickets/ticketSlice";
-
-import { MdDelete } from "react-icons/md";
-import { MdModeEditOutline } from "react-icons/md";
-import { FaArrowCircleDown, FaArrowCircleUp } from "react-icons/fa";
+import { useParams, Link } from "react-router-dom";
 
 import UpdateTicket from "./forms/UpdateTicket";
 import DeleteTicket from "./forms/DeleteTicket";
 import CreateTicket from "./forms/CreateTicket";
+import { getProjectTickets } from "../features/tickets/ticketSlice";
 
+import Modal from "./Modal";
+
+import { MdDelete } from "react-icons/md";
+import { MdModeEditOutline } from "react-icons/md";
+
+import { PrimaryButton } from "../styles/Button";
+import { SecondaryButton } from "../styles/Button";
 import Spinner from "../styles/Spinner";
 
-import {
-   sortTicketsByPriorityAscending,
-   sortTicketsByPriorityDescending,
-} from "../utils/sortTicketsPriority";
-
-import {
-   sortTicketsByStatusAscending,
-   sortTicketsByStatusDescending,
-} from "../utils/sortTicketsStatus";
-import { useEffect } from "react";
+import TicketMarker from "./TicketMarker";
 
 const ProjectTickets = ({ project }) => {
-   const [priorityToggle, setPriorityToggle] = useState(false);
-   const [statusToggle, setStatusToggle] = useState(false);
-   const [selectedPriority, setSelectedPriority] = useState("");
-   const [selectedStatus, setSelectedStatus] = useState("");
+   const [selectedPriority, setSelectedPriority] = useState("All");
+   const [selectedStatus, setSelectedStatus] = useState("All");
 
    const dispatch = useDispatch();
    const { id } = useParams();
@@ -48,6 +35,42 @@ const ProjectTickets = ({ project }) => {
 
    const handleStatusChange = (e) => {
       setSelectedStatus(e.target.value);
+   };
+
+   const filterPriority = (ticket) => {
+      if (selectedPriority === "All") {
+         return ticket;
+      } else {
+         return ticket.priority === selectedPriority;
+      }
+   };
+
+   const filterStatus = (ticket) => {
+      if (selectedStatus === "All") {
+         return ticket;
+      } else {
+         return ticket.status === selectedStatus;
+      }
+   };
+
+   const statusMarker = (status) => {
+      if (status === "On Hold") {
+         return <TicketMarker title="On Hold" color="bg-gray-500" />;
+      } else if (status === "In Progress") {
+         return <TicketMarker title="In Progress" color="bg-orange-500" />;
+      } else if (status === "Completed") {
+         return <TicketMarker title="Completed" color="bg-green-500" />;
+      }
+   };
+
+   const priorityMarker = (priority) => {
+      if (priority === "Low") {
+         return <TicketMarker title="Low" color="bg-gray-500" />;
+      } else if (priority === "Medium") {
+         return <TicketMarker title="Medium" color="bg-orange-500" />;
+      } else if (priority === "High") {
+         return <TicketMarker title="High" color="bg-red-500" />;
+      }
    };
 
    const handleTicketHeading = (selectedPriority, selectedStatus) => {
@@ -77,7 +100,7 @@ const ProjectTickets = ({ project }) => {
                <CreateTicket project={project} />
             </Modal>
          </div>
-         <div className="flex gap-2">
+         <div className="flex gap-2 mb-3">
             <div className="flex flex-col">
                <label htmlFor="status">Status</label>
                <select
@@ -109,75 +132,78 @@ const ProjectTickets = ({ project }) => {
                </select>
             </div>
          </div>
-         <h3 className="text-lg font-bold">
+         <h3 className="text-lg font-bold mb-3">
             {handleTicketHeading(selectedPriority, selectedStatus)}
          </h3>
-         <table className="w-full border-collapse text-left mb-5">
-            <thead>
-               <tr>
-                  <th className="font-normal">Title</th>
-                  <th className="font-normal">Description</th>
-               </tr>
-            </thead>
-            <tbody>
-               {tickets
-                  .filter((ticket) => {
-                     if (selectedStatus === "All" && selectedPriority === "All")
-                        return ticket;
-                     if (
-                        ticket.status === selectedStatus &&
-                        ticket.priority === selectedPriority
-                     )
-                        return ticket;
-                  })
-                  .map((filteredTicket) => (
-                     <tr
-                        className="border-b-[1px] border-slate-200"
-                        key={filteredTicket._id}
-                        style={
-                           filteredTicket.status === "Completed"
-                              ? { color: "#bbbbbb" }
-                              : null
-                        }
-                     >
-                        <td className="text-[#087e8b]">
-                           <Link
-                              to={`/ticket/${filteredTicket._id}`}
-                              key={filteredTicket._id}
-                           >
-                              {filteredTicket.title}
-                           </Link>
-                        </td>
-                        <td>{filteredTicket.description}</td>
-                        <td>
-                           <Modal
-                              button={
-                                 <SecondaryButton>
-                                    <MdModeEditOutline />
-                                 </SecondaryButton>
-                              }
-                           >
-                              <UpdateTicket
-                                 project={project}
-                                 ticket={filteredTicket}
-                              />
-                           </Modal>
-                        </td>
-                        <td>
-                           <Modal
-                              button={
-                                 <SecondaryButton>
-                                    <MdDelete />
-                                 </SecondaryButton>
-                              }
-                           >
-                              <DeleteTicket id={filteredTicket._id} />
-                           </Modal>
-                        </td>
-                     </tr>
-                  ))}
-            </tbody>
-         </table>
+         {tickets
+            .filter((ticket) => filterPriority(ticket))
+            .filter((ticket) => filterStatus(ticket)).length ? (
+            <table className="w-full border-collapse text-left mb-5">
+               <thead>
+                  <tr>
+                     <th className="font-normal">Title</th>
+                     <th className="font-normal">Description</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  {tickets
+                     .filter((ticket) => filterPriority(ticket))
+                     .filter((ticket) => filterStatus(ticket))
+                     .map((filteredTicket) => (
+                        <tr
+                           className="border-b-[1px] border-slate-200"
+                           key={filteredTicket._id}
+                           style={
+                              filteredTicket.status === "Completed"
+                                 ? {
+                                      color: "#bbbbbb",
+                                   }
+                                 : null
+                           }
+                        >
+                           <td className="text-[#087e8b]">
+                              <Link
+                                 to={`/ticket/${filteredTicket._id}`}
+                                 key={filteredTicket._id}
+                              >
+                                 {filteredTicket.title}
+                              </Link>
+                           </td>
+                           <td>{filteredTicket.description}</td>
+                           <td>{statusMarker(filteredTicket.status)}</td>
+                           <td>{priorityMarker(filteredTicket.priority)}</td>
+                           <td>
+                              <Modal
+                                 button={
+                                    <SecondaryButton>
+                                       <MdModeEditOutline />
+                                    </SecondaryButton>
+                                 }
+                              >
+                                 <UpdateTicket
+                                    project={project}
+                                    ticket={filteredTicket}
+                                 />
+                              </Modal>
+                           </td>
+                           <td>
+                              <Modal
+                                 button={
+                                    <SecondaryButton>
+                                       <MdDelete />
+                                    </SecondaryButton>
+                                 }
+                              >
+                                 <DeleteTicket id={filteredTicket._id} />
+                              </Modal>
+                           </td>
+                        </tr>
+                     ))}
+               </tbody>
+            </table>
+         ) : (
+            <h4>No tickets found</h4>
+         )}
       </>
    );
 };
