@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { register } from "../features/auth/authSlice";
 
 import { PrimaryButton } from "../styles/Button";
-import LoginBoxStyle from "../styles/LoginBoxStyle";
 
 import LoginLanding from "../components/LoginLanding";
 
@@ -53,42 +52,51 @@ const Register = () => {
    }, [user, isSuccess, navigate]);
 
    return (
-      <LoginBoxStyle>
+      <>
          <LoginLanding />
-         <div className="login">
-            <div>
-               <h1>Register</h1>
-               <form onSubmit={handleSubmit}>
-                  <input
-                     type="text"
-                     name="name"
-                     placeholder="Name"
-                     onChange={handleChange}
-                  />
-                  <input
-                     type="text"
-                     name="email"
-                     placeholder="Email"
-                     onChange={handleChange}
-                  />
-                  <input
-                     type="password"
-                     name="password"
-                     placeholder="Password"
-                     onChange={handleChange}
-                  />
-                  <input
-                     type="password"
-                     name="confirmPassword"
-                     placeholder="Confirm Password"
-                     onChange={handleChange}
-                  />
-                  <PrimaryButton type="submit">Submit</PrimaryButton>
-               </form>
-            </div>
-            <Link to="/login">Login</Link>
+         <div className="flex flex-col flex-1 gap-3 justify-center items-center">
+            <h2 className="text-lg">Register</h2>
+            <form
+               className="flex flex-col gap-3 max-w-xs w-full"
+               onSubmit={handleSubmit}
+            >
+               <input
+                  className="border-[1px] border-black px-2 py-1"
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                  onChange={handleChange}
+               />
+               <input
+                  className="border-[1px] border-black px-2 py-1"
+                  type="text"
+                  name="email"
+                  placeholder="Email"
+                  onChange={handleChange}
+               />
+
+               <input
+                  className="border-[1px] border-black px-2 py-1"
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  onChange={handleChange}
+               />
+
+               <input
+                  className="border-[1px] border-black px-2 py-1"
+                  type="password"
+                  name="confirmPassword"
+                  placeholder="Confirm Password"
+                  onChange={handleChange}
+               />
+               <PrimaryButton type="submit">Submit</PrimaryButton>
+            </form>
+            <Link className="text-lg" to="/login">
+               Login
+            </Link>
          </div>
-      </LoginBoxStyle>
+      </>
    );
 };
 

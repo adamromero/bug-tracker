@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { login } from "../features/auth/authSlice";
 
 import { PrimaryButton } from "../styles/Button";
-import LoginBoxStyle from "../styles/LoginBoxStyle";
 
 import LoginLanding from "../components/LoginLanding";
 
@@ -40,32 +39,37 @@ const Login = () => {
    }, [user, isSuccess, navigate]);
 
    return (
-      <LoginBoxStyle>
+      <>
          <LoginLanding />
-         <div className="login">
-            <div>
-               <h1>Login</h1>
-               <form onSubmit={handleSubmit}>
-                  <input
-                     type="text"
-                     name="email"
-                     placeholder="Email"
-                     onChange={handleChange}
-                  />
+         <div className="flex flex-col flex-1 gap-3 justify-center items-center">
+            <h2 className="text-lg">Login</h2>
+            <form
+               className="flex flex-col gap-3 max-w-xs w-full"
+               onSubmit={handleSubmit}
+            >
+               <input
+                  className="border-[1px] border-black px-2 py-1"
+                  type="text"
+                  name="email"
+                  placeholder="Email"
+                  onChange={handleChange}
+               />
 
-                  <input
-                     type="password"
-                     name="password"
-                     placeholder="Password"
-                     onChange={handleChange}
-                  />
+               <input
+                  className="border-[1px] border-black px-2 py-1"
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  onChange={handleChange}
+               />
 
-                  <PrimaryButton type="submit">Login</PrimaryButton>
-               </form>
-               <Link to="/register">Register</Link>
-            </div>
+               <PrimaryButton type="submit">Login</PrimaryButton>
+            </form>
+            <Link className="text-lg" to="/register">
+               Register
+            </Link>
          </div>
-      </LoginBoxStyle>
+      </>
    );
 };
 
