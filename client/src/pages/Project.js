@@ -36,10 +36,41 @@ const Project = () => {
             <p className="my-5 text-lg italic">{project.description}</p>
             {project.teamMembers && project.teamMembers.length > 0 ? (
                <div>
-                  <h4>Assigned To:</h4>
-                  {project.teamMembers.map((member) => (
-                     <p key={member._id}>{member.name}</p>
-                  ))}
+                  <div className="mb-5">
+                     <h4>Assigned To:</h4>
+                     {project.teamMembers.map((member) => (
+                        <p key={member._id}>{member.name}</p>
+                     ))}
+                  </div>
+
+                  <div className="flex gap-2">
+                     <div className="flex flex-col">
+                        <label htmlFor="status">Status</label>
+                        <select
+                           className="border-[1px] border-black"
+                           name="ticketsByStatus"
+                           id="status"
+                        >
+                           <option value="">All</option>
+                           <option value="">On Hold</option>
+                           <option value="">In Progress</option>
+                           <option value="">Completed</option>
+                        </select>
+                     </div>
+                     <div className="flex flex-col">
+                        <label htmlFor="priority">Priority</label>
+                        <select
+                           className="border-[1px] border-black"
+                           name="ticketsByPriority"
+                           id="priority"
+                        >
+                           <option value="">All</option>
+                           <option value="">Low</option>
+                           <option value="">Medium</option>
+                           <option value="">High</option>
+                        </select>
+                     </div>
+                  </div>
                </div>
             ) : (
                <p>No team members assigned</p>

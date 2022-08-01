@@ -41,6 +41,16 @@ const Ticket = () => {
       }
    };
 
+   const estimateColor = (estimate) => {
+      if (estimate > 6) {
+         return "bg-red-500";
+      } else if (estimate > 3) {
+         return "bg-orange-500";
+      } else {
+         return "bg-green-500";
+      }
+   };
+
    useEffect(() => {
       dispatch(getTicket(id));
    }, [dispatch]);
@@ -88,7 +98,11 @@ const Ticket = () => {
                   </div>
                   <div>
                      <h4>Estimate:</h4>
-                     <p className="bg-gray-500	text-center text-white rounded px-2">
+                     <p
+                        className={`${estimateColor(
+                           ticket.estimate
+                        )}	text-center text-white rounded px-2`}
+                     >
                         {ticket.estimate}
                      </p>
                   </div>

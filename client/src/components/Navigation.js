@@ -8,6 +8,8 @@ import { PrimaryButton } from "../styles/Button";
 import { MdDashboard } from "react-icons/md";
 import { FaTicketAlt } from "react-icons/fa";
 import { RiAdminFill } from "react-icons/ri";
+import { CgProfile } from "react-icons/cg";
+
 import { MdDarkMode } from "react-icons/md";
 import { MdLightMode } from "react-icons/md";
 import { TbRadar } from "react-icons/tb";
@@ -31,7 +33,7 @@ const Navigation = () => {
 
    if (user) {
       return (
-         <nav className="md:min-h-screen md:max-w-[275px] bg-zinc-300 w-full p-5 dark:bg-zinc-900 text-[#087e8b] dark:text-white">
+         <nav className="md:min-h-screen md:max-w-[275px] bg-zinc-300 w-full p-5 dark:bg-zinc-900 text-[#087e8b] dark:text-[#73e9ff]">
             <div className="flex justify-between items-center mb-2">
                <Link className="flex items-center gap-1" to="/">
                   <h1 className="font-bold text-3xl ">Bug Tracker</h1>
@@ -85,6 +87,17 @@ const Navigation = () => {
                   <Link className="inline-flex items-center" to="/tickets">
                      <FaTicketAlt style={{ marginRight: "8px" }} />
                      Tickets
+                  </Link>
+               </li>
+               <li
+                  className="pb-2"
+                  style={{
+                     fontWeight: location.pathname === "/profile" ? "bold" : "",
+                  }}
+               >
+                  <Link className="inline-flex items-center" to="/profile">
+                     <CgProfile style={{ marginRight: "8px" }} />
+                     Profile
                   </Link>
                </li>
                {user.isAdmin && (
