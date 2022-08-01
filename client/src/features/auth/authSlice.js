@@ -23,6 +23,13 @@ export const logout = createAsyncThunk("auth/logout", async () => {
    return await authService.logout();
 });
 
+export const updatePassword = createAsyncThunk(
+   "auth/updatePassword",
+   async (user) => {
+      return await authService.updatePassword(user);
+   }
+);
+
 export const authSlice = createSlice({
    name: "auth",
    initialState,
@@ -59,6 +66,19 @@ export const authSlice = createSlice({
             state.user = action.payload;
          })
          .addCase(login.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
+         })
+         .addCase(updatePassword.pending, (state) => {
+            state.isLoading = true;
+         })
+         .addCase(updatePassword.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.user = action.payload;
+         })
+         .addCase(updatePassword.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload;

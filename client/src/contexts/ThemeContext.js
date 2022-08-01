@@ -12,7 +12,6 @@ const themeReducer = (state, action) => {
    switch (action.type) {
       case "TOGGLE_THEME":
          localStorage.setItem("darkMode", !state.darkMode);
-         console.log("darkMode: ", !state.darkMode);
          return {
             ...state,
             darkMode: !state.darkMode,

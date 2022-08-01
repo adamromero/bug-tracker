@@ -54,16 +54,25 @@ const loginUser = asyncHandler(async (req, res) => {
 });
 
 const updatePassword = asyncHandler(async (req, res) => {
-   const { oldPassword, newPassword } = req.body;
+   const { id, currentPassword, newPassword, confirmPassword } = req.body;
 
-   const user = await User.findById(req.user._id);
+   const user = await User.findById(id);
 
-   if (user && (await bcrypt.compare(oldPassword, user.password))) {
+   if (user && (await bcrypt.compare(currentPassword, user.password))) {
+      if (newPassword !== confirmPassword) {
+         res.status(400);
+         throw new Error("New password and confirm password do not match");
+      }
+
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(newPassword, salt);
-      await User.findByIdAndUpdate(req.user._id, { password: hashedPassword });
+      await User.findByIdAndUpdate(id, { password: hashedPassword });
       res.status(200).json({
-         message: "Password updated successfully",
+         _id: user._id,
+         name: user.name,
+         email: user.email,
+         isAdmin: user.isAdmin,
+         token: generateToken(user._id),
       });
    } else {
       res.status(400);

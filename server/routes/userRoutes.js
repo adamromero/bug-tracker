@@ -8,7 +8,7 @@ import {
 } from "../controllers/userController.js";
 
 router.post("/", registerUser);
+router.put("/", updatePassword);
 router.post("/login", loginUser);
-router.put("/password", updatePassword);
 
 export default router;

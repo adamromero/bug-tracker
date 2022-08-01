@@ -1,13 +1,34 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { updatePassword } from "../features/auth/authSlice";
+import Spinner from "../styles/Spinner";
 
 const Profile = () => {
-   const { user } = useSelector((state) => state.auth);
+   const { user, isLoading } = useSelector((state) => state.auth);
+   const dispatch = useDispatch();
    const [image, setImage] = useState(null);
+   const [passwords, setPasswords] = useState({});
 
    const handleImageUpload = (e) => {
       setImage(URL.createObjectURL(e.target.files[0]));
    };
+
+   const handleNewPasswordSubmit = (e) => {
+      e.preventDefault();
+      dispatch(updatePassword(passwords));
+   };
+
+   const handlePasswordChange = (e) => {
+      setPasswords({
+         ...passwords,
+         id: user._id,
+         [e.target.name]: e.target.value,
+      });
+   };
+
+   if (isLoading) {
+      return <Spinner />;
+   }
 
    return (
       <div className="m-5">
@@ -36,24 +57,33 @@ const Profile = () => {
                Upload
             </button>
          </div>
-         <div className="inline-flex flex-col gap-3">
+         <form
+            className="inline-flex flex-col gap-3"
+            onSubmit={handleNewPasswordSubmit}
+         >
             <input
                className="border-[1px] border-black p-1"
                type="password"
+               name="currentPassword"
                placeholder="Current password"
+               onChange={handlePasswordChange}
             />
             <input
                className="border-[1px] border-black p-1"
                type="password"
+               name="newPassword"
                placeholder="New password"
+               onChange={handlePasswordChange}
             />
             <input
                className="border-[1px] border-black p-1"
                type="password"
+               name="confirmPassword"
                placeholder="Confirm password"
+               onChange={handlePasswordChange}
             />
             <button className="bg-sky-500 max-w-[6rem] w-full">Update</button>
-         </div>
+         </form>
       </div>
    );
 };

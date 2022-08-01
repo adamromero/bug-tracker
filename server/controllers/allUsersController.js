@@ -8,11 +8,18 @@ const getUsers = asyncHandler(async (req, res) => {
 });
 
 const updateUser = asyncHandler(async (req, res) => {
-   const { _id } = req.body;
-   const user = await User.findByIdAndUpdate(_id, req.body, {
+   const user = await User.findByIdAndUpdate(req.body._id, req.body, {
       new: true,
       runValidators: true,
-   }).select("-password");
+   }).then((user) => {
+      return User.findById(user._id).select("-password");
+   });
+
+   if (!user) {
+      res.status(404);
+      throw new Error("User not found");
+   }
+
    res.status(200).json(user);
 });
 
