@@ -67,7 +67,7 @@ const Navigation = () => {
                <Link to="/profile">{user.name}</Link>
             </h2>
             {user.name === "demo" && (
-               <p className="bg-white text-xs p-2">
+               <p className="bg-white text-black text-xs p-2">
                   This is an account meant for demo purposes. No data will be
                   altered when using this account.
                </p>

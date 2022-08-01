@@ -4,24 +4,25 @@ import { updateUser, deleteUser } from "../../features/users/allUsersSlice";
 import { PrimaryButton } from "../../styles/Button";
 import UserEditStyle from "../../styles/UserEditStyle";
 
-const UpdateUser = ({ selectedUser, dispatch }) => {
+const UpdateUser = ({ selectedUser }) => {
    const [userDetails, setUserDetails] = useState(selectedUser);
    const [isAdminChecked, setIsAdminChecked] = useState(false);
-   //const dispatch = useDispatch();
+   const [isVerifiedChecked, setIsVerifiedChecked] = useState(false);
+   const dispatch = useDispatch();
 
    const handleEditUser = (e) => {
       e.preventDefault();
+      console.log(userDetails);
       dispatch(updateUser(userDetails));
-      //console.log(userDetails);
    };
 
    const handleDeleteUser = (e) => {
       e.preventDefault();
-      //dispatch(deleteUser(userDetails._id));
       console.log("delete user: ", userDetails._id);
+      dispatch(deleteUser(userDetails._id));
    };
 
-   const handleOnChange = (e) => {
+   const handleIsAdminChange = (e) => {
       setUserDetails((prevState) => ({
          ...prevState,
          [e.target.name]:
@@ -32,11 +33,29 @@ const UpdateUser = ({ selectedUser, dispatch }) => {
       }
    };
 
+   const handleIsVerifiedChange = (e) => {
+      setUserDetails((prevState) => ({
+         ...prevState,
+         [e.target.name]:
+            e.target.name === "isVerified" ? e.target.checked : e.target.value,
+      }));
+      if (e.target.name === "isVerified") {
+         setIsVerifiedChecked(!isVerifiedChecked);
+      }
+   };
+
+   const handleOnChange = (e) => {
+      setUserDetails((prevState) => ({
+         ...prevState,
+         [e.target.name]: e.target.value,
+      }));
+   };
+
    useEffect(() => {
       setUserDetails(selectedUser);
       setIsAdminChecked(selectedUser.isAdmin);
-      console.log("rendering UpdateUser");
-   }, [dispatch, selectedUser.name]);
+      setIsVerifiedChecked(selectedUser.isVerified);
+   }, [dispatch]);
 
    return (
       <UserEditStyle>
@@ -73,12 +92,25 @@ const UpdateUser = ({ selectedUser, dispatch }) => {
                   type="checkbox"
                   name="isAdmin"
                   onChange={(e) => {
-                     handleOnChange(e);
+                     handleIsAdminChange(e);
                   }}
                   checked={isAdminChecked}
                   value={isAdminChecked}
                />
             </label>
+            <label className="inline-label">
+               Verified:
+               <input
+                  type="checkbox"
+                  name="isVerified"
+                  onChange={(e) => {
+                     handleIsVerifiedChange(e);
+                  }}
+                  checked={isVerifiedChecked}
+                  value={isVerifiedChecked}
+               />
+            </label>
+
             <div style={{ display: "flex", justifyContent: "space-between" }}>
                <PrimaryButton onClick={handleEditUser}>Submit</PrimaryButton>
                <PrimaryButton onClick={handleDeleteUser}>
