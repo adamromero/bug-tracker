@@ -10,6 +10,11 @@ import { PrimaryButton } from "../styles/Button";
 import { SecondaryButton } from "../styles/Button";
 import { MdDelete } from "react-icons/md";
 
+import {
+   useUserValidation,
+   userValidationMessage,
+} from "../utils/userValidation";
+
 import Spinner from "../styles/Spinner";
 
 const Comments = ({ ticketId }) => {
@@ -25,6 +30,8 @@ const Comments = ({ ticketId }) => {
 
    const dispatch = useDispatch();
 
+   const isUserAuthorized = useUserValidation();
+
    const { comments, isLoading, isError, message } = useSelector(
       (state) => state.comments
    );
@@ -39,8 +46,8 @@ const Comments = ({ ticketId }) => {
       e.preventDefault();
       setInput("");
 
-      if (commentDetails.text.trim()) {
-         dispatch(createComment(commentDetails));
+      if (isUserAuthorized) {
+         dispatch(createComment(commentDetails.text.trim()));
       }
    };
 
@@ -105,6 +112,7 @@ const Comments = ({ ticketId }) => {
                }
             })}
          <form onSubmit={handleOnSubmit}>
+            {userValidationMessage(isUserAuthorized)}
             <textarea
                className="border border-gray-500 p-2 w-full dark:bg-zinc-800"
                name="text"
@@ -114,7 +122,7 @@ const Comments = ({ ticketId }) => {
                value={input}
             ></textarea>
             <br />
-            <PrimaryButton type="submit" disabled={!input}>
+            <PrimaryButton type="submit" disabled={!input || !isUserAuthorized}>
                Submit
             </PrimaryButton>
          </form>

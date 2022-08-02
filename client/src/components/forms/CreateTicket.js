@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createTicket } from "../../features/tickets/ticketSlice";
+import {
+   useUserValidation,
+   userValidationMessage,
+} from "../../utils/userValidation";
 
 import { PrimaryButton } from "../../styles/Button";
 
@@ -19,11 +23,16 @@ const CreateTicket = ({ project }) => {
 
    const dispatch = useDispatch();
 
+   const isUserAuthorized = useUserValidation();
+
    const { user } = useSelector((state) => state.auth);
 
    const handleNewTicket = (e) => {
       e.preventDefault();
-      dispatch(createTicket(ticketDetails));
+
+      if (isUserAuthorized) {
+         dispatch(createTicket(ticketDetails));
+      }
    };
 
    const handleOnChange = (e) => {
@@ -50,6 +59,7 @@ const CreateTicket = ({ project }) => {
    return (
       <>
          <h2>Create Ticket</h2>
+         {userValidationMessage(isUserAuthorized)}
          <form className="flex flex-col" onSubmit={handleNewTicket}>
             <label htmlFor="">Title</label>
             <input
@@ -95,7 +105,9 @@ const CreateTicket = ({ project }) => {
                <option value="Medium">Medium</option>
                <option value="High">High</option>
             </select>
-            <PrimaryButton type="submit">Submit</PrimaryButton>
+            <PrimaryButton type="submit" disabled={!isUserAuthorized}>
+               Submit
+            </PrimaryButton>
          </form>
       </>
    );

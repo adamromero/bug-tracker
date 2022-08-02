@@ -11,14 +11,14 @@ const updateUser = asyncHandler(async (req, res) => {
    const user = await User.findByIdAndUpdate(req.body._id, req.body, {
       new: true,
       runValidators: true,
-   }).then((user) => {
-      return User.findById(user._id).select("-password");
-   });
+   }).then((user) => User.findById(user._id).select("-password"));
 
    if (!user) {
       res.status(404);
       throw new Error("User not found");
    }
+
+   console.log(user);
 
    res.status(200).json(user);
 });

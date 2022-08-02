@@ -3,6 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { updateProject } from "../../features/projects/projectSlice";
 import { getUsers } from "../../features/users/allUsersSlice";
 
+import {
+   useUserValidation,
+   userValidationMessage,
+} from "../../utils/userValidation";
+
 import { PrimaryButton } from "../../styles/Button";
 
 const UpdateProject = ({ project }) => {
@@ -10,10 +15,14 @@ const UpdateProject = ({ project }) => {
 
    const dispatch = useDispatch();
    const { allUsers } = useSelector((state) => state.users);
+   const isUserAuthorized = useUserValidation();
 
    const handleEditProject = (e) => {
       e.preventDefault();
-      dispatch(updateProject(projectDetails));
+
+      if (isUserAuthorized) {
+         dispatch(updateProject(projectDetails));
+      }
    };
 
    const handleOnChange = (e) => {
@@ -40,6 +49,7 @@ const UpdateProject = ({ project }) => {
    return (
       <>
          <h2>Update Project </h2>
+         {userValidationMessage(isUserAuthorized)}
          <form className="flex flex-col" onSubmit={handleEditProject}>
             <label htmlFor="">Title</label>
             <input
@@ -66,7 +76,9 @@ const UpdateProject = ({ project }) => {
                   </option>
                ))}
             </select>
-            <PrimaryButton type="submit">Submit</PrimaryButton>
+            <PrimaryButton type="submit" disabled={!isUserAuthorized}>
+               Submit
+            </PrimaryButton>
          </form>
       </>
    );

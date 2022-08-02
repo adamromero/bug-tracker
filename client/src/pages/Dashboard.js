@@ -62,7 +62,7 @@ function Dashboard() {
                      key={project._id}
                      className="border-b-[1px] border-slate-200"
                   >
-                     <td className="text-[#087e8b] dark:text-[#73e9ff]">
+                     <td className="text-[#087e8b] dark:text-white">
                         <Link to={`/project/${project._id}`} key={project._id}>
                            {project.title}
                         </Link>
@@ -97,11 +97,6 @@ function Dashboard() {
                ))}
             </tbody>
          </table>
-         <div>
-            <PrimaryButton>1</PrimaryButton>
-            <PrimaryButton>2</PrimaryButton>
-            <PrimaryButton>3</PrimaryButton>
-         </div>
          <Chart />
       </div>
    );

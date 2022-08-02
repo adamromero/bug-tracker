@@ -5,6 +5,11 @@ import { getUsers } from "../../features/users/allUsersSlice";
 
 import { PrimaryButton } from "../../styles/Button";
 
+import {
+   useUserValidation,
+   userValidationMessage,
+} from "../../utils/userValidation";
+
 const CreateProject = () => {
    const initialProjectDetails = {
       title: "",
@@ -15,10 +20,14 @@ const CreateProject = () => {
 
    const dispatch = useDispatch();
    const { allUsers } = useSelector((state) => state.users);
+   const isUserAuthorized = useUserValidation();
 
    const handleNewProject = (e) => {
       e.preventDefault();
-      dispatch(createProject(projectDetails));
+
+      if (isUserAuthorized) {
+         dispatch(createProject(projectDetails));
+      }
    };
 
    const handleOnChange = (e) => {
@@ -45,6 +54,7 @@ const CreateProject = () => {
    return (
       <>
          <h2>Create Project </h2>
+         {userValidationMessage(isUserAuthorized)}
          <form className="flex flex-col" onSubmit={handleNewProject}>
             <label htmlFor="">Title</label>
             <input
@@ -69,7 +79,9 @@ const CreateProject = () => {
                   </option>
                ))}
             </select>
-            <PrimaryButton type="submit">Submit</PrimaryButton>
+            <PrimaryButton type="submit" disabled={!isUserAuthorized}>
+               Submit
+            </PrimaryButton>
          </form>
       </>
    );

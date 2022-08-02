@@ -45,6 +45,7 @@ const loginUser = asyncHandler(async (req, res) => {
          name: user.name,
          email: user.email,
          isAdmin: user.isAdmin,
+         isVerified: user.isVerified,
          token: generateToken(user._id),
       });
    } else {
