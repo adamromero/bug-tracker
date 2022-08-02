@@ -36,8 +36,8 @@ const App = () => {
             <main
                className={`${
                   user
-                     ? "flex-1 dark:bg-zinc-800 dark:text-white"
-                     : "flex min-h-screen	"
+                     ? "flex-1 dark:bg-zinc-800 dark:text-white min-h-screen"
+                     : "flex min-h-screen	md:flex-row flex-col"
                }`}
             >
                <Routes>

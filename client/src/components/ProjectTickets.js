@@ -104,7 +104,7 @@ const ProjectTickets = ({ project }) => {
             <div className="flex flex-col">
                <label htmlFor="status">Status</label>
                <select
-                  className="border-[1px] border-black"
+                  className="border-[1px] border-black dark:bg-zinc-900"
                   name="ticketsByStatus"
                   id="status"
                   onChange={handleStatusChange}
@@ -119,7 +119,7 @@ const ProjectTickets = ({ project }) => {
             <div className="flex flex-col">
                <label htmlFor="priority">Priority</label>
                <select
-                  className="border-[1px] border-black"
+                  className="border-[1px] border-black dark:bg-zinc-900"
                   name="ticketsByPriority"
                   id="priority"
                   onChange={handlePriorityChange}
