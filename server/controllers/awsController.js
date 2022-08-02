@@ -1,11 +1,11 @@
 import asyncHandler from "express-async-handler";
+import multer from "multer";
 import {
    getObjectSignedUrl,
    uploadImageFile,
    deleteImageFile,
 } from "../config/aws.js";
 import User from "../models/userModel.js";
-import multer from "multer";
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
