@@ -28,9 +28,7 @@ const updateProject = asyncHandler(async (req, res) => {
    const project = await Project.findByIdAndUpdate(req.body._id, req.body, {
       new: true,
       runValidators: true,
-   }).then((project) => {
-      return Project.findById(project._id).populate("teamMembers");
-   });
+   }).then((project) => Project.findById(project._id).populate("teamMembers"));
 
    if (!project) {
       res.status(404);

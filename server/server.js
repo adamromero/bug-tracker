@@ -7,6 +7,7 @@ import userRoutes from "./routes/userRoutes.js";
 import allUsersRoutes from "./routes/allUsersRoutes.js";
 import ticketRoutes from "./routes/ticketRoutes.js";
 import commentRoutes from "./routes/commentRoutes.js";
+import awsRoutes from "./routes/awsRoutes.js";
 import connectDB from "./config/db.js";
 
 connectDB();
@@ -21,6 +22,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/allUsers", allUsersRoutes);
 app.use("/api/ticket", ticketRoutes);
 app.use("/api/comment", commentRoutes);
+app.use("/api/aws", awsRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

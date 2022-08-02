@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updatePassword } from "../features/auth/authSlice";
 import Spinner from "../styles/Spinner";
-import { setImage as setImageAction } from "../features/images/imageSlice";
+import { uploadImage } from "../features/images/imageSlice";
+import { updateUser } from "../features/users/allUsersSlice";
 
 import {
    useUserValidation,
@@ -12,26 +13,38 @@ import {
 const Profile = () => {
    const { user, isLoading } = useSelector((state) => state.auth);
    const dispatch = useDispatch();
-   const [image, setImage] = useState(null);
-   const [imageUrl, setImageUrl] = useState(null);
+   const [selectedImage, setSelectedImage] = useState(null);
+   const [imageTitle, setImageTitle] = useState("");
+   const [imageUrl, setImageUrl] = useState("");
    const [passwords, setPasswords] = useState({});
    const isUserAuthorized = useUserValidation();
    const formData = new FormData();
 
+   useEffect(() => {
+      setImageUrl(
+         `https://bug-tracker-adamromero-images.s3.us-west-1.amazonaws.com/${user.image}`
+      );
+      console.log(user.image);
+   }, [user.image]);
+
    const handleImageUpload = (e) => {
       setImageUrl(URL.createObjectURL(e.target.files[0]));
-      setImage(e.target.files[0]);
+      setSelectedImage(e.target.files[0]);
+      setImageTitle(e.target.files[0].name);
    };
 
    const handleImageSubmit = (e) => {
       e.preventDefault();
-      formData.append("image", image);
-      console.log(formData);
-      console.log(image);
-      //formData.append("userId", user.id);
+      formData.append("image", selectedImage);
+
+      const newUserImage = {
+         ...user,
+         image: imageTitle,
+      };
 
       if (isUserAuthorized) {
-         dispatch(setImageAction(formData));
+         dispatch(uploadImage(formData));
+         dispatch(updateUser(newUserImage));
       }
    };
 
@@ -64,7 +77,6 @@ const Profile = () => {
             </p>
             <p className="text-xl">{user.email}</p>
          </div>
-
          <div className="flex gap-20">
             <div>
                <h3 className="font-bold mb-2">Upload Profile Image</h3>
@@ -90,7 +102,7 @@ const Profile = () => {
                      <button
                         className="bg-[#087e8b] text-white max-w-[6rem] w-full"
                         type="submit"
-                        disabled={!image || !isUserAuthorized}
+                        disabled={!selectedImage || !isUserAuthorized}
                      >
                         Upload
                      </button>

@@ -9,18 +9,21 @@ const Administration = () => {
    const dispatch = useDispatch();
    const { user } = useSelector((state) => state.auth);
    const { allUsers, isLoading } = useSelector((state) => state.users);
-   //const [selectedUser, setSelectedUser] = useState();
+   const [selectedUser, setSelectedUser] = useState(user);
+   const [isUserUpdated, setIsUserUpdated] = useState(false);
 
    useEffect(() => {
       dispatch(getUsers());
+      //console.log("administration render");
       //setSelectedUser(allUsers[0]);
-   }, [dispatch]);
+   }, [dispatch, isUserUpdated]);
 
    if (isLoading) {
       return <Spinner />;
    }
 
-   //console.log(selectedUser);
+   console.log("seleced user admin: ", selectedUser);
+   //console.log(allUsers);
 
    return (
       <div className="m-5">
@@ -43,23 +46,32 @@ const Administration = () => {
                         <tr
                            key={currentUser._id}
                            style={{ cursor: "pointer" }}
-                           //onClick={() => setSelectedUser(currentUser)}
+                           onClick={() => setSelectedUser(currentUser)}
                         >
                            <td>{currentUser.name}</td>
                            <td>{currentUser.email}</td>
                            <td>{currentUser.isAdmin ? "Yes" : "No"}</td>
                            <td>{currentUser.isVerified ? "Yes" : "No"}</td>
-                           <td>
+                           {/* <td>
                               <Modal button={<button>Edit</button>}>
-                                 <UpdateUser selectedUser={currentUser} />
+                                 <UpdateUser
+                                    selectedUser={currentUser}
+                                    isUserUpdated={isUserUpdated}
+                                    setIsUserUpdated={setIsUserUpdated}
+                                 />
                               </Modal>
-                           </td>
+                           </td> */}
                         </tr>
                      ))}
                   </tbody>
                </table>
             </div>
-            {/* {selectedUser && <UpdateUser selectedUser={selectedUser} />} */}
+
+            <UpdateUser
+               selectedUser={selectedUser}
+               isUserUpdated={isUserUpdated}
+               setIsUserUpdated={setIsUserUpdated}
+            />
          </div>
       </div>
    );
