@@ -6,7 +6,6 @@ import { getProjects } from "../features/projects/projectSlice";
 import Spinner from "../styles/Spinner";
 import { PrimaryButton } from "../styles/Button";
 import { SecondaryButton } from "../styles/Button";
-import PageStyle from "../styles/PageStyle";
 
 import { MdDelete } from "react-icons/md";
 import { MdModeEditOutline } from "react-icons/md";
@@ -41,9 +40,11 @@ function Dashboard() {
 
    return (
       <div className="m-5">
-         <h2 className="text-2xl	font-bold">Dashboard</h2>
-         <div className="flex justify-between items-center mb-5 py-5 border-b-[1px] border-slate-200">
-            <h3 className="text-xl">Projects</h3>
+         <h2 className="text-2xl	font-bold pb-5 mb-5 border-b-[1px] border-slate-200">
+            Dashboard
+         </h2>
+         <div className="flex justify-between items-center mb-5">
+            <h3 className="text-lg font-bold">Projects</h3>
             <Modal button={<PrimaryButton>New Project</PrimaryButton>}>
                <CreateProject />
             </Modal>
@@ -57,23 +58,25 @@ function Dashboard() {
                </tr>
             </thead>
             <tbody>
-               {projects.map((project) => (
+               {projects.map((project, index) => (
                   <tr
                      key={project._id}
-                     className="border-b-[1px] border-slate-200"
+                     className={`border-b-[1px] border-slate-200 ${
+                        index % 2 === 0 ? "bg-gray-100" : "bg-gray-200"
+                     }`}
                   >
-                     <td className="text-[#087e8b] dark:text-white">
+                     <td className="text-[#087e8b] dark:text-white p-3">
                         <Link to={`/project/${project._id}`} key={project._id}>
                            {project.title}
                         </Link>
                      </td>
-                     <td>{project.description}</td>
-                     <td>
+                     <td className="p-3">{project.description}</td>
+                     <td className="p-3">
                         {project.teamMembers.map((user) => (
                            <div key={user._id}>{user.name}</div>
                         ))}
                      </td>
-                     <td>
+                     <td className="p-3">
                         <Modal
                            button={
                               <SecondaryButton>

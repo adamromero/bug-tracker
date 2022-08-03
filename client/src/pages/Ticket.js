@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getTicket } from "../features/tickets/ticketSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Comments from "../components/Comments";
 
@@ -11,9 +11,20 @@ import Spinner from "../styles/Spinner";
 const Ticket = () => {
    const { id } = useParams();
    const dispatch = useDispatch();
+   const navigate = useNavigate();
+   const { user } = useSelector((state) => state.auth);
    const { ticket, isLoading, isError, isSuccess } = useSelector(
       (state) => state.tickets
    );
+
+   useEffect(() => {
+      if (!user) {
+         console.log("No user logged in");
+         navigate("/login");
+      }
+
+      dispatch(getTicket(id));
+   }, [dispatch]);
 
    const priorityColor = (priority) => {
       switch (priority) {
@@ -51,20 +62,16 @@ const Ticket = () => {
       }
    };
 
-   useEffect(() => {
-      dispatch(getTicket(id));
-   }, [dispatch]);
-
    if (isLoading) {
       return <Spinner />;
    }
 
    return (
       <div className="m-5">
-         <div className="flex gap-4 items-center">
-            <h2 className="text-2xl	font-bold">Ticket</h2>
+         <div className="flex gap-4 items-center font-bold">
+            <h2 className="text-2xl">Ticket</h2>
             <div>&gt;</div>
-            <h2 className="text-2xl font-bold">{ticket && ticket.title}</h2>
+            <h2 className="text-2xl">{ticket && ticket.title}</h2>
          </div>
          {/* {ticket ? (
             <Link to={`/project/${ticket.project._id}`}>

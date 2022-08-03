@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getProject } from "../features/projects/projectSlice";
 
@@ -10,13 +10,19 @@ import ProjectTickets from "../components/ProjectTickets";
 
 const Project = () => {
    const dispatch = useDispatch();
+   const navigate = useNavigate();
    const { id } = useParams();
 
    const { project, isLoading, isError, message } = useSelector(
       (state) => state.projects
    );
+   const { user } = useSelector((state) => state.auth);
 
    useEffect(() => {
+      if (!user) {
+         navigate("/login");
+      }
+
       dispatch(getProject(id));
    }, [dispatch]);
 
@@ -26,11 +32,11 @@ const Project = () => {
 
    return (
       <div className="m-5">
-         <div className="mb-5 pb-5 border-b-[1px] border-slate-200">
-            <div className="flex gap-4 items-center">
-               <h2 className="text-2xl	font-bold">Project</h2>
+         <div className="mb-5 border-b-[1px] border-slate-200">
+            <div className="flex gap-4 items-center font-bold">
+               <h2 className="text-2xl">Project</h2>
                <div>&gt;</div>
-               <h2 className="text-2xl font-bold">{project.title}</h2>
+               <h2 className="text-2xl">{project.title}</h2>
             </div>
             <p className="my-5 text-lg italic">{project.description}</p>
             {project.teamMembers && project.teamMembers.length > 0 ? (
