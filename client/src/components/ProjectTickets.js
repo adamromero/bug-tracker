@@ -16,11 +16,14 @@ import { PrimaryButton } from "../styles/Button";
 import { SecondaryButton } from "../styles/Button";
 import Spinner from "../styles/Spinner";
 
+import { BsThreeDotsVertical } from "react-icons/bs";
+
 import TicketMarker from "./TicketMarker";
 
 const ProjectTickets = ({ project }) => {
    const [selectedPriority, setSelectedPriority] = useState("All");
    const [selectedStatus, setSelectedStatus] = useState("All");
+   const [openToolTip, setOpenToolTip] = useState({ id: null, open: false });
 
    const dispatch = useDispatch();
    const { id } = useParams();
@@ -94,7 +97,7 @@ const ProjectTickets = ({ project }) => {
 
    return (
       <>
-         <div className="flex justify-between items-center">
+         <div className="flex justify-between items-center mb-3">
             <h3 className="text-lg font-bold">Tickets</h3>
             <Modal button={<PrimaryButton>New Ticket</PrimaryButton>}>
                <CreateTicket project={project} />
@@ -149,19 +152,14 @@ const ProjectTickets = ({ project }) => {
                   {tickets
                      .filter((ticket) => filterPriority(ticket))
                      .filter((ticket) => filterStatus(ticket))
-                     .map((filteredTicket) => (
+                     .map((filteredTicket, index) => (
                         <tr
-                           className="border-b-[1px] border-slate-200"
+                           className={`border-b-[1px] border-slate-200 ${
+                              index % 2 === 0 ? "bg-gray-100" : "bg-gray-200"
+                           }`}
                            key={filteredTicket._id}
-                           style={
-                              filteredTicket.status === "Completed"
-                                 ? {
-                                      color: "#bbbbbb",
-                                   }
-                                 : null
-                           }
                         >
-                           <td className="text-[#087e8b]">
+                           <td className="text-[#087e8b] p-3">
                               <Link
                                  to={`/ticket/${filteredTicket._id}`}
                                  key={filteredTicket._id}
@@ -169,10 +167,44 @@ const ProjectTickets = ({ project }) => {
                                  {filteredTicket.title}
                               </Link>
                            </td>
-                           <td>{filteredTicket.description}</td>
-                           <td>{statusMarker(filteredTicket.status)}</td>
-                           <td>{priorityMarker(filteredTicket.priority)}</td>
-                           <td>
+                           <td className="p-3">{filteredTicket.description}</td>
+                           <td className="p-3">
+                              {statusMarker(filteredTicket.status)}
+                           </td>
+                           <td className="p-3">
+                              {priorityMarker(filteredTicket.priority)}
+                           </td>
+                           <td className="relative">
+                              <button
+                                 className="py-2"
+                                 onClick={(e) => {
+                                    setOpenToolTip({
+                                       id: filteredTicket._id,
+                                       open: !openToolTip.open,
+                                    });
+                                 }}
+                              >
+                                 <BsThreeDotsVertical className="text-xl w-10	cursor-pointer" />
+                              </button>
+
+                              {openToolTip.id === filteredTicket._id &&
+                                 openToolTip.open && (
+                                    <div className="tooltip">
+                                       <Modal button={<button>Edit</button>}>
+                                          <UpdateTicket
+                                             project={project}
+                                             ticket={filteredTicket}
+                                          />
+                                       </Modal>
+                                       <Modal button={<button>Delete</button>}>
+                                          <DeleteTicket
+                                             id={filteredTicket._id}
+                                          />
+                                       </Modal>
+                                    </div>
+                                 )}
+                           </td>
+                           <td className="hidden">
                               <Modal
                                  button={
                                     <SecondaryButton>
@@ -186,7 +218,7 @@ const ProjectTickets = ({ project }) => {
                                  />
                               </Modal>
                            </td>
-                           <td>
+                           <td className="hidden">
                               <Modal
                                  button={
                                     <SecondaryButton>
