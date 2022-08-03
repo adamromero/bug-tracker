@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import UpdateUser from "../components/forms/UpdateUser";
+import { useUserValidation } from "../utils/userValidation";
 import { getUsers } from "../features/users/allUsersSlice";
 import Spinner from "../styles/Spinner";
 import Modal from "../components/Modal";
@@ -13,6 +14,7 @@ const Administration = () => {
    const { allUsers, isLoading } = useSelector((state) => state.users);
    const [selectedUser, setSelectedUser] = useState(user);
    const [isUserUpdated, setIsUserUpdated] = useState(false);
+   const isUserAuthorized = useUserValidation();
 
    useEffect(() => {
       if (!user) {
@@ -20,65 +22,69 @@ const Administration = () => {
       }
 
       dispatch(getUsers());
-      //console.log("administration render");
-      //setSelectedUser(allUsers[0]);
    }, [dispatch, isUserUpdated]);
 
    if (isLoading) {
       return <Spinner />;
    }
 
-   console.log("seleced user admin: ", selectedUser);
-   //console.log(allUsers);
-
    if (user) {
       return (
          <div className="m-5">
-            <h2 className="text-2xl	font-bold">Administration</h2>
-            <p>{user.isAdmin ? "You have administrator privileges" : ""}</p>
+            <h2 className="text-2xl	font-bold pb-5 mb-5 border-b-[1px] border-slate-200">
+               Administration
+            </h2>
+            <p>
+               {user.isAdmin && isUserAuthorized
+                  ? "You have administrator privileges"
+                  : ""}
+            </p>
             <div className="flex gap-11">
-               <div>
-                  <h3>Team</h3>
+               <div className="flex-1">
+                  <h3 className="text-lg font-bold">Team</h3>
                   <table className="text-left w-full">
                      <thead>
                         <tr>
-                           <th>Name</th>
-                           <th>Email</th>
-                           <th>Is Admin</th>
-                           <th>Is Verified</th>
+                           <th className="font-normal">Name</th>
+                           <th className="font-normal">Email</th>
+                           <th className="font-normal">Is Admin</th>
+                           <th className="font-normal">Is Verified</th>
                         </tr>
                      </thead>
                      <tbody>
-                        {allUsers.map((currentUser) => (
+                        {allUsers.map((currentUser, index) => (
                            <tr
                               key={currentUser._id}
+                              className={`${
+                                 index % 2 === 0
+                                    ? "bg-gray-100 dark:bg-[#3e3e3e]"
+                                    : "bg-gray-200 dark:bg-black"
+                              }`}
                               style={{ cursor: "pointer" }}
-                              onClick={() => setSelectedUser(currentUser)}
+                              //onClick={() => setSelectedUser(currentUser)}
                            >
-                              <td>{currentUser.name}</td>
-                              <td>{currentUser.email}</td>
-                              <td>{currentUser.isAdmin ? "Yes" : "No"}</td>
-                              <td>{currentUser.isVerified ? "Yes" : "No"}</td>
-                              {/* <td>
-                              <Modal button={<button>Edit</button>}>
-                                 <UpdateUser
-                                    selectedUser={currentUser}
-                                    isUserUpdated={isUserUpdated}
-                                    setIsUserUpdated={setIsUserUpdated}
-                                 />
-                              </Modal>
-                           </td> */}
+                              <td className="p-3">{currentUser.name}</td>
+                              <td className="p-3">{currentUser.email}</td>
+                              <td className="p-3">
+                                 {currentUser.isAdmin ? "Yes" : "No"}
+                              </td>
+                              <td className="p-3">
+                                 {currentUser.isVerified ? "Yes" : "No"}
+                              </td>
+                              <td className="p-3">
+                                 <Modal button={<button>Edit</button>}>
+                                    <UpdateUser
+                                       selectedUser={currentUser}
+                                       isUserUpdated={isUserUpdated}
+                                       setIsUserUpdated={setIsUserUpdated}
+                                    />
+                                 </Modal>
+                              </td>
                            </tr>
                         ))}
                      </tbody>
                   </table>
                </div>
-
-               <UpdateUser
-                  selectedUser={selectedUser}
-                  isUserUpdated={isUserUpdated}
-                  setIsUserUpdated={setIsUserUpdated}
-               />
             </div>
          </div>
       );

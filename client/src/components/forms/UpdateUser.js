@@ -2,24 +2,31 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updateUser, deleteUser } from "../../features/users/allUsersSlice";
 import { PrimaryButton } from "../../styles/Button";
-import UserEditStyle from "../../styles/UserEditStyle";
+import {
+   useUserValidation,
+   userValidationMessage,
+} from "../../utils/userValidation";
 
-const UpdateUser = ({ selectedUser }) => {
+const UpdateUser = ({ selectedUser, isUserUpdated, setIsUserUpdated }) => {
    const [userDetails, setUserDetails] = useState(selectedUser);
    const [isAdminChecked, setIsAdminChecked] = useState(false);
    const [isVerifiedChecked, setIsVerifiedChecked] = useState(false);
+   const isUserAuthorized = useUserValidation();
    const dispatch = useDispatch();
 
    const handleEditUser = (e) => {
       e.preventDefault();
-      console.log(userDetails);
-      dispatch(updateUser(userDetails));
+      setIsUserUpdated(!isUserUpdated);
+      if (isUserAuthorized) {
+         dispatch(updateUser(userDetails));
+      }
    };
 
    const handleDeleteUser = (e) => {
       e.preventDefault();
-      console.log("delete user: ", userDetails._id);
-      dispatch(deleteUser(userDetails._id));
+      if (isUserAuthorized) {
+         dispatch(deleteUser(userDetails._id));
+      }
    };
 
    const handleIsAdminChange = (e) => {
@@ -55,13 +62,13 @@ const UpdateUser = ({ selectedUser }) => {
       setUserDetails(selectedUser);
       setIsAdminChecked(selectedUser.isAdmin);
       setIsVerifiedChecked(selectedUser.isVerified);
-   }, [dispatch]);
+   }, [dispatch, selectedUser.name, isUserUpdated]);
 
    return (
-      <UserEditStyle>
+      <>
          <h3>Update user information</h3>
          <h4>{selectedUser.name}</h4>
-
+         {userValidationMessage(isUserAuthorized)}
          <form>
             <label>
                Name:
@@ -110,15 +117,22 @@ const UpdateUser = ({ selectedUser }) => {
                   value={isVerifiedChecked}
                />
             </label>
-
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-               <PrimaryButton onClick={handleEditUser}>Submit</PrimaryButton>
-               <PrimaryButton onClick={handleDeleteUser}>
+            <div className="flex justify-between">
+               <PrimaryButton
+                  onClick={handleEditUser}
+                  disabled={!isUserAuthorized}
+               >
+                  Submit
+               </PrimaryButton>
+               <PrimaryButton
+                  onClick={handleDeleteUser}
+                  disabled={!isUserAuthorized}
+               >
                   Remove User
                </PrimaryButton>
             </div>
          </form>
-      </UserEditStyle>
+      </>
    );
 };
 

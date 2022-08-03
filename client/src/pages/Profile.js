@@ -27,16 +27,14 @@ const Profile = () => {
          navigate("/login");
       } else {
          if (user.image) {
-            setImageUrl(
-               `https://bug-tracker-adamromero-images.s3.us-west-1.amazonaws.com/${user.image}`
-            );
+            setImageUrl(user.image);
          }
       }
-   }, [imageUrl]);
+   }, [user.name]);
 
-   console.log("imageUrl: ", imageUrl);
-   console.log("selectedImage: ", selectedImage);
-   console.log("imageTitle: ", imageTitle);
+   // console.log("imageUrl: ", imageUrl);
+   // console.log("selectedImage: ", selectedImage);
+   // console.log("imageTitle: ", imageTitle);
 
    const handleImageUpload = (e) => {
       console.log(URL.createObjectURL(e.target.files[0]));
@@ -56,7 +54,7 @@ const Profile = () => {
 
       if (isUserAuthorized) {
          dispatch(uploadImage(formData));
-         dispatch(updateUser(newUserImage));
+         //dispatch(updateUser(newUserImage));
       }
    };
 
@@ -83,7 +81,9 @@ const Profile = () => {
    if (user) {
       return (
          <div className="m-5">
-            <h2 className="text-2xl font-bold">Profile</h2>
+            <h2 className="text-2xl	font-bold pb-5 mb-5 border-b-[1px] border-slate-200">
+               Profile
+            </h2>
             <div className="my-5 md:text-xl text-lg">
                <p>
                   {user.name} {user.isAdmin && "(Administrator)"}
@@ -95,7 +95,7 @@ const Profile = () => {
                <div>
                   <h3 className="font-bold mb-2">Upload Profile Image</h3>
                   <div className="flex flex-col max-w-[14rem] gap-3 mb-5">
-                     {imageUrl ? (
+                     {/* {imageUrl ? (
                         <img src={imageUrl} width="100" />
                      ) : (
                         <img
@@ -103,11 +103,14 @@ const Profile = () => {
                            width="100"
                            alt={user.name}
                         />
-                     )}
-                     <form onSubmit={handleImageSubmit}>
+                     )} */}
+                     <form
+                        onSubmit={handleImageSubmit}
+                        encType="multipart/form-data"
+                     >
                         <input
                            className="mb-3 w-[217px]"
-                           id="image-upload"
+                           id="image"
                            type="file"
                            name="image"
                            accept="image/*"

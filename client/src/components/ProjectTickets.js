@@ -20,6 +20,8 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 
 import TicketMarker from "./TicketMarker";
 
+import useComponentVisible from "../utils/useComponentVisible";
+
 const ProjectTickets = ({ project }) => {
    const [selectedPriority, setSelectedPriority] = useState("All");
    const [selectedStatus, setSelectedStatus] = useState("All");
@@ -178,37 +180,7 @@ const ProjectTickets = ({ project }) => {
                            <td className="p-3">
                               {priorityMarker(filteredTicket.priority)}
                            </td>
-                           <td className="relative">
-                              <button
-                                 className="py-2"
-                                 onClick={(e) => {
-                                    setOpenToolTip({
-                                       id: filteredTicket._id,
-                                       open: !openToolTip.open,
-                                    });
-                                 }}
-                              >
-                                 <BsThreeDotsVertical className="text-xl w-10	cursor-pointer" />
-                              </button>
-
-                              {openToolTip.id === filteredTicket._id &&
-                                 openToolTip.open && (
-                                    <div className="tooltip">
-                                       <Modal button={<button>Edit</button>}>
-                                          <UpdateTicket
-                                             project={project}
-                                             ticket={filteredTicket}
-                                          />
-                                       </Modal>
-                                       <Modal button={<button>Delete</button>}>
-                                          <DeleteTicket
-                                             id={filteredTicket._id}
-                                          />
-                                       </Modal>
-                                    </div>
-                                 )}
-                           </td>
-                           <td className="hidden">
+                           <td>
                               <Modal
                                  button={
                                     <SecondaryButton>
@@ -222,7 +194,7 @@ const ProjectTickets = ({ project }) => {
                                  />
                               </Modal>
                            </td>
-                           <td className="hidden">
+                           <td>
                               <Modal
                                  button={
                                     <SecondaryButton>

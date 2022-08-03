@@ -21,8 +21,8 @@ const Tickets = () => {
    if (user) {
       return (
          <div className="m-5">
-            <h2 className="text-2xl	font-bold mb-5">
-               Tickets <div className="text-sm">assigned to {user.name}</div>
+            <h2 className="text-2xl	font-bold pb-5 mb-5 border-b-[1px] border-slate-200">
+               Tickets
             </h2>
             {tickets.length > 0 ? (
                <table
