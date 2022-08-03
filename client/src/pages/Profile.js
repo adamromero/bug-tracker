@@ -34,7 +34,12 @@ const Profile = () => {
       }
    }, [imageUrl]);
 
+   console.log("imageUrl: ", imageUrl);
+   console.log("selectedImage: ", selectedImage);
+   console.log("imageTitle: ", imageTitle);
+
    const handleImageUpload = (e) => {
+      console.log(URL.createObjectURL(e.target.files[0]));
       setImageUrl(URL.createObjectURL(e.target.files[0]));
       setSelectedImage(e.target.files[0]);
       setImageTitle(e.target.files[0].name);
@@ -79,14 +84,14 @@ const Profile = () => {
       return (
          <div className="m-5">
             <h2 className="text-2xl font-bold">Profile</h2>
-            <div className="my-5">
-               <p className="text-xl">
+            <div className="my-5 md:text-xl text-lg">
+               <p>
                   {user.name} {user.isAdmin && "(Administrator)"}
                </p>
-               <p className="text-xl">{user.email}</p>
+               <p>{user.email}</p>
             </div>
             <div>{userValidationMessage(isUserAuthorized)}</div>
-            <div className="flex gap-20">
+            <div className="flex md:gap-20 gap-5 md:flex-row flex-col">
                <div>
                   <h3 className="font-bold mb-2">Upload Profile Image</h3>
                   <div className="flex flex-col max-w-[14rem] gap-3 mb-5">
@@ -101,7 +106,7 @@ const Profile = () => {
                      )}
                      <form onSubmit={handleImageSubmit}>
                         <input
-                           className="mb-3"
+                           className="mb-3 w-[217px]"
                            id="image-upload"
                            type="file"
                            name="image"

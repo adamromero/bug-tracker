@@ -67,13 +67,15 @@ function Dashboard() {
                            : "bg-gray-200 dark:bg-black"
                      }`}
                   >
-                     <td className="text-[#087e8b] dark:text-white p-3">
+                     <td className="text-[#087e8b] dark:text-white md:text-base text-sm p-3">
                         <Link to={`/project/${project._id}`} key={project._id}>
                            {project.title}
                         </Link>
                      </td>
-                     <td className="p-3">{project.description}</td>
-                     <td className="p-3">
+                     <td className="p-3 md:text-base text-sm">
+                        {project.description}
+                     </td>
+                     <td className="p-3 md:text-base text-sm">
                         {project.teamMembers.map((user) => (
                            <div key={user._id}>{user.name}</div>
                         ))}

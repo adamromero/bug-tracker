@@ -36,6 +36,12 @@ const Login = () => {
       if (isSuccess || user) {
          navigate("/");
       }
+
+      console.log("isError: ", isError);
+
+      if (isError) {
+         console.log(message);
+      }
    }, [user, isSuccess, navigate]);
 
    return (
@@ -52,6 +58,7 @@ const Login = () => {
                   type="text"
                   name="email"
                   placeholder="Email"
+                  maxLength={100}
                   onChange={handleChange}
                />
 
@@ -60,6 +67,7 @@ const Login = () => {
                   type="password"
                   name="password"
                   placeholder="Password"
+                  maxLength={20}
                   onChange={handleChange}
                />
 

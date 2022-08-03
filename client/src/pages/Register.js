@@ -65,6 +65,7 @@ const Register = () => {
                   type="text"
                   name="name"
                   placeholder="Name"
+                  maxLength={100}
                   onChange={handleChange}
                />
                <input
@@ -72,6 +73,7 @@ const Register = () => {
                   type="text"
                   name="email"
                   placeholder="Email"
+                  maxLength={100}
                   onChange={handleChange}
                />
 
@@ -80,6 +82,7 @@ const Register = () => {
                   type="password"
                   name="password"
                   placeholder="Password"
+                  maxLength={20}
                   onChange={handleChange}
                />
 
@@ -88,6 +91,7 @@ const Register = () => {
                   type="password"
                   name="confirmPassword"
                   placeholder="Confirm Password"
+                  maxLength={20}
                   onChange={handleChange}
                />
                <PrimaryButton type="submit">Submit</PrimaryButton>
