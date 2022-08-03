@@ -61,8 +61,10 @@ function Dashboard() {
                {projects.map((project, index) => (
                   <tr
                      key={project._id}
-                     className={`border-b-[1px] border-slate-200 ${
-                        index % 2 === 0 ? "bg-gray-100" : "bg-gray-200"
+                     className={`${
+                        index % 2 === 0
+                           ? "bg-gray-100 dark:bg-[#3e3e3e]"
+                           : "bg-gray-200 dark:bg-black"
                      }`}
                   >
                      <td className="text-[#087e8b] dark:text-white p-3">

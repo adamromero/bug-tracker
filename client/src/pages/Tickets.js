@@ -43,17 +43,21 @@ const Tickets = () => {
                      </tr>
                   </thead>
                   <tbody>
-                     {tickets.map((ticket) => (
+                     {tickets.map((ticket, index) => (
                         <tr
                            key={ticket._id}
-                           className="border-b-[1px] border-slate-200"
+                           className={`${
+                              index % 2 === 0
+                                 ? "bg-gray-100 dark:bg-[#3e3e3e]"
+                                 : "bg-gray-200 dark:bg-black"
+                           }`}
                         >
-                           <td className="py-2 text-[#087e8b]">
+                           <td className="p-3 text-[#087e8b] dark:text-white">
                               <Link to={`/ticket/${ticket._id}`} state={ticket}>
                                  {ticket.title}
                               </Link>
                            </td>
-                           <td className="py-2">{ticket.description}</td>
+                           <td className="p-3">{ticket.description}</td>
                            {/* <td className="py-2">{ticket.estimate}</td>
                         <td className="py-2">{ticket.priority}</td>
                         <td className="py-2">{ticket.status}</td> */}

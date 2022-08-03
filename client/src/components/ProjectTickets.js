@@ -154,12 +154,14 @@ const ProjectTickets = ({ project }) => {
                      .filter((ticket) => filterStatus(ticket))
                      .map((filteredTicket, index) => (
                         <tr
-                           className={`border-b-[1px] border-slate-200 ${
-                              index % 2 === 0 ? "bg-gray-100" : "bg-gray-200"
+                           className={`${
+                              index % 2 === 0
+                                 ? "bg-gray-100 dark:bg-[#3e3e3e]"
+                                 : "bg-gray-200 dark:bg-black"
                            }`}
                            key={filteredTicket._id}
                         >
-                           <td className="text-[#087e8b] p-3">
+                           <td className="text-[#087e8b] dark:text-white p-3 md:text-base text-sm">
                               <Link
                                  to={`/ticket/${filteredTicket._id}`}
                                  key={filteredTicket._id}
@@ -167,7 +169,9 @@ const ProjectTickets = ({ project }) => {
                                  {filteredTicket.title}
                               </Link>
                            </td>
-                           <td className="p-3">{filteredTicket.description}</td>
+                           <td className="p-3 md:text-base text-sm">
+                              {filteredTicket.description}
+                           </td>
                            <td className="p-3">
                               {statusMarker(filteredTicket.status)}
                            </td>

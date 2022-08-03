@@ -81,7 +81,7 @@ const Comments = ({ ticketId }) => {
                if (comment.createdBy) {
                   return (
                      <div
-                        className="text-black bg-[#ededed] dark:text-white dark:bg-[#087e8b] p-5 mb-2"
+                        className="text-black bg-[#ededed] dark:text-white dark:bg-[#3e3e3e] p-5 mb-2"
                         key={comment._id}
                      >
                         <div className="flex items-center">
