@@ -20,8 +20,6 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 
 import TicketMarker from "./TicketMarker";
 
-import useComponentVisible from "../utils/useComponentVisible";
-
 const ProjectTickets = ({ project }) => {
    const [selectedPriority, setSelectedPriority] = useState("All");
    const [selectedStatus, setSelectedStatus] = useState("All");
