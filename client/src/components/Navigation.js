@@ -12,7 +12,7 @@ import { CgProfile } from "react-icons/cg";
 
 import { MdDarkMode } from "react-icons/md";
 import { MdLightMode } from "react-icons/md";
-import { TbRadar } from "react-icons/tb";
+import { TbRadar2 } from "react-icons/tb";
 
 import { ThemeContext } from "../contexts/ThemeContext";
 
@@ -31,13 +31,13 @@ const Navigation = () => {
       navigate("/");
    };
 
-   if (user) {
+   if (user && location.pathname !== "/404") {
       return (
          <nav className="md:min-h-screen md:max-w-[275px] bg-zinc-300 w-full p-5 dark:bg-zinc-900 text-[#087e8b] dark:text-white">
             <div className="flex justify-between items-center mb-2">
                <Link className="flex items-center gap-1" to="/">
                   <h1 className="font-bold text-3xl ">Bug Tracker</h1>
-                  <TbRadar className="animate-spin	relative	top-1" />
+                  <TbRadar2 className="animate-spin text-xl" />
                </Link>
                {darkMode ? (
                   <button

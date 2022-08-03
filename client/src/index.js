@@ -1,6 +1,12 @@
 import React, { useContext } from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import {
+   BrowserRouter as Router,
+   Routes,
+   Route,
+   Navigate,
+   Link,
+} from "react-router-dom";
 import { store } from "./app/store";
 import { Provider, useSelector } from "react-redux";
 import Login from "./pages/Login";
@@ -50,7 +56,8 @@ const App = () => {
                   <Route path="/ticket/:id" element={<Ticket />} />
                   <Route path="/project/:id" element={<Project />} />
                   <Route path="/administration" element={<Administration />} />
-                  <Route path="*" element={<PageNotFound />} />
+                  <Route path="/404" element={<PageNotFound />} />
+                  <Route path="*" element={<Navigate to="/404" replace />} />
                </Routes>
             </main>
          </div>
