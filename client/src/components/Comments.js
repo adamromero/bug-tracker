@@ -47,7 +47,9 @@ const Comments = ({ ticketId }) => {
       setInput("");
 
       if (isUserAuthorized) {
-         dispatch(createComment(commentDetails.text.trim()));
+         if (commentDetails.text.trim()) {
+            dispatch(createComment(commentDetails));
+         }
       }
    };
 
