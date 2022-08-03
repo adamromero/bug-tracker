@@ -12,6 +12,7 @@ import Administration from "./pages/Administration";
 import Project from "./pages/Project";
 import Navigation from "./components/Navigation";
 import Profile from "./pages/Profile";
+import PageNotFound from "./pages/PageNotFound";
 import "./index.css";
 
 import { ThemeProvider } from "./contexts/ThemeContext";
@@ -43,12 +44,13 @@ const App = () => {
                <Routes>
                   <Route exact path="/" element={<Dashboard />} />
                   <Route path="/login" element={<Login />} />
-                  <Route path="/profile" element={<Profile />} />
                   <Route path="/register" element={<Register />} />
+                  <Route path="/profile" element={<Profile />} />
                   <Route path="/tickets" element={<Tickets />} />
                   <Route path="/ticket/:id" element={<Ticket />} />
                   <Route path="/project/:id" element={<Project />} />
                   <Route path="/administration" element={<Administration />} />
+                  <Route path="*" element={<PageNotFound />} />
                </Routes>
             </main>
          </div>
