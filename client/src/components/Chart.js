@@ -78,66 +78,69 @@ const Chart = () => {
 
    if (isPriorityOnAnyTickets() || isStatusOnAnyTickets()) {
       return (
-         <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-            <div>
-               {isPriorityOnAnyTickets() && (
-                  <>
-                     <PieChart
-                        data={priorityCount}
-                        label={({ x, y, dx, dy, dataEntry }) =>
-                           dataEntry.value > 0 && (
-                              <text
-                                 key={dataEntry.title}
-                                 x={x}
-                                 y={y}
-                                 dx={dx}
-                                 dy={dy}
-                                 dominantBaseline="central"
-                                 textAnchor="middle"
-                                 style={{
-                                    fontSize: "8px",
-                                    fontFamily: "sans-serif",
-                                 }}
-                              >
-                                 {dataEntry.title}
-                              </text>
-                           )
-                        }
-                        style={{ height: "150px", width: "150px" }}
-                     ></PieChart>
-                     <h4 style={{ textAlign: "center" }}>Ticket Priority</h4>
-                  </>
-               )}
-            </div>
-            <div>
-               {isStatusOnAnyTickets() && (
-                  <>
-                     <PieChart
-                        data={statusCount}
-                        label={({ x, y, dx, dy, dataEntry }) =>
-                           dataEntry.value > 0 && (
-                              <text
-                                 key={dataEntry.title}
-                                 x={x}
-                                 y={y}
-                                 dx={dx}
-                                 dy={dy}
-                                 dominantBaseline="central"
-                                 textAnchor="middle"
-                                 style={{
-                                    fontSize: "8px",
-                                    fontFamily: "sans-serif",
-                                 }}
-                              >
-                                 {dataEntry.title}
-                              </text>
-                           )
-                        }
-                        style={{ height: "150px", width: "150px" }}
-                     ></PieChart>
-                     <h4 style={{ textAlign: "center" }}>Ticket Status</h4>
-                  </>
-               )}
+         <div>
+            <h3 className="text-lg font-bold">Ticket Stats</h3>
+            <div className="flex justify-start gap-10 mt-5">
+               <div>
+                  {isPriorityOnAnyTickets() && (
+                     <>
+                        <PieChart
+                           data={priorityCount}
+                           label={({ x, y, dx, dy, dataEntry }) =>
+                              dataEntry.value > 0 && (
+                                 <text
+                                    key={dataEntry.title}
+                                    x={x}
+                                    y={y}
+                                    dx={dx}
+                                    dy={dy}
+                                    dominantBaseline="central"
+                                    textAnchor="middle"
+                                    style={{
+                                       fontSize: "8px",
+                                       fontFamily: "sans-serif",
+                                    }}
+                                 >
+                                    {dataEntry.title}
+                                 </text>
+                              )
+                           }
+                           style={{ height: "150px", width: "150px" }}
+                        ></PieChart>
+                        <h4 className="mt-3 text-center">Ticket Priority</h4>
+                     </>
+                  )}
+               </div>
+               <div>
+                  {isStatusOnAnyTickets() && (
+                     <>
+                        <PieChart
+                           data={statusCount}
+                           label={({ x, y, dx, dy, dataEntry }) =>
+                              dataEntry.value > 0 && (
+                                 <text
+                                    key={dataEntry.title}
+                                    x={x}
+                                    y={y}
+                                    dx={dx}
+                                    dy={dy}
+                                    dominantBaseline="central"
+                                    textAnchor="middle"
+                                    style={{
+                                       fontSize: "8px",
+                                       fontFamily: "sans-serif",
+                                    }}
+                                 >
+                                    {dataEntry.title}
+                                 </text>
+                              )
+                           }
+                           style={{ height: "150px", width: "150px" }}
+                        ></PieChart>
+                        <h4 className="mt-3 text-center">Ticket Status</h4>
+                     </>
+                  )}
+               </div>
             </div>
          </div>
       );
