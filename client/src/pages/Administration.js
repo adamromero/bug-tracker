@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import UpdateUser from "../components/forms/UpdateUser";
+import DeleteUser from "../components/forms/DeleteUser";
 import { useUserValidation } from "../utils/userValidation";
 import { getUsers } from "../features/users/allUsersSlice";
+import { MdModeEditOutline } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 import Spinner from "../styles/Spinner";
 import Modal from "../components/Modal";
 
@@ -12,8 +15,6 @@ const Administration = () => {
    const navigate = useNavigate();
    const { user } = useSelector((state) => state.auth);
    const { allUsers, isLoading } = useSelector((state) => state.users);
-   const [selectedUser, setSelectedUser] = useState(user);
-   const [isUserUpdated, setIsUserUpdated] = useState(false);
    const isUserAuthorized = useUserValidation();
 
    useEffect(() => {
@@ -22,7 +23,7 @@ const Administration = () => {
       }
 
       dispatch(getUsers());
-   }, [dispatch, isUserUpdated]);
+   }, [dispatch]);
 
    if (isLoading) {
       return <Spinner />;
@@ -60,8 +61,6 @@ const Administration = () => {
                                     ? "bg-gray-100 dark:bg-[#3e3e3e]"
                                     : "bg-gray-200 dark:bg-black"
                               }`}
-                              style={{ cursor: "pointer" }}
-                              //onClick={() => setSelectedUser(currentUser)}
                            >
                               <td className="p-3">{currentUser.name}</td>
                               <td className="p-3">{currentUser.email}</td>
@@ -72,12 +71,29 @@ const Administration = () => {
                                  {currentUser.isVerified ? "Yes" : "No"}
                               </td>
                               <td className="p-3">
-                                 <Modal button={<button>Edit</button>}>
-                                    <UpdateUser
-                                       selectedUser={currentUser}
-                                       isUserUpdated={isUserUpdated}
-                                       setIsUserUpdated={setIsUserUpdated}
-                                    />
+                                 <Modal
+                                    button={
+                                       <button className="transition-colors	cursor-pointer	text-[#087E8B] p-2">
+                                          <MdModeEditOutline>
+                                             Edit
+                                          </MdModeEditOutline>
+                                       </button>
+                                    }
+                                 >
+                                    <UpdateUser currentUser={currentUser} />
+                                 </Modal>
+                              </td>
+                              <td>
+                                 <Modal
+                                    button={
+                                       <button className="transition-colors	cursor-pointer	text-[#087E8B] p-2">
+                                          <MdDelete className="transition-colors	cursor-pointer	text-[#087E8B] ">
+                                             Delete
+                                          </MdDelete>
+                                       </button>
+                                    }
+                                 >
+                                    <DeleteUser userId={currentUser._id} />
                                  </Modal>
                               </td>
                            </tr>
