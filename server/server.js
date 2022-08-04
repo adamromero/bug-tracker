@@ -9,7 +9,8 @@ import userRoutes from "./routes/userRoutes.js";
 import allUsersRoutes from "./routes/allUsersRoutes.js";
 import ticketRoutes from "./routes/ticketRoutes.js";
 import commentRoutes from "./routes/commentRoutes.js";
-import awsRoutes from "./routes/awsRoutes.js";
+//import awsRoutes from "./routes/awsRoutes.js";
+import imageRoutes from "./routes/imageRoutes.js";
 import connectDB from "./config/db.js";
 
 connectDB();
@@ -24,7 +25,8 @@ app.use("/api/users", userRoutes);
 app.use("/api/allUsers", allUsersRoutes);
 app.use("/api/ticket", ticketRoutes);
 app.use("/api/comment", commentRoutes);
-app.use("/api/aws", awsRoutes);
+//app.use("/api/aws", awsRoutes);
+app.use("/api/upload", imageRoutes);
 
 if (process.env.NODE_ENV === "production") {
    const __filename = fileURLToPath(import.meta.url);

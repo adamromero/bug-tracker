@@ -3,6 +3,7 @@ import allUsersService from "./allUsersService";
 
 const initialState = {
    allUsers: [],
+   currentUser: [],
    isLoading: false,
    isError: false,
    isSuccess: false,
@@ -10,6 +11,10 @@ const initialState = {
 
 export const getUsers = createAsyncThunk("users/getUsers", async () => {
    return await allUsersService.getUsers();
+});
+
+export const getUser = createAsyncThunk("users/getUser", async (id) => {
+   return await allUsersService.getUser(id);
 });
 
 export const updateUser = createAsyncThunk("users/updateUser", async (user) => {
@@ -35,6 +40,18 @@ export const allUsersSlice = createSlice({
             state.allUsers = action.payload;
          })
          .addCase(getUsers.rejected, (state) => {
+            state.isLoading = false;
+            state.isError = true;
+         })
+         .addCase(getUser.pending, (state) => {
+            state.isLoading = true;
+         })
+         .addCase(getUser.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.currentUser = action.payload;
+         })
+         .addCase(getUser.rejected, (state) => {
             state.isLoading = false;
             state.isError = true;
          })

@@ -7,6 +7,15 @@ const getUsers = asyncHandler(async (req, res) => {
    res.status(200).json(users);
 });
 
+const getUser = asyncHandler(async (req, res) => {
+   const user = await User.findById(req.params.id).select("-password");
+   if (!user) {
+      res.status(404);
+      throw new Error("User not found");
+   }
+   res.status(200).json(user);
+});
+
 const updateUser = asyncHandler(async (req, res) => {
    const user = await User.findByIdAndUpdate(req.body._id, req.body, {
       new: true,
@@ -18,8 +27,6 @@ const updateUser = asyncHandler(async (req, res) => {
       throw new Error("User not found");
    }
 
-   console.log(user);
-
    res.status(200).json(user);
 });
 
@@ -30,4 +37,4 @@ const deleteUser = asyncHandler(async (req, res) => {
    res.status(200);
 });
 
-export { getUsers, updateUser, deleteUser };
+export { getUsers, getUser, updateUser, deleteUser };

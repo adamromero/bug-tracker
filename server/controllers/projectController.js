@@ -45,9 +45,6 @@ const updateProjectTicket = asyncHandler(async (req, res) => {
       throw new Error("Project not found");
    }
 
-   console.log("req.body: ", req.body);
-   console.log("project: ", project);
-
    //project.tickets.push(req.body.ticketId);
    //await project.save();
    //res.status(200).json(project);
