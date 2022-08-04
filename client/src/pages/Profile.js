@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { updatePassword } from "../features/auth/authSlice";
 import Spinner from "../styles/Spinner";
 import { uploadImage } from "../features/images/imageSlice";
-import { getUser, updateUser } from "../features/users/allUsersSlice";
+import { updateUser } from "../features/users/allUsersSlice";
 
 import {
    useUserValidation,
@@ -13,7 +13,6 @@ import {
 
 const Profile = () => {
    const { user, isLoading } = useSelector((state) => state.auth);
-   const { currentUser } = useSelector((state) => state.users);
    const dispatch = useDispatch();
    const navigate = useNavigate();
    const [selectedImage, setSelectedImage] = useState(null);
@@ -29,12 +28,11 @@ const Profile = () => {
       if (!user) {
          navigate("/login");
       } else {
-         dispatch(getUser(user._id));
          if (user.image) {
             setImageUrl(`/uploads/${user.image}`);
          }
       }
-   }, [user.name]);
+   }, [user ? user.name : null]);
 
    const handleImageUpload = (e) => {
       setImageUrl(URL.createObjectURL(e.target.files[0]));
@@ -109,7 +107,11 @@ const Profile = () => {
                            onChange={handleImageUpload}
                         />
                         <button
-                           className="bg-[#087e8b] text-white max-w-[6rem] w-full"
+                           className={`bg-[#087e8b] text-white max-w-[6rem] p-1.5 w-full ${
+                              !selectedImage || !isUserAuthorized
+                                 ? "cursor-not-allowed cursor-not-allowed bg-[#087e8b]/75"
+                                 : "cursor-pointer"
+                           }`}
                            type="submit"
                            disabled={!selectedImage || !isUserAuthorized}
                         >
@@ -149,7 +151,11 @@ const Profile = () => {
                         onChange={handlePasswordChange}
                      />
                      <button
-                        className="bg-[#087e8b] text-white max-w-[6rem] w-full"
+                        className={`bg-[#087e8b] text-white max-w-[6rem] w-full p-1.5 ${
+                           !isUserAuthorized
+                              ? "cursor-not-allowed bg-[#087e8b]/75"
+                              : "cursor-pointer"
+                        }`}
                         disabled={!isUserAuthorized}
                      >
                         Update

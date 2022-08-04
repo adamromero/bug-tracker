@@ -16,8 +16,6 @@ import { TbRadar2 } from "react-icons/tb";
 
 import { ThemeContext } from "../contexts/ThemeContext";
 
-import { getUser } from "../features/users/allUsersSlice";
-
 const Navigation = () => {
    const dispatch = useDispatch();
    const navigate = useNavigate();
@@ -26,7 +24,6 @@ const Navigation = () => {
    const darkMode = theme.state.darkMode;
 
    const { user } = useSelector((state) => state.auth);
-   const { currentUser } = useSelector((state) => state.users);
    const [userImage, setUserImage] = useState("");
 
    const handleLogout = () => {
@@ -37,7 +34,6 @@ const Navigation = () => {
 
    useEffect(() => {
       if (user) {
-         dispatch(getUser(user._id));
          setUserImage(
             user.image
                ? `/uploads/${user.image}`
