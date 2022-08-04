@@ -35,9 +35,9 @@ const Administration = () => {
             <h2 className="text-2xl	font-bold pb-5 mb-5 border-b-[1px] border-slate-200">
                Administration
             </h2>
-            <p>
+            <p className="mb-5">
                {user.isAdmin && isUserAuthorized
-                  ? "You have administrator privileges"
+                  ? "You are an administrator"
                   : ""}
             </p>
             <div className="flex gap-11">

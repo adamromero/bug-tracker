@@ -93,19 +93,24 @@ const Profile = () => {
                   <h3 className="font-bold mb-2">Upload Profile Image</h3>
                   <div className="flex flex-col max-w-[14rem] gap-3 mb-5">
                      <img src={imageUrl} width="100" alt={user.name} />
-
                      <form
                         onSubmit={handleImageSubmit}
                         encType="multipart/form-data"
                      >
                         <input
-                           className="mb-3 w-[217px]"
+                           className="hidden"
                            id="image"
                            type="file"
                            name="image"
                            accept="image/*"
                            onChange={handleImageUpload}
                         />
+                        <label
+                           className="bg-[#087e8b] text-white text-center max-w-[10rem] p-1.5 mb-2 w-full cursor-pointer block"
+                           htmlFor="image"
+                        >
+                           Choose an image
+                        </label>
                         <button
                            className={`bg-[#087e8b] text-white max-w-[6rem] p-1.5 w-full ${
                               !selectedImage || !isUserAuthorized
