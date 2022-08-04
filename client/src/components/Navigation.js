@@ -36,7 +36,9 @@ const Navigation = () => {
          <nav className="md:min-h-screen md:max-w-[275px] bg-zinc-300 w-full p-5 dark:bg-zinc-900 text-[#087e8b] dark:text-white">
             <div className="flex justify-between items-center mb-2">
                <Link className="flex items-center gap-1" to="/">
-                  <h1 className="font-bold text-3xl ">Bug Tracker</h1>
+                  <h1 className="oswald-heading font-bold text-3xl ">
+                     Bug Tracker
+                  </h1>
                   <TbRadar2 className="animate-spin text-xl" />
                </Link>
                {darkMode ? (

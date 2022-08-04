@@ -54,7 +54,7 @@ const Register = () => {
    return (
       <>
          <LoginLanding />
-         <div className="flex flex-col flex-1 gap-3 justify-center items-center">
+         <div className="flex flex-col flex-1 gap-3 justify-start md:justify-center items-center mt-6 md:m-0">
             <h2 className="text-lg">Register</h2>
             <form
                className="flex flex-col gap-3 max-w-xs w-full"
@@ -99,6 +99,7 @@ const Register = () => {
             <Link className="text-lg" to="/login">
                Login
             </Link>
+            {isError && <p className="text-red-500">{message}</p>}
          </div>
       </>
    );

@@ -4,6 +4,7 @@ const userSchema = new mongoose.Schema({
    name: {
       type: String,
       required: true,
+      maxLength: 100,
    },
    image: {
       type: String,
@@ -11,10 +12,12 @@ const userSchema = new mongoose.Schema({
    email: {
       type: String,
       required: true,
+      maxLength: 100,
    },
    password: {
       type: String,
       required: true,
+      maxLength: 20,
    },
    tickets: [
       {

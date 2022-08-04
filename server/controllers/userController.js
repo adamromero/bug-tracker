@@ -7,14 +7,12 @@ const registerUser = asyncHandler(async (req, res) => {
    const { name, email, password } = req.body;
 
    if (!name || !email || !password) {
-      res.status(400);
-      throw new Error("Please provide required fields");
+      res.status(400).json({ message: "Please provide required fields" });
    }
 
    const userExists = await User.findOne({ email });
    if (userExists) {
-      res.status(400);
-      throw new Error("User already exists");
+      res.status(400).json({ message: "User already exists" });
    }
 
    const salt = await bcrypt.genSalt(10);
@@ -29,8 +27,9 @@ const registerUser = asyncHandler(async (req, res) => {
          token: generateToken(user._id),
       });
    } else {
-      res.status(400);
-      throw new Error("Something went wrong");
+      res.status(400).json({
+         message: "Something went wrong, user not created",
+      });
    }
 });
 
@@ -38,6 +37,10 @@ const loginUser = asyncHandler(async (req, res) => {
    const { email, password } = req.body;
 
    const user = await User.findOne({ email });
+
+   if (!email || !password) {
+      res.status(400).json({ message: "Please provide required fields" });
+   }
 
    if (user && (await bcrypt.compare(password, user.password))) {
       res.status(200).json({
@@ -50,8 +53,9 @@ const loginUser = asyncHandler(async (req, res) => {
          token: generateToken(user._id),
       });
    } else {
-      res.status(400);
-      throw new Error("Invalid credentials");
+      res.status(400).json({
+         message: "Invalid credentials",
+      });
    }
 });
 
@@ -62,8 +66,7 @@ const updatePassword = asyncHandler(async (req, res) => {
 
    if (user && (await bcrypt.compare(currentPassword, user.password))) {
       if (newPassword !== confirmPassword) {
-         res.status(400);
-         throw new Error("New password and confirm password do not match");
+         res.status(400).json({ message: "Passwords do not match" });
       }
 
       const salt = await bcrypt.genSalt(10);
@@ -77,8 +80,7 @@ const updatePassword = asyncHandler(async (req, res) => {
          token: generateToken(user._id),
       });
    } else {
-      res.status(400);
-      throw new Error("Invalid credentials");
+      res.status(400).json({ message: "Invalid credentials" });
    }
 });
 

@@ -33,21 +33,18 @@ const Login = () => {
    };
 
    useEffect(() => {
+      if (isError) {
+         //console.log(message);
+      }
       if (isSuccess || user) {
          navigate("/");
-      }
-
-      console.log("isError: ", isError);
-
-      if (isError) {
-         console.log(message);
       }
    }, [user, isSuccess, navigate]);
 
    return (
       <>
          <LoginLanding />
-         <div className="flex flex-col flex-1 gap-3 justify-center items-center">
+         <div className="flex flex-col flex-1 gap-3 justify-start md:justify-center items-center mt-6 md:m-0">
             <h2 className="text-lg">Login</h2>
             <form
                className="flex flex-col gap-3 max-w-xs w-full"
@@ -76,6 +73,7 @@ const Login = () => {
             <Link className="text-lg" to="/register">
                Register
             </Link>
+            {isError && <p className="text-red-500">{message}</p>}
          </div>
       </>
    );

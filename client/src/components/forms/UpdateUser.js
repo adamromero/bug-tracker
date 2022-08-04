@@ -7,8 +7,8 @@ import {
    userValidationMessage,
 } from "../../utils/userValidation";
 
-const UpdateUser = ({ selectedUser, isUserUpdated, setIsUserUpdated }) => {
-   const [userDetails, setUserDetails] = useState(selectedUser);
+const UpdateUser = ({ currentUser }) => {
+   const [userDetails, setUserDetails] = useState(currentUser);
    const [isAdminChecked, setIsAdminChecked] = useState(false);
    const [isVerifiedChecked, setIsVerifiedChecked] = useState(false);
    const isUserAuthorized = useUserValidation();
@@ -16,16 +16,9 @@ const UpdateUser = ({ selectedUser, isUserUpdated, setIsUserUpdated }) => {
 
    const handleEditUser = (e) => {
       e.preventDefault();
-      setIsUserUpdated(!isUserUpdated);
+
       if (isUserAuthorized) {
          dispatch(updateUser(userDetails));
-      }
-   };
-
-   const handleDeleteUser = (e) => {
-      e.preventDefault();
-      if (isUserAuthorized) {
-         dispatch(deleteUser(userDetails._id));
       }
    };
 
@@ -59,15 +52,15 @@ const UpdateUser = ({ selectedUser, isUserUpdated, setIsUserUpdated }) => {
    };
 
    useEffect(() => {
-      setUserDetails(selectedUser);
-      setIsAdminChecked(selectedUser.isAdmin);
-      setIsVerifiedChecked(selectedUser.isVerified);
-   }, [dispatch, selectedUser.name, isUserUpdated]);
+      setUserDetails(currentUser);
+      setIsAdminChecked(currentUser.isAdmin);
+      setIsVerifiedChecked(currentUser.isVerified);
+   }, [dispatch]);
 
    return (
       <>
          <h3>Update user information</h3>
-         <h4>{selectedUser.name}</h4>
+         <h4>{currentUser.name}</h4>
          {userValidationMessage(isUserAuthorized)}
          <form>
             <label>
@@ -92,8 +85,7 @@ const UpdateUser = ({ selectedUser, isUserUpdated, setIsUserUpdated }) => {
                   value={userDetails.email || ""}
                />
             </label>
-
-            <label className="inline-label">
+            <label className="flex items-center max-w-[150px]">
                Administrator:
                <input
                   type="checkbox"
@@ -105,7 +97,7 @@ const UpdateUser = ({ selectedUser, isUserUpdated, setIsUserUpdated }) => {
                   value={isAdminChecked}
                />
             </label>
-            <label className="inline-label">
+            <label className="flex items-center max-w-[100px]">
                Verified:
                <input
                   type="checkbox"
@@ -123,12 +115,6 @@ const UpdateUser = ({ selectedUser, isUserUpdated, setIsUserUpdated }) => {
                   disabled={!isUserAuthorized}
                >
                   Submit
-               </PrimaryButton>
-               <PrimaryButton
-                  onClick={handleDeleteUser}
-                  disabled={!isUserAuthorized}
-               >
-                  Remove User
                </PrimaryButton>
             </div>
          </form>
