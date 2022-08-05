@@ -53,6 +53,13 @@ export const updatePassword = createAsyncThunk(
    }
 );
 
+export const updateImage = createAsyncThunk(
+   "auth/updateImage",
+   async (image) => {
+      return await authService.updateImage(image);
+   }
+);
+
 export const authSlice = createSlice({
    name: "auth",
    initialState,
@@ -89,6 +96,19 @@ export const authSlice = createSlice({
             state.user = action.payload;
          })
          .addCase(login.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
+         })
+         .addCase(updateImage.pending, (state) => {
+            state.isLoading = true;
+         })
+         .addCase(updateImage.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.user = action.payload;
+         })
+         .addCase(updateImage.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload;

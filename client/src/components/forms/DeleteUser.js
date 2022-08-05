@@ -9,7 +9,7 @@ import {
 
 import { PrimaryButton } from "../../styles/Button";
 
-const DeleteUser = (userId) => {
+const DeleteUser = ({ id }) => {
    const dispatch = useDispatch();
 
    const isUserAuthorized = useUserValidation();
@@ -18,7 +18,8 @@ const DeleteUser = (userId) => {
       e.preventDefault();
 
       if (isUserAuthorized) {
-         dispatch(deleteUser(userId.id));
+         dispatch(deleteUser(id));
+         window.location.reload();
       }
    };
 

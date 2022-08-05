@@ -59,6 +59,19 @@ const loginUser = asyncHandler(async (req, res) => {
    }
 });
 
+const updateImage = asyncHandler(async (req, res) => {
+   const { id } = req.params;
+   const { image } = req.body;
+
+   const user = await User.findByIdAndUpdate(id, { image }, { new: true });
+   if (!user) {
+      res.status(404);
+      throw new Error("User not found");
+   }
+
+   res.status(200).json(user);
+});
+
 const updatePassword = asyncHandler(async (req, res) => {
    const { id, currentPassword, newPassword, confirmPassword } = req.body;
 
@@ -94,4 +107,4 @@ const generateToken = (id) => {
    });
 };
 
-export { registerUser, loginUser, getUser, updatePassword };
+export { registerUser, loginUser, getUser, updatePassword, updateImage };

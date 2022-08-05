@@ -10,6 +10,16 @@ const register = async (user) => {
    return response.data;
 };
 
+const updateImage = async (user) => {
+   const response = await axios.put(`/api/users`, user);
+
+   if (response.data) {
+      localStorage.setItem("user", JSON.stringify(response.data));
+   }
+
+   return response.data;
+};
+
 const updatePassword = async (user) => {
    const response = await axios.put("/api/users", user);
 
@@ -38,6 +48,7 @@ const authService = {
    register,
    login,
    logout,
+   updateImage,
    updatePassword,
 };
 

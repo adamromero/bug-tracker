@@ -7,11 +7,6 @@ const getUsers = async () => {
 
 const updateUser = async (user) => {
    const response = await axios.put(`/api/allUsers/${user.id}`, user);
-
-   if (response.data) {
-      localStorage.setItem("user", JSON.stringify(response.data));
-   }
-
    return response.data;
 };
 

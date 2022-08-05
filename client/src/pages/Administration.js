@@ -93,7 +93,7 @@ const Administration = () => {
                                        </button>
                                     }
                                  >
-                                    <DeleteUser userId={currentUser._id} />
+                                    <DeleteUser id={currentUser._id} />
                                  </Modal>
                               </td>
                            </tr>

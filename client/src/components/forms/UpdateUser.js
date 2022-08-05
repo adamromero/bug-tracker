@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { updateUser, deleteUser } from "../../features/users/allUsersSlice";
+import { updateUser } from "../../features/users/allUsersSlice";
 import { PrimaryButton } from "../../styles/Button";
 import {
    useUserValidation,
@@ -19,6 +19,7 @@ const UpdateUser = ({ currentUser }) => {
 
       if (isUserAuthorized) {
          dispatch(updateUser(userDetails));
+         window.location.reload();
       }
    };
 

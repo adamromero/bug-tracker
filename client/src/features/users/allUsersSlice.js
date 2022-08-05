@@ -26,18 +26,6 @@ export const allUsersSlice = createSlice({
    reducers: {},
    extraReducers: (builder) => {
       builder
-         .addCase(getUsers.pending, (state) => {
-            state.isLoading = true;
-         })
-         .addCase(getUsers.fulfilled, (state, action) => {
-            state.isLoading = false;
-            state.isSuccess = true;
-            state.allUsers = action.payload;
-         })
-         .addCase(getUsers.rejected, (state) => {
-            state.isLoading = false;
-            state.isError = true;
-         })
          .addCase(updateUser.pending, (state) => {
             state.isLoading = true;
          })
@@ -52,6 +40,18 @@ export const allUsersSlice = createSlice({
             });
          })
          .addCase(updateUser.rejected, (state) => {
+            state.isLoading = false;
+            state.isError = true;
+         })
+         .addCase(getUsers.pending, (state) => {
+            state.isLoading = true;
+         })
+         .addCase(getUsers.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.allUsers = action.payload;
+         })
+         .addCase(getUsers.rejected, (state) => {
             state.isLoading = false;
             state.isError = true;
          })

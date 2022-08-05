@@ -3,12 +3,11 @@ const router = express.Router();
 import {
    registerUser,
    loginUser,
-   getUser,
+   updateImage,
    updatePassword,
 } from "../controllers/userController.js";
 
-router.post("/", registerUser);
-router.put("/", updatePassword);
-router.post("/login", loginUser);
+router.route("/").post(registerUser).put(updatePassword).put(updateImage);
+router.route("/login").post(loginUser);
 
 export default router;

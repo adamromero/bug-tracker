@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { updatePassword } from "../features/auth/authSlice";
 import Spinner from "../styles/Spinner";
 import { uploadImage } from "../features/images/imageSlice";
-import { updateUser } from "../features/users/allUsersSlice";
+import { updateImage, updatePassword } from "../features/auth/authSlice";
 
 import {
    useUserValidation,
@@ -51,7 +50,7 @@ const Profile = () => {
 
       if (isUserAuthorized) {
          dispatch(uploadImage(formData));
-         dispatch(updateUser(newUserImage));
+         dispatch(updateImage(newUserImage));
       }
    };
 
